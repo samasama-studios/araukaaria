@@ -1,0 +1,126 @@
+:root {
+  --background: #d9f0d6;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* body {  
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+} */
+
+body {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--background);
+}
+
+#logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+#logo a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#araukaaria {
+  width: 50%;
+}
+
+#footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin: 2rem;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1
+/*   background-color: red; */
+}
+
+#cover {
+  width: 90%;
+/*   background-color: yellow; */
+}
+
+#title {
+  font-size: 2.5em;
+  font-family: 'Permanent Marker', cursive;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+/*   background: blue; */
+  margin: 2em;
+}
+
+@media (min-width: 641px) {
+  #araukaaria {
+    max-width: 25%;
+  }
+  
+  #cover {
+    max-width: 40%;
+  }
+
+  #footer {
+    max-width: 50%;
+  }
+}
+
+#previous, #next, #play {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 2em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  background-color: #F1F3F4;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  border-radius: 50%;
+  white-space: nowrap;
+}
+
+#play {
+  font-size: 2.5em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+}
+
+.button-media {
+  opacity: 0.5;
+}
+
+.button-media:hover {
+  opacity: 1;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}

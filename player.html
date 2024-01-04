@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Araukaaria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="content">
+      <div id="title">Canto Oscuro</div>
+      <img id="cover"></img>      
+    </div>
+    <div id="controls">
+      <div id="previous" onclick="previousSong();">&#124;&lt;</div>
+<!--       <img id="previous" src="assets/icons/previous.png" onclick="previousSong();"/> -->
+      <audio id="player" controls controlsList="nodownload noplaybackrate" style="display: none;"></audio>
+<!--       <img id="next" src="assets/icons/next.png" onclick="nextSong();"/> -->
+      <div id="play" onclick="play();">&gt;</div>
+      <div id="next" onclick="nextSong();">&gt;&#124;</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
