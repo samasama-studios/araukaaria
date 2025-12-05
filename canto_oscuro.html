@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Lyrics Page</title>
+
+  <!-- Load Jura font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Jura', sans-serif;
+      font-weight: 700;
+      line-height: 1.5;
+      background-color: #3A709C;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+    }
+
+    .artwork, .lyrics {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 60px; /* more horizontal padding for mobile, less for desktop adjusted below */
+    }
+
+    .artwork img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+    }
+
+    .lyrics {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .buttons {
+      margin-bottom: 15px; /* increased spacing to title */
+      font-size: 1rem;
+    }
+
+    .buttons span {
+      cursor: pointer;
+      color: white;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+
+    .song-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .lyrics-text {
+      font-size: 1.2rem;
+      white-space: pre-line;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .artwork, .lyrics {
+        flex: none;
+        width: 100%;
+        padding: 20px; /* standard padding for mobile */
+      }
+    }
+
+    /* Optional: reduce horizontal padding for desktop to bring content closer */
+    @media (min-width: 769px) {
+      .artwork, .lyrics {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="artwork">
+      <img src="assets/artwork.jpg" alt="Artwork">
+    </div>
+    <div class="lyrics">
+      <div class="buttons">
+        <span id="btnEn" onclick="showLyrics('en')">English</span> |
+        <span id="btnEs" onclick="showLyrics('es')">Spanish</span>
+      </div>
+      <div class="song-title" id="songTitle">
+        <!-- song title will be set by JS -->
+      </div>
+      <div class="lyrics-text" id="lyricsText">
+        <!-- lyrics will be loaded via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const lyrics = {
+      en: {
+        title: "Dark Chant",
+        text: `I don’t know where I am
+I don’t know where I’m going
+All I know is that besides you
+the light of truth is glowing
+
+How far do I need to travel?
+How much more should I be dreaming?
+The more the time goes by
+I can understand what’s really there
+
+I can only hear your voice
+It roars like a lion,
+and it tries to wake up the moon
+that got lost in the city
+
+Here I stand alone
+Not even the sun is left
+Nothing remains to hold onto
+as I vanish into darkness`
+      },
+      es: {
+        title: "Canto Oscuro",
+        text: `No sé dónde estoy.
+No se a dónde voy.
+Sólo sé que a tu lado,
+brilla la luz de la verdad.
+
+¿Cuánto debo viajar?
+¿Cuánto debo soñar?
+Cuanto mas el tiempo pasa,
+puedo entender que es lo que hay.
+
+Sólo escucho tu voz.
+Ruge como un León.
+Quiere despertar a la Luna,
+que se ha perdido aquí en la ciudad.
+
+Aqui solo estoy,
+Ya no queda ni el Sol.
+Nada en que abrazarme,
+mientras me esfumo en la oscuridad.`
+      }
+    };
+
+    function showLyrics(lang) {
+      document.getElementById('lyricsText').innerText = lyrics[lang].text;
+      document.getElementById('songTitle').innerText = lyrics[lang].title;
+
+      // highlight active language
+      document.getElementById('btnEn').style.fontWeight = lang === 'en' ? 'bold' : 'normal';
+      document.getElementById('btnEs').style.fontWeight = lang === 'es' ? 'bold' : 'normal';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      showLyrics('es'); // default language
+    });
+  </script>
+</body>
+</html>
