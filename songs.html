@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Lyrics Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Jura', sans-serif;
+      font-weight: 700;
+      line-height: 1.5;
+      background-color: #ABDCD9;
+      color: white;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+    }
+    .artwork, .lyrics {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 60px;
+    }
+    .artwork img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+    }
+    .lyrics {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    .buttons {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    .buttons span {
+      cursor: pointer;
+      color: inherit;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+    .song-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .lyrics-text {
+      font-size: 1.2rem;
+      white-space: pre-line;
+    }
+    @media (max-width: 768px) {
+      .container { flex-direction: column; }
+      .artwork, .lyrics { flex: none; width: 100%; padding: 20px; }
+    }
+    @media (min-width: 769px) {
+      .artwork, .lyrics { padding-left: 40px; padding-right: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="artwork">
+      <img id="songArtwork" src="" alt="Artwork">
+    </div>
+
+    <div class="lyrics">
+      <div class="buttons">
+        <span id="btnEn" onclick="setLanguage('en')">English</span> |
+        <span id="btnEs" onclick="setLanguage('es')">Castellano</span>
+      </div>
+      <div class="song-title" id="songTitle"></div>
+      <div class="lyrics-text" id="lyricsText"></div>
+    </div>
+  </div>
+
+  <script>
+    const songs = [
+      {
+        id: "what_makes_us",
+        artwork: "assets/covers/what_makes_us.jpg",
+        bgColor: "#689D9A",
+        textColor: "white",
+        lyrics: {
+          en: {
+            title: "What Makes Us?",
+            text: `Who said the sun won't burn your skin?
+Who gave the fool the right to rule?
+Your gentle hands have not seen work
+You dress up clean no sign of dirt
+
+You kept us quiet when you talked
+Our hands were tied against the wall
+So we lay in the lies we are told
+Meanwhile the air is growing cold
+
+You act like you don't care
+Words falling from your mouth
+Walking in broken glass
+Wonder why does it hurt?
+
+What makes us what we are?
+What makes us what we are?
+What makes us what we are?
+
+I wished your mama gave so much of her love
+You could have grown to be a little star
+Giving me an appetite for life
+Giving me an appetite for life`
+          }
+        }
+      },
+      {
+        id: "canto_oscuro",
+        artwork: "assets/covers/canto_oscuro.jpg",
+        bgColor: "#222831",
+        textColor: "#EEEEEE",
+        lyrics: {
+          es: {
+            title: "Canto Oscuro",
+            text: `No sé dónde estoy.
+No se a dónde voy.
+Sólo sé que a tu lado,
+brilla la luz de la verdad.
+
+¿Cuánto debo viajar?
+¿Cuánto debo soñar?
+Cuanto mas el tiempo pasa,
+puedo entender que es lo que hay.
+
+Sólo escucho tu voz.
+Ruge como un León.
+Quiere despertar a la Luna,
+que se ha perdido aquí en la ciudad.
+
+Aqui solo estoy,
+Ya no queda ni el Sol.
+Nada en que abrazarme,
+mientras me esfumo en la oscuridad.`
+          },
+          en: {
+            title: "Dark Chant",
+            text: `I don’t know where I am
+I don’t know where I’m going
+All I know is that besides you
+the light of truth is glowing
+
+How far do I need to travel?
+How much more should I be dreaming?
+The more the time goes by
+I can understand what’s really there
+
+I can only hear your voice
+It roars like a lion,
+and it tries to wake up the moon
+that got lost in the city
+
+Here I stand alone
+Not even the sun is left
+Nothing remains to hold onto
+as I vanish into darkness`
+          }
+        }
+      }
+    ];
+
+    let currentLanguage = null;
+    const titleEl = document.getElementById("songTitle");
+    const lyricsEl = document.getElementById("lyricsText");
+    const artworkEl = document.getElementById("songArtwork");
+    const langButtons = document.querySelector(".buttons");
+    const btnEn = document.getElementById("btnEn");
+    const btnEs = document.getElementById("btnEs");
+
+    function getSongFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const songId = params.get("id");
+      const song = songs.find(s => s.id === songId);
+      return song || songs[0]; // fallback to first song
+    }
+
+    function loadSong(song) {
+      const availableLangs = Object.keys(song.lyrics);
+      if (!availableLangs.includes(currentLanguage)) {
+        currentLanguage = availableLangs[0];
+      }
+
+      if (availableLangs.length === 1) {
+        langButtons.style.display = "none";
+      } else {
+        langButtons.style.display = "block";
+        btnEn.style.display = availableLangs.includes("en") ? "inline" : "none";
+        btnEs.style.display = availableLangs.includes("es") ? "inline" : "none";
+        btnEn.style.fontWeight = currentLanguage === "en" ? "bold" : "normal";
+        btnEs.style.fontWeight = currentLanguage === "es" ? "bold" : "normal";
+      }
+
+      document.body.style.backgroundColor = song.bgColor;
+      document.body.style.color = song.textColor;
+      artworkEl.src = song.artwork;
+      titleEl.innerText = song.lyrics[currentLanguage].title;
+      lyricsEl.innerText = song.lyrics[currentLanguage].text;
+      document.title = song.lyrics[currentLanguage].title;
+    }
+
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      const song = getSongFromURL();
+      loadSong(song);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const song = getSongFromURL();
+      currentLanguage = Object.keys(song.lyrics)[0];
+      loadSong(song);
+    });
+  </script>
+
+</body>
+</html>
