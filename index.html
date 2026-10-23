@@ -8,7 +8,7 @@
   <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
   <link href="style.css" rel="stylesheet" type="text/css" />
   <script>
-    // Hide the buttons, the "out now" line and the player until the logo's
+    // Hide the navbar and the "out now" line until the logo's
     // entry animation is over (glitch.js reveals them). The timeout is a
     // safety net in case that never happens.
     document.documentElement.classList.add('intro');
@@ -186,47 +186,9 @@
   </section>
   <footer id="footer">
     <a href="mailto:contact@araukaaria.com">contact@araukaaria.com</a>
-    <span class="footer-dot" aria-hidden="true">·</span>
+    <span aria-hidden="true">·</span>
     <span>by <a href="https://samasama.studio">samasama.studio</a></span>
   </footer>
-  <!-- Custom music player, switched off while trying the Spotify player
-       below. To switch it back on, remove this comment around it, remove the
-       Spotify player, and restore the player.js script tag.
-  <div id="player-bar" role="region" aria-label="Music player">
-    <input id="player-progress" type="range" min="0" max="1000" value="0" aria-label="Song position">
-    <div class="player-track">
-      <img id="player-cover" src="assets/songs/thumbs/Canto_Oscuro.jpg" alt="">
-      <div class="player-text">
-        <span id="player-title">Canto Oscuro</span>
-        <span class="player-artist">araukaaria</span>
-      </div>
-    </div>
-    <div class="player-controls">
-      <button id="player-prev" aria-label="Previous song">
-        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
-          <path d="M18 18V39M39 18V39L22 28.5L39 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-        </svg>
-      </button>
-      <button id="player-toggle" aria-label="Play">
-        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
-          <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="2" />
-          <path class="icon-play" d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-          <path class="icon-pause" d="M23 19V38M34 19V38" stroke="currentColor" stroke-width="2" />
-        </svg>
-      </button>
-      <button id="player-next" aria-label="Next song">
-        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
-          <path d="M39 18V39M18 18V39L35 28.5L18 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-        </svg>
-      </button>
-    </div>
-    <div class="player-side">
-      <span id="player-time">0:00 / 0:00</span>
-      <a class="player-spotify" href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg">Listen on Spotify</a>
-    </div>
-    <audio id="player-audio" preload="none"></audio>
-  </div>
-  -->
   <div id="spotify-bar">
     <button class="skip-button" id="spotify-close" aria-label="Close player">
       <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
@@ -251,7 +213,6 @@
   <script src="glitch.js"></script>
   <script src="menu.js"></script>
   <script src="about.js"></script>
-  <!-- <script src="player.js"></script> -->
   <script src="spotify.js"></script>
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
