@@ -789,6 +789,34 @@ button:focus-visible .button-media {
   background: linear-gradient(to right, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
 }
 
+/* The top of the section fades in over the wordmark pattern instead of
+   starting with a hard edge: the photo through a mask, the section's solid
+   background through its own gradient, both over the same distance
+   (--about-fade) so they match. The steps are eased so there's no visible
+   line where the fade ends. */
+#about {
+  --about-fade: min(12svh, 16vw);
+  background: linear-gradient(to bottom,
+    rgba(45, 40, 40, 0) 0,
+    rgba(45, 40, 40, 0.05) calc(var(--about-fade) * 0.15),
+    rgba(45, 40, 40, 0.18) calc(var(--about-fade) * 0.3),
+    rgba(45, 40, 40, 0.5) calc(var(--about-fade) * 0.5),
+    rgba(45, 40, 40, 0.82) calc(var(--about-fade) * 0.7),
+    rgba(45, 40, 40, 0.95) calc(var(--about-fade) * 0.85),
+    var(--background) var(--about-fade));
+}
+
+.about-photo {
+  mask-image: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0.05) calc(var(--about-fade) * 0.15),
+    rgba(0, 0, 0, 0.18) calc(var(--about-fade) * 0.3),
+    rgba(0, 0, 0, 0.5) calc(var(--about-fade) * 0.5),
+    rgba(0, 0, 0, 0.82) calc(var(--about-fade) * 0.7),
+    rgba(0, 0, 0, 0.95) calc(var(--about-fade) * 0.85),
+    #000 var(--about-fade));
+}
+
 .about-text {
   align-self: center;
   max-width: 60ch;
