@@ -211,7 +211,7 @@ button:focus-visible .button-media {
 #menu {
   position: fixed;
   inset: auto;
-  top: calc(var(--nav-pad) + 44px + 0.75rem);
+  top: calc(var(--nav-pad-y) + 44px + 0.75rem);
   right: var(--nav-pad);
   margin: 0;
   padding: 0;
@@ -953,15 +953,18 @@ body:has(#spotify-bar.open) #footer {
    right. Transparent over the hero (its wordmark hidden, since the big one is
    right there); once the big logo has scrolled away it gets a dark
    background, tightens, and the wordmark fades in. menu.js sets
-   "nav-scrolled" on <html>. --nav-pad is the space around the navbar; the
-   menu (#menu) is placed from it so it always opens right under the
-   button. */
+   "nav-scrolled" on <html>. --nav-pad is the space at the navbar's sides,
+   --nav-pad-y above and below it (less once it has its background, so the
+   bar stays slim); the menu (#menu) is placed from them so it always opens
+   right under the button. */
 html {
   --nav-pad: 2rem;
+  --nav-pad-y: 2rem;
 }
 
 html.nav-scrolled {
   --nav-pad: 1rem;
+  --nav-pad-y: 0.625rem;
 }
 
 #navbar {
@@ -973,7 +976,7 @@ html.nav-scrolled {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  padding: var(--nav-pad);
+  padding: var(--nav-pad-y) var(--nav-pad);
   border-bottom: 1px solid transparent;
   pointer-events: none;
   transition: padding 0.3s, background-color 0.3s, border-color 0.3s;
@@ -1017,6 +1020,11 @@ html.nav-scrolled {
   html,
   html.nav-scrolled {
     --nav-pad: 1.25rem;
+    --nav-pad-y: 1.25rem;
+  }
+
+  html.nav-scrolled {
+    --nav-pad-y: 0.625rem;
   }
 
   .navbar-wordmark img {
