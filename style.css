@@ -75,8 +75,12 @@ body {
    the name and the line, blurred and sized from the logo, so they follow its
    shape on every screen. The line's band fades in with the line after the
    intro (see "intro" below). */
+/* --logo is the logo's width: sized from the smaller screen dimension so it
+   scales smoothly from phones to tablets to desktops, and leaves room for
+   the rest of the hero on short screens. A bit wider on phones, where half
+   the width looks small. */
 .hero-group {
-  --logo: min(50vw, 35vh, 360px);
+  --logo: min(50vw, 35svh, 360px);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -136,19 +140,20 @@ body {
   gap: 1.5rem;
 }
 
-/* Sized from the smaller screen dimension so it scales smoothly from phones
-   to tablets to desktops, and leaves room for the rest of the hero on short
-   screens. */
+@media (max-width: 640px) {
+  .hero-group {
+    --logo: min(60vw, 35svh, 360px);
+  }
+}
+
 #araukaaria {
-  width: min(50vw, 35vh, 360px);
-  width: min(50vw, 35svh, 360px);
+  width: var(--logo);
   filter: url(#logo-fx);
 }
 
 /* The name under the logo, as wide as the logo's circle (95% of the logo). */
 #wordmark {
-  width: calc(min(50vw, 35vh, 360px) * 0.95);
-  width: calc(min(50vw, 35svh, 360px) * 0.95);
+  width: calc(var(--logo) * 0.95);
   filter: url(#word-fx);
 }
 
@@ -359,11 +364,14 @@ button:focus-visible .button-media {
   position: relative;
 }
 
-/* The streaming links, in a row to the left of the music button. */
+/* The streaming links, in a row to the left of the music button, centred on
+   it vertically. ("translate" does the centring, so the slide-in can use
+   "transform".) */
 .menu-sub {
   position: absolute;
-  top: 0;
+  top: 50%;
   right: calc(100% + 0.75rem);
+  translate: 0 -50%;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
@@ -372,7 +380,7 @@ button:focus-visible .button-media {
      On very narrow phones it wraps onto a second line instead of running off
      the screen. */
   width: max-content;
-  max-width: calc(100vw - 2.5rem - 44px - 0.75rem);
+  max-width: calc(100vw - 2 * var(--nav-pad) - 44px - 0.75rem);
   opacity: 1;
   transform: none;
   transition: opacity 0.2s, transform 0.2s;
@@ -1199,20 +1207,20 @@ html.nav-scrolled {
   }
 }
 
-/* Very narrow phones: slightly smaller buttons in the music and social rows,
-   so all of them fit on one line and their names don't collide. */
+/* Phones: the names under the music and social rows are smaller and
+   steeper, so the last (leftmost) one, SoundCloud, stays on screen. */
+@media (max-width: 640px) {
+  .menu-sub-label {
+    --angle: -74deg;
+    font-size: 0.8rem;
+  }
+}
+
+/* Very narrow phones: the music row's buttons sit a little closer together,
+   so all of them fit on one line at full size. */
 @media (max-width: 360px) {
   .menu-sub {
     gap: 0.5rem;
-  }
-
-  .menu-sub .menu-icon .button-media {
-    width: 36px;
-    height: 36px;
-  }
-
-  .menu-sub-label {
-    --angle: -66deg;
   }
 
   /* Keeps "Canto Oscuro · Out now" on one line at full size. */
