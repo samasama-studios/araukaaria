@@ -257,7 +257,8 @@ button:focus-visible .button-media {
 
 /* Names next to the column buttons, shown while the menu is open (phones have
    no hover to reveal them). A button's name hides while its row of links is
-   open. */
+   open. The names (here and in the rows) sit inside their button or link, so
+   tapping a name works like tapping its button. */
 #menu > .menu-icon,
 .menu-item > .menu-icon {
   position: relative;
@@ -280,7 +281,6 @@ button:focus-visible .button-media {
   white-space: nowrap;
   opacity: 0.85;
   transform: translateY(-50%);
-  pointer-events: none;
 }
 
 
@@ -329,7 +329,6 @@ button:focus-visible .button-media {
   /* The middle of the name's end sits right under the button's centre. */
   transform: translateY(-50%) rotate(var(--angle));
   transform-origin: right center;
-  pointer-events: none;
 }
 
 /* A button's name lights up with it: full strength, a slight zoom and the
