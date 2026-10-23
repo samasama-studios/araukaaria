@@ -832,7 +832,12 @@ button:focus-visible .button-media {
   }
 }
 
+/* overflow-x: clip keeps the glows behind the hero (which reach past the
+   "out now" line) from sticking out at the sides on phones. The clip on
+   <body> alone isn't enough: the browser applies it to the whole window, and
+   Android Chrome then still widens the page and zooms out. */
 .home #logo {
+  overflow-x: clip;
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
