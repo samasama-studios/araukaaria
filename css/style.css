@@ -830,7 +830,7 @@ button:focus-visible .button-media {
 
 /* Same style as the menu's button names, larger. */
 .about-text h2 {
-  margin: 0 0 2rem;
+  margin: 0 0 1.25rem;
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 2rem;
   font-weight: 500;
