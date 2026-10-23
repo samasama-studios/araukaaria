@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-defs" aria-hidden="true">
+  <!-- Vivid version of logo-fx.svg (open the site with ?look=vivid).
+       Bright red, green and blue copies sit behind the white logo and are
+       screen-blended, so where two overlap they mix into yellow, cyan or
+       magenta, like the glitch. During the entry, glitch.js also splits the
+       white logo into its R, G and B channels. Units are fractions of the logo
+       size, so the offsets scale with it. -->
+  <filter id="logo-fx" primitiveUnits="objectBoundingBox" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <feFlood flood-color="#ff0000" flood-opacity="0.8" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="0.022" dy="-0.026" result="red" />
+    <feFlood flood-color="#00ff00" flood-opacity="0.7" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="0.008" dy="0.009" result="green" />
+    <feFlood flood-color="#2f6bff" flood-opacity="0.9" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="-0.008" dy="-0.006" result="blue" />
+    <feBlend in="red" in2="green" mode="screen" result="red-green" />
+    <feBlend in="red-green" in2="blue" mode="screen" result="fringes" />
+
+    <!-- The white logo, split into channels (offsets are 0 at rest, where the
+         three add back up to the logo's own white). -->
+    <feColorMatrix in="SourceGraphic" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="r" />
+    <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="g" />
+    <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="b" />
+    <feBlend in="r" in2="g" mode="screen" result="rg" />
+    <feBlend in="rg" in2="b" mode="screen" result="logo" />
+
+    <feMerge>
+      <feMergeNode in="fringes" />
+      <feMergeNode in="logo" />
+    </feMerge>
+  </filter>
+
+  <!-- Same effect for the wordmark under the logo. The wordmark is long and
+       thin, so the offsets are scaled to its letter height instead. -->
+  <filter id="word-fx" primitiveUnits="objectBoundingBox" x="-20%" y="-60%" width="140%" height="220%" color-interpolation-filters="sRGB">
+    <feFlood flood-color="#ff0000" flood-opacity="0.8" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="0.0086" dy="-0.11" result="red" />
+    <feFlood flood-color="#00ff00" flood-opacity="0.7" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="0.0034" dy="0.045" result="green" />
+    <feFlood flood-color="#2f6bff" flood-opacity="0.9" />
+    <feComposite in2="SourceAlpha" operator="in" />
+    <feOffset class="fx-fringe" dx="-0.0034" dy="-0.03" result="blue" />
+    <feBlend in="red" in2="green" mode="screen" result="red-green" />
+    <feBlend in="red-green" in2="blue" mode="screen" result="fringes" />
+
+    <feColorMatrix in="SourceGraphic" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="r" />
+    <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="g" />
+    <feColorMatrix in="SourceGraphic" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" />
+    <feOffset class="fx-split" dx="0" dy="0" result="b" />
+    <feBlend in="r" in2="g" mode="screen" result="rg" />
+    <feBlend in="rg" in2="b" mode="screen" result="word" />
+
+    <feMerge>
+      <feMergeNode in="fringes" />
+      <feMergeNode in="word" />
+    </feMerge>
+  </filter>
+</svg>

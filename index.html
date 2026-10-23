@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="home-page">
 
 <head>
   <meta charset="utf-8">
@@ -7,26 +7,253 @@
   <title>araukaaria</title>
   <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <script>
+    // Hide the buttons, the "out now" line and the player until the logo's
+    // entry animation is over (glitch.js reveals them). The timeout is a
+    // safety net in case that never happens.
+    document.documentElement.classList.add('intro');
+    setTimeout(() => document.documentElement.classList.replace('intro', 'revealed'), 5000);
+  </script>
 </head>
 
-<body>
+<body class="home">
+  <!-- Navbar: the small wordmark (back to top) and the menu button, which
+       opens the menu below. -->
+  <header id="navbar">
+    <a class="navbar-wordmark" href="#" aria-label="araukaaria, back to top">
+      <img src="assets/icons/araukaaria.svg" alt="">
+    </a>
+    <button class="corner-button" id="menu-toggle" popovertarget="menu" aria-label="Menu">
+      <img class="button-media" src="assets/icons/menu.svg" alt="">
+    </button>
+  </header>
+  <!-- Menu: a column of icon buttons under the menu button. The music and
+       social buttons each open a row to their left with their links. -->
+  <nav id="menu" popover aria-label="Menu">
+    <div class="menu-item">
+      <div class="menu-sub" id="music-links" hidden>
+        <a class="menu-icon" href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg">
+          <img class="button-media" src="assets/icons/spotify.svg" alt="">
+          <span class="visually-hidden">Spotify</span>
+          <span class="menu-sub-label" aria-hidden="true">Spotify</span>
+        </a>
+        <a class="menu-icon" href="https://www.youtube.com/channel/UC892rpH4PCHJ1TktOKu8bhQ">
+          <img class="button-media" src="assets/icons/youtube.svg" alt="">
+          <span class="visually-hidden">YouTube</span>
+          <span class="menu-sub-label" aria-hidden="true">YouTube</span>
+        </a>
+        <a class="menu-icon" href="https://araukaaria.bandcamp.com/">
+          <img class="button-media" src="assets/icons/bandcamp.svg" alt="">
+          <span class="visually-hidden">Bandcamp</span>
+          <span class="menu-sub-label" aria-hidden="true">Bandcamp</span>
+        </a>
+        <a class="menu-icon" href="https://soundcloud.com/araukaaria">
+          <img class="button-media" src="assets/icons/soundcloud.svg" alt="">
+          <span class="visually-hidden">SoundCloud</span>
+          <span class="menu-sub-label" aria-hidden="true">SoundCloud</span>
+        </a>
+        <a class="menu-icon" href="https://tidal.com/artist/44435396">
+          <img class="button-media" src="assets/icons/tidal.svg" alt="">
+          <span class="visually-hidden">TIDAL</span>
+          <span class="menu-sub-label" aria-hidden="true">TIDAL</span>
+        </a>
+      </div>
+      <button class="menu-icon" aria-expanded="false" aria-controls="music-links">
+        <span class="menu-label" aria-hidden="true">Music</span>
+        <img class="button-media" src="assets/icons/music.svg" alt="">
+        <span class="visually-hidden">Music</span>
+      </button>
+    </div>
+    <a class="menu-icon" href="#about">
+      <span class="menu-label" aria-hidden="true">About</span>
+      <img class="button-media" src="assets/icons/about.svg" alt="">
+      <span class="visually-hidden">About</span>
+    </a>
+    <a class="menu-icon" href="mailto:contact@araukaaria.com">
+      <span class="menu-label" aria-hidden="true">Contact</span>
+      <img class="button-media" src="assets/icons/mail.svg" alt="">
+      <span class="visually-hidden">Email contact@araukaaria.com</span>
+    </a>
+    <div class="menu-item">
+      <div class="menu-sub" id="social-links" hidden>
+        <a class="menu-icon" href="https://www.instagram.com/araukaaria/">
+          <img class="button-media" src="assets/icons/instagram.svg" alt="">
+          <span class="visually-hidden">Instagram</span>
+          <span class="menu-sub-label" aria-hidden="true">Instagram</span>
+        </a>
+        <a class="menu-icon" href="https://linktr.ee/araukaaria">
+          <img class="button-media" src="assets/icons/linktree.svg" alt="">
+          <span class="visually-hidden">Linktree</span>
+          <span class="menu-sub-label" aria-hidden="true">Linktree</span>
+        </a>
+        <!-- Facebook: add the page address and remove this comment around it.
+        <a class="menu-icon" href="FACEBOOK_URL">
+          <img class="button-media" src="assets/icons/facebook.svg" alt="">
+          <span class="visually-hidden">Facebook</span>
+          <span class="menu-sub-label" aria-hidden="true">Facebook</span>
+        </a>
+        -->
+      </div>
+      <button class="menu-icon" aria-expanded="false" aria-controls="social-links">
+        <span class="menu-label" aria-hidden="true">Social</span>
+        <img class="button-media" src="assets/icons/social.svg" alt="">
+        <span class="visually-hidden">Social</span>
+      </button>
+    </div>
+  </nav>
   <div id="logo">
-    <a href="songs.html?id=canto_oscuro">
-      <img id="araukaaria" src="assets/icons/logo.png">
-    </a>
+    <div class="hero-group">
+      <span class="hero-glow hero-glow-logo" aria-hidden="true"></span>
+      <span class="hero-glow hero-glow-text" aria-hidden="true"></span>
+      <span class="hero-glow hero-glow-cta" aria-hidden="true"></span>
+      <a id="logo-mark" href="https://samasama.studio/games/saliendo_de_ficcion/">
+        <img id="araukaaria" src="assets/icons/logo.svg" alt="">
+        <img id="wordmark" src="assets/icons/araukaaria.svg" alt="araukaaria">
+      </a>
+      <button id="cta" aria-label="Play Canto Oscuro">
+        <svg class="cta-icon" viewBox="0 0 57 57" fill="none" aria-hidden="true">
+          <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="2.5" />
+          <path d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+        </svg>
+        <span class="cta-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="cta-title">Canto Oscuro</span>
+        <span class="cta-note" id="cta-note">Out now</span>
+      </button>
+    </div>
   </div>
-  <div id="footer">
-    <a href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg">
-      <img class="button-media" id="button-spotify" src="assets/icons/spotify.svg" />
-    </a>
-    <a href="https://www.instagram.com/araukaaria/">
-      <img class="button-media" id="button-instagram" src="assets/icons/instagram.svg" />
-    </a>
-    <a href="https://www.youtube.com/channel/UC892rpH4PCHJ1TktOKu8bhQ">
-      <img class="button-media" id="button-youtube" src="assets/icons/youtube.svg" />
-    </a>
+  <section id="about" aria-labelledby="about-heading">
+    <!-- Photo carousel (about.js): the slides sit on top of each other and
+         cross-fade. To add a photo, add another <picture class="about-slide">
+         (made like the ones below, with web-sized copies in
+         assets/photos/web); the indicators are made by about.js. -->
+    <div class="about-photo" role="group" aria-roledescription="carousel" aria-label="Photos of the band">
+      <!-- Portrait screens get the portrait crop of this photo, landscape screens the landscape one. -->
+      <picture class="about-slide about-slide-barn is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <source media="(orientation: portrait)" type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/portrait-800.webp 800w, assets/photos/web/portrait-1200.webp 1200w, assets/photos/web/portrait-1600.webp 1600w">
+        <source media="(orientation: portrait)" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/portrait-800.jpg 800w, assets/photos/web/portrait-1200.jpg 1200w, assets/photos/web/portrait-1600.jpg 1600w">
+        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/landscape-640.webp 640w, assets/photos/web/landscape-960.webp 960w, assets/photos/web/landscape-1280.webp 1280w, assets/photos/web/landscape-1920.webp 1920w">
+        <img src="assets/photos/web/landscape-1280.jpg" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/landscape-640.jpg 640w, assets/photos/web/landscape-960.jpg 960w, assets/photos/web/landscape-1280.jpg 1280w, assets/photos/web/landscape-1920.jpg 1920w"
+          width="1920" height="1280" fetchpriority="low" decoding="async"
+          alt="Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof.">
+      </picture>
+      <picture class="about-slide about-slide-stage" role="group" aria-roledescription="slide" aria-label="2 of 3">
+        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/stage-640.webp 640w, assets/photos/web/stage-960.webp 960w, assets/photos/web/stage-1280.webp 1280w, assets/photos/web/stage-1920.webp 1920w">
+        <img src="assets/photos/web/stage-1280.jpg" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/stage-640.jpg 640w, assets/photos/web/stage-960.jpg 960w, assets/photos/web/stage-1280.jpg 1280w, assets/photos/web/stage-1920.jpg 1920w"
+          width="1920" height="1280" loading="lazy" decoding="async"
+          alt="The band playing on a small stage with keyboards and guitars, in a black-and-white double exposure.">
+      </picture>
+      <picture class="about-slide about-slide-above" role="group" aria-roledescription="slide" aria-label="3 of 3">
+        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/above-800.webp 800w, assets/photos/web/above-1200.webp 1200w, assets/photos/web/above-1600.webp 1600w">
+        <img src="assets/photos/web/above-1200.jpg" sizes="(max-width: 900px) 100vw, 50vw"
+          srcset="assets/photos/web/above-800.jpg 800w, assets/photos/web/above-1200.jpg 1200w, assets/photos/web/above-1600.jpg 1600w"
+          width="1600" height="1600" loading="lazy" decoding="async"
+          alt="The band seen from above, standing together on the grass, in a black-and-white double exposure.">
+      </picture>
+      <div class="carousel-controls">
+        <button class="carousel-button" id="carousel-prev" aria-label="Previous photo">
+          <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M32 19L22.5 28.5L32 38" stroke="currentColor" stroke-width="1.54054" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="carousel-dots"></div>
+        <button class="carousel-button" id="carousel-next" aria-label="Next photo">
+          <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M25 19L34.5 28.5L25 38" stroke="currentColor" stroke-width="1.54054" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="about-text">
+      <h2 id="about-heading">About</h2>
+      <p>Araukaaria brings Latin American psychedelia to the Baltic: an Argentine-Estonian five-piece from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, the songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk.</p>
+      <p>The debut album arrives 6 February 2027.</p>
+      <!-- Line-up, hidden for now. Fill in the names and remove this comment around it to show it.
+      <p class="about-lineup">José “Pepi” Prieto — vocals, guitar · [name] — [instrument] · …</p>
+      -->
+      <!-- Press kit link, hidden until the press kit exists. Point href at it and remove this comment around it to show it.
+      <a class="about-link" href="#">Press kit →</a>
+      -->
+    </div>
+  </section>
+  <footer id="footer">
+    <a href="mailto:contact@araukaaria.com">contact@araukaaria.com</a>
+    <span class="footer-dot" aria-hidden="true">·</span>
+    <span>by <a href="https://samasama.studio">samasama.studio</a></span>
+  </footer>
+  <!-- Custom music player, switched off while trying the Spotify player
+       below. To switch it back on, remove this comment around it, remove the
+       Spotify player, and restore the player.js script tag.
+  <div id="player-bar" role="region" aria-label="Music player">
+    <input id="player-progress" type="range" min="0" max="1000" value="0" aria-label="Song position">
+    <div class="player-track">
+      <img id="player-cover" src="assets/songs/thumbs/Canto_Oscuro.jpg" alt="">
+      <div class="player-text">
+        <span id="player-title">Canto Oscuro</span>
+        <span class="player-artist">araukaaria</span>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button id="player-prev" aria-label="Previous song">
+        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+          <path d="M18 18V39M39 18V39L22 28.5L39 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button id="player-toggle" aria-label="Play">
+        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+          <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="2" />
+          <path class="icon-play" d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          <path class="icon-pause" d="M23 19V38M34 19V38" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </button>
+      <button id="player-next" aria-label="Next song">
+        <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+          <path d="M39 18V39M18 18V39L35 28.5L18 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+    <div class="player-side">
+      <span id="player-time">0:00 / 0:00</span>
+      <a class="player-spotify" href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg">Listen on Spotify</a>
+    </div>
+    <audio id="player-audio" preload="none"></audio>
   </div>
-  <script src="script.js"></script>
+  -->
+  <div id="spotify-bar">
+    <button class="skip-button" id="spotify-close" aria-label="Close player">
+      <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+        <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="2" />
+        <path d="M20 20L37 37M37 20L20 37" stroke="currentColor" stroke-width="2" />
+      </svg>
+    </button>
+    <button class="skip-button" id="spotify-prev" aria-label="Previous song">
+      <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+        <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+        <path d="M18 18V39M39 18V39L22 28.5L39 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div id="spotify-embed"></div>
+    <button class="skip-button" id="spotify-next" aria-label="Next song">
+      <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+        <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+        <path d="M39 18V39M18 18V39L35 28.5L18 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+  <script src="glitch.js"></script>
+  <script src="menu.js"></script>
+  <script src="about.js"></script>
+  <!-- <script src="player.js"></script> -->
+  <script src="spotify.js"></script>
+  <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 
 </html>

@@ -1,24 +1,123 @@
+@font-face {
+  font-family: "Midnight Motion";
+  src: url("assets/fonts/MidnightMotion-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Midnight Motion";
+  src: url("assets/fonts/MidnightMotion-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+
+/* Jura (Google Fonts, SIL Open Font License), hosted with the site so
+   visitors' browsers don't contact Google. Latin and extended Latin. */
+@font-face {
+  font-family: "Jura";
+  src: url("assets/fonts/Jura-Regular-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Jura";
+  src: url("assets/fonts/Jura-Regular-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
   --background: #2D2828;
 }
 
 html, body {
   margin: 0;
-  height: 100%;
-  overflow: hidden;
 }
 
-/* body {  
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background);
-} */
-
-body {  
+/* The page scrolls: the logo fills the first screen (the hero) and the About
+   section and footer follow. overflow-x: clip prevents sideways scrolling
+   without making the body a second scroll area (a nested scroll area makes
+   trackpad and touch scrolling stick). */
+body {
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: var(--background);
+}
+
+/* Repeated wordmark behind the home page, in staggered rows. The
+   #svgView(viewBox(...)) part pads the 1952×149 wordmark out to a 1952×600
+   tile: no space between words in a row, only between rows. The second copy
+   is shifted half a tile to stagger the rows. --tile sets the word width,
+   opacity the strength. */
+.home::before {
+  --tile: 240px;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image:
+    url("assets/icons/araukaaria.svg#svgView(viewBox(0,-225.5,1952,600))"),
+    url("assets/icons/araukaaria.svg#svgView(viewBox(0,-225.5,1952,600))");
+  background-size: var(--tile) calc(var(--tile) * 600 / 1952);
+  background-position: 0 0, calc(var(--tile) / 2) calc(var(--tile) * 300 / 1952);
+}
+
+/* Soft dark glow behind the logo, name and "out now" line, so the pattern
+   fades out around them: a circle behind the logo and rounded bands behind
+   the name and the line, blurred and sized from the logo, so they follow its
+   shape on every screen. The line's band fades in with the line after the
+   intro (see "intro" below). */
+.hero-group {
+  --logo: min(50vw, 35vh, 360px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  isolation: isolate;
+}
+
+.hero-glow {
+  position: absolute;
+  z-index: -1;
+  background: var(--background);
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.hero-glow-logo {
+  top: calc(var(--logo) / 2);
+  left: 50%;
+  width: calc(var(--logo) * 1.4);
+  height: calc(var(--logo) * 1.4);
+  border-radius: 50%;
+  filter: blur(calc(var(--logo) * 0.16));
+  transform: translate(-50%, -50%);
+}
+
+.hero-glow-text,
+.hero-glow-cta {
+  right: -3rem;
+  left: -3rem;
+  border-radius: 999px;
+  filter: blur(32px);
+}
+
+.hero-glow-text {
+  top: calc(var(--logo) + 0.25rem);
+  height: calc(var(--logo) * 0.07 + 2.5rem);
+}
+
+.hero-glow-cta {
+  bottom: -2rem;
+  height: calc(32px + 3.5rem);
 }
 
 #logo {
@@ -31,96 +130,1089 @@ body {
 
 #logo a {
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#araukaaria {
-  width: 50%;
-}
-
-#footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  margin: 2rem;
-}
-
-#content {
-  display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
-  flex: 1
-/*   background-color: red; */
-}
-
-#cover {
-  width: 90%;
-/*   background-color: yellow; */
-}
-
-#title {
-  font-size: 2.5em;
-  font-family: 'Permanent Marker', cursive;
-}
-
-#controls {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-/*   background: blue; */
-  margin: 2em;
+  gap: 1.5rem;
 }
 
-@media (min-width: 641px) {
-  #araukaaria {
-    max-width: 25%;
-  }
-  
-  #cover {
-    max-width: 40%;
-  }
-
-  #footer {
-    max-width: 50%;
-  }
+/* Sized from the smaller screen dimension so it scales smoothly from phones
+   to tablets to desktops, and leaves room for the rest of the hero on short
+   screens. */
+#araukaaria {
+  width: min(50vw, 35vh, 360px);
+  width: min(50vw, 35svh, 360px);
+  filter: url(#logo-fx);
 }
 
-#previous, #next, #play {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 2em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  background-color: #F1F3F4;
-  padding-left: 0.25em;
-  padding-right: 0.25em;
-  border-radius: 50%;
-  white-space: nowrap;
+/* The name under the logo, as wide as the logo's circle (95% of the logo). */
+#wordmark {
+  width: calc(min(50vw, 35vh, 360px) * 0.95);
+  width: calc(min(50vw, 35svh, 360px) * 0.95);
+  filter: url(#word-fx);
 }
 
-#play {
-  font-size: 2.5em;
-  padding-left: 0.4em;
-  padding-right: 0.4em;
+#logo-mark.glitch-pending {
+  opacity: 0;
+}
+
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .button-media {
-  opacity: 0.5;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-.button-media:hover {
+/* On hover (or keyboard focus), zoom in and add the logo's red and blue
+   fringes. */
+a:hover .button-media,
+a:focus-visible .button-media,
+button:hover .button-media,
+button:focus-visible .button-media {
+  opacity: 1;
+  transform: scale(1.12);
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+/* Menu button, in the navbar; same style as the other icon buttons. */
+.corner-button {
+  display: block;
+  justify-self: end;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+/* Focus is shown by the zoom and colour effect instead. */
+.corner-button:focus-visible {
+  outline: none;
+}
+
+/* Menu: a column of icon buttons right under the menu button, the same size
+   and style. The music button opens a row to its left with the
+   streaming links (menu.js). Uses the browser's popover: Escape or a click
+   anywhere else closes it. */
+#menu {
+  position: fixed;
+  inset: auto;
+  top: calc(var(--nav-pad) + 44px + 0.75rem);
+  right: var(--nav-pad);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: visible;
+}
+
+#menu:popover-open {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* Fade and slide down from the menu button. */
+@starting-style {
+  #menu:popover-open {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+/* Each button has a dark fill so it stays readable over the photo or text. */
+.menu-icon {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: rgba(45, 40, 40, 0.92);
+  cursor: pointer;
+  line-height: 0;
+}
+
+.menu-icon:focus-visible {
+  outline: none;
+}
+
+.menu-icon .button-media {
+  width: 44px;
+  height: 44px;
+}
+
+/* Names next to the column buttons, shown while the menu is open (phones have
+   no hover to reveal them). A button's name hides while its row of links is
+   open. */
+#menu > .menu-icon,
+.menu-item > .menu-icon {
+  position: relative;
+}
+
+.menu-label {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 0.75rem);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(45, 40, 40, 0.92);
+  color: #E2FDE1;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.85;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+/* While a row of links is open its own names take this space, so the
+   column's names hide. */
+#menu:has(.menu-sub:not([hidden])) .menu-label {
+  display: none;
+}
+
+/* While a row is open, the column's other buttons are dimmed so the open one
+   and its links stand out. */
+#menu > .menu-icon,
+.menu-item > .menu-icon {
+  transition: opacity 0.2s;
+}
+
+#menu:has(.menu-sub:not([hidden])) > .menu-icon,
+#menu:has(.menu-sub:not([hidden])) .menu-item:not(:has(.menu-sub:not([hidden]))) > .menu-icon {
+  opacity: 0.35;
+}
+
+/* Names under the buttons in the music and social rows, set on a diagonal
+   so they fit: each rises from bottom-left to top-right and ends just under
+   its button. */
+.menu-sub .menu-icon {
+  position: relative;
+}
+
+.menu-sub-label {
+  --angle: -60deg;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 50%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(45, 40, 40, 0.92);
+  color: #E2FDE1;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.85;
+  /* The middle of the name's end sits right under the button's centre. */
+  transform: translateY(-50%) rotate(var(--angle));
+  transform-origin: right center;
+  pointer-events: none;
+}
+
+/* A button's name lights up with it: full strength, a slight zoom and the
+   same red and blue fringes (as text shadows, so they follow the letters
+   rather than the name's box). */
+.menu-label,
+.menu-sub-label {
+  transition: opacity 0.2s, transform 0.2s, text-shadow 0.2s;
+}
+
+.menu-label {
+  transform-origin: right center;
+}
+
+.menu-icon:is(:hover, :focus-visible, :active) .menu-label,
+.menu-icon:is(:hover, :focus-visible, :active) .menu-sub-label {
+  opacity: 1;
+  text-shadow:
+    -1px 0 0 #2f6bff,
+    1.5px -1px 0 rgba(255, 0, 0, 0.6);
+}
+
+.menu-icon:is(:hover, :focus-visible, :active) .menu-label {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.menu-icon:is(:hover, :focus-visible, :active) .menu-sub-label {
+  transform: translateY(-50%) rotate(var(--angle)) scale(1.08);
+}
+
+.menu-item {
+  position: relative;
+}
+
+/* The streaming links, in a row to the left of the music button. */
+.menu-sub {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 0.75rem);
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  /* The row fills outwards from its button (the first link sits next to it).
+     On very narrow phones it wraps onto a second line instead of running off
+     the screen. */
+  width: max-content;
+  max-width: calc(100vw - 2.5rem - 44px - 0.75rem);
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.menu-sub[hidden] {
+  display: none;
+}
+
+@starting-style {
+  .menu-sub {
+    opacity: 0;
+    transform: translateX(0.5rem);
+  }
+}
+
+/* Hidden on screen, still read out by screen readers (the social icons'
+   names). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* "Canto Oscuro, out now" line under the logo: plays the song in place. */
+#cta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #E2FDE1;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+#cta:hover,
+#cta:focus-visible {
+  opacity: 1;
+  outline: none;
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+/* The icon and the equaliser take up the same fixed space, so swapping them
+   doesn't change the line's size and nothing around it moves. */
+#cta {
+  height: 32px;
+}
+
+.cta-icon,
+.cta-eq {
+  flex: none;
+  width: 32px;
+  height: 32px;
+}
+
+.cta-note {
+  opacity: 0.6;
+}
+
+/* While the Spotify player is open the line is just a quiet "now playing"
+   label: no play icon, not clickable, a small equaliser instead. */
+#cta.now-playing {
+  cursor: default;
+  opacity: 0.6;
+  filter: none;
+}
+
+#cta.now-playing .cta-icon {
+  display: none;
+}
+
+.cta-eq {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+#cta.now-playing .cta-eq {
+  display: flex;
+}
+
+.cta-eq i {
+  width: 3px;
+  height: 14px;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: eq 0.9s ease-in-out infinite alternate;
+}
+
+.cta-eq i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.cta-eq i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+
+/* Bars hold still while paused, and for visitors who prefer less motion. */
+#cta.paused .cta-eq i {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-eq i {
+    animation: none;
+    transform: scaleY(0.6);
+  }
+}
+
+@keyframes eq {
+  from {
+    transform: scaleY(0.25);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.cta-note::before {
+  content: "· ";
+}
+
+@media (max-width: 640px) {
+  #cta {
+    gap: 0.5rem;
+  }
+
+  #cta {
+    height: 28px;
+  }
+
+  .cta-icon,
+  .cta-eq {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Play/pause icons (the line under the logo and the player): shows the pause
+   bars instead of the triangle while playing. */
+.icon-pause,
+.playing .icon-play {
+  display: none;
+}
+
+.playing .icon-pause {
+  display: inline;
+}
+
+/* Spotify player (trial), centred at the bottom. Spotify draws the card
+   itself inside the iframe. */
+#spotify-bar {
+  position: fixed;
+  right: 0;
+  bottom: 1rem;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(640px, calc(100% - 2rem));
+  height: 80px;
+  margin: 0 auto;
+  color: #E2FDE1;
+}
+
+/* Hidden until the "out now" line is clicked (spotify.js adds "open"). */
+#spotify-bar:not(.open) {
+  visibility: hidden;
+}
+
+#spotify-bar.open {
+  animation: reveal 0.6s ease backwards;
+}
+
+#spotify-bar iframe {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* Same size and outline as the menu button. */
+.skip-button svg {
+  width: 57px;
+  height: 57px;
+}
+
+/* Small close button above the right end of the player. */
+#spotify-close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.75rem);
+}
+
+#spotify-close svg {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 640px) {
+  #spotify-bar {
+    gap: 0.5rem;
+  }
+
+  .skip-button svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Custom music player (switched off in index.html for now), fixed to the
+   bottom of the screen. The progress bar runs along its top edge. */
+#player-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  height: 76px;
+  padding: 0 2rem;
+  background: rgba(45, 40, 40, 0.92);
+  backdrop-filter: blur(6px);
+  color: #E2FDE1;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.player-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+#player-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.player-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+#player-title {
+  overflow: hidden;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.player-controls button,
+.skip-button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  line-height: 0;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s, filter 0.2s;
+}
+
+.player-controls button:hover,
+.player-controls button:focus-visible,
+.skip-button:hover,
+.skip-button:focus-visible {
+  opacity: 1;
+  outline: none;
+  transform: scale(1.12);
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+.player-controls svg {
+  width: 32px;
+  height: 32px;
+}
+
+#player-toggle svg {
+  width: 44px;
+  height: 44px;
+}
+
+.player-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  font-size: 0.7rem;
+}
+
+#player-time {
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-spotify {
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.player-spotify:hover,
+.player-spotify:focus-visible {
   opacity: 1;
 }
 
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+/* Thin progress line on the top edge; --progress is set by player.js. */
+#player-progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  margin: 0;
+  transform: translateY(-50%);
+  background: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#player-progress::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(#E2FDE1, #E2FDE1) 0 / var(--progress, 0%) 100% no-repeat, rgba(226, 253, 225, 0.2);
+}
+
+#player-progress::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(#E2FDE1, #E2FDE1) 0 / var(--progress, 0%) 100% no-repeat, rgba(226, 253, 225, 0.2);
+}
+
+#player-progress::-webkit-slider-thumb {
+  width: 10px;
+  height: 10px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: #E2FDE1;
+  opacity: 0;
+  transition: opacity 0.2s;
+  -webkit-appearance: none;
+}
+
+#player-progress::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: #E2FDE1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#player-bar:hover #player-progress::-webkit-slider-thumb,
+#player-progress:focus-visible::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+#player-bar:hover #player-progress::-moz-range-thumb,
+#player-progress:focus-visible::-moz-range-thumb {
+  opacity: 1;
+}
+
+#player-progress:focus-visible {
+  outline: none;
+}
+
+/* On phones: song on the left, controls on the right. */
+@media (max-width: 640px) {
+  #player-bar {
+    grid-template-columns: 1fr auto;
+    padding: 0 1rem;
+    letter-spacing: 0.08em;
+  }
+
+  #player-title {
+    font-size: 0.8rem;
+  }
+
+  .player-side {
+    display: none;
+  }
+}
+
+/* Until the logo's entry animation is over, only the logo shows; then the
+   buttons, the "out now" line and the player fade in one after another. The
+   "intro" and "revealed" classes are set by index.html and glitch.js. */
+.intro #navbar,
+.intro #cta,
+.intro .hero-glow-cta,
+.intro #player-bar {
+  visibility: hidden;
+}
+
+.revealed #navbar {
+  animation: reveal 0.6s ease backwards;
+}
+
+.revealed #cta,
+.revealed .hero-glow-cta {
+  animation: reveal 0.6s ease 0.15s backwards;
+}
+
+.revealed #player-bar {
+  animation: reveal 0.6s ease 0.3s backwards;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+.home #logo {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  flex: none;
+}
+
+/* About: photo on the left from the page edge, text on the right (stacked on
+   phones). A solid background keeps the wordmark pattern out from behind the
+   text. */
+#about {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--background);
+  color: #E2FDE1;
+}
+
+/* Photo carousel: the slides fill the photo area on top of each other and
+   cross-fade (about.js moves "is-active"). The area's size comes from the
+   section (wide screens) or a fixed shape (phones), never from the photos, so
+   photos of any shape fit and nothing moves when they change. */
+.about-photo {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.about-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.about-slide.is-active {
+  opacity: 1;
+}
+
+.about-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-slide-barn img {
+  object-position: 47% center;
+}
+
+/* Arrows and indicators along the bottom of the photo, above the dark
+   overlay. Same thin outline style as the other buttons. */
+.carousel-controls {
+  position: absolute;
+  right: 0;
+  bottom: 1.5rem;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #E2FDE1;
+}
+
+.carousel-button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  line-height: 0;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s, filter 0.2s;
+}
+
+.carousel-button:hover,
+.carousel-button:focus-visible {
+  opacity: 1;
+  outline: none;
+  transform: scale(1.12);
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+.carousel-button svg {
+  width: 36px;
+  height: 36px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Thin lines; the current photo's is brighter and longer. The button is
+   taller than the line so it's easy to tap. */
+.carousel-dots button {
+  display: block;
+  width: 18px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: width 0.3s, opacity 0.3s;
+}
+
+.carousel-dots button[aria-current="true"] {
+  width: 30px;
+  opacity: 1;
+}
+
+.carousel-dots button:hover,
+.carousel-dots button:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+/* Dark overlay in the background colour, stronger toward the text, so the
+   photo sits in the page instead of glowing out of it. */
+.about-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
+}
+
+.about-text {
+  align-self: center;
+  max-width: 60ch;
+  /* More room on top, clear of the navbar. */
+  padding: 9rem clamp(2rem, 6vw, 6rem) 4rem;
+  font-family: "Jura", system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Same style as the menu's button names, larger. */
+.about-text h2 {
+  margin: 0 0 2rem;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.about-text p {
+  margin: 0 0 1.25rem;
+  opacity: 0.85;
+}
+
+.about-text .about-lineup {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  opacity: 0.55;
+}
+
+.about-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: inherit;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+.about-link:hover,
+.about-link:focus-visible {
+  opacity: 1;
+  outline: none;
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (max-width: 900px) {
+  #about {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .about-photo {
+    aspect-ratio: 3 / 2;
+  }
+
+  .about-photo::after {
+    background: linear-gradient(to bottom, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
+  }
+
+  .about-text {
+    max-width: none;
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+/* Footer: contact address and credit in one small line under the about
+   section. While the Spotify player is open it gets extra room at the bottom
+   so the player doesn't cover it. */
+#footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+  /* Same colour as the icon outlines. */
+  border-top: 1px solid rgba(226, 253, 225, 0.85);
+  background: var(--background);
+  color: rgba(226, 253, 225, 0.7);
+  font-family: "Jura", system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+body:has(#spotify-bar.open) #footer {
+  padding-bottom: calc(80px + 3rem);
+}
+
+#footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+
+#footer a:hover,
+#footer a:focus-visible {
+  outline: none;
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+/* Gentle fade-in as the section scrolls into view (about.js adds these
+   classes; skipped for visitors who prefer less motion). */
+#about.will-reveal .about-photo,
+#about.will-reveal .about-text {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+#about.will-reveal .about-text {
+  transition-delay: 0.15s;
+}
+
+#about.in-view .about-photo,
+#about.in-view .about-text {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sticky navbar: the small wordmark on the left, the menu button on the
+   right. Transparent over the hero (its wordmark hidden, since the big one is
+   right there); once the big logo has scrolled away it gets a dark
+   background, tightens, and the wordmark fades in. menu.js sets
+   "nav-scrolled" on <html>. --nav-pad is the space around the navbar; the
+   menu (#menu) is placed from it so it always opens right under the
+   button. */
+html {
+  --nav-pad: 2rem;
+}
+
+html.nav-scrolled {
+  --nav-pad: 1rem;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: var(--nav-pad);
+  border-bottom: 1px solid transparent;
+  pointer-events: none;
+  transition: padding 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+#navbar > * {
+  pointer-events: auto;
+}
+
+.navbar-wordmark {
+  justify-self: start;
+  line-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.navbar-wordmark img {
+  width: auto;
+  height: 16px;
+  filter: url(#word-fx);
+}
+
+#navbar .corner-button .button-media {
+  width: auto;
+  height: 44px;
+}
+
+.nav-scrolled #navbar {
+  border-bottom-color: rgba(226, 253, 225, 0.85); /* same colour as the icon outlines */
+  background-color: rgba(45, 40, 40, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.nav-scrolled .navbar-wordmark {
+  opacity: 0.9;
+  visibility: visible;
+}
+
+@media (max-width: 900px) {
+  html,
+  html.nav-scrolled {
+    --nav-pad: 1.25rem;
+  }
+
+  .navbar-wordmark img {
+    height: 13px;
+  }
+}
+
+/* Scrolls smoothly to a section when its link is clicked. */
+@media (prefers-reduced-motion: no-preference) {
+  html.home-page {
+    scroll-behavior: smooth;
+  }
+}
+
+/* The portrait photo (portrait screens) is taller, and centred on the singer. */
+@media (orientation: portrait) {
+  .about-slide-barn img {
+    object-position: 40% center;
+  }
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+  .about-photo {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* Very narrow phones: slightly smaller buttons in the music and social rows,
+   so all of them fit on one line and their names don't collide. */
+@media (max-width: 360px) {
+  .menu-sub {
+    gap: 0.5rem;
+  }
+
+  .menu-sub .menu-icon .button-media {
+    width: 36px;
+    height: 36px;
+  }
+
+  .menu-sub-label {
+    --angle: -66deg;
+  }
+
+  /* Keeps "Canto Oscuro · Out now" on one line at full size. */
+  #cta {
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
 }
