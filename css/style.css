@@ -32,6 +32,9 @@
 
 :root {
   --background: #2D2828;
+  /* Letter spacing for Midnight Motion text, the same as the araukaaria
+     wordmark (3.5% in Figma). */
+  --tracking: 0.035em;
 }
 
 html, body {
@@ -276,7 +279,7 @@ button:focus-visible .button-media {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking);
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0.85;
@@ -322,7 +325,7 @@ button:focus-visible .button-media {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking);
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0.85;
@@ -420,7 +423,7 @@ button:focus-visible .button-media {
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking);
   text-transform: uppercase;
   cursor: pointer;
   opacity: 0.85;
@@ -804,7 +807,7 @@ button:focus-visible .button-media {
   font-size: 2rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking);
   text-transform: uppercase;
 }
 
@@ -825,7 +828,7 @@ button:focus-visible .button-media {
   color: inherit;
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 0.85rem;
-  letter-spacing: 0.15em;
+  letter-spacing: var(--tracking);
   text-decoration: none;
   text-transform: uppercase;
   opacity: 0.85;
@@ -1029,9 +1032,8 @@ html.nav-scrolled {
     gap: 0.5rem;
   }
 
-  /* Keeps "Canto Oscuro · Out now" on one line at full size. */
+  /* Keeps "Canto Oscuro · Out now" on one line. */
   #cta {
-    letter-spacing: 0.06em;
     white-space: nowrap;
   }
 }
