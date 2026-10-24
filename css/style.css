@@ -43,10 +43,8 @@
   --about-fade: min(12svh, 16vw);
 }
 
-/* The fade steps, worked out from --about-fade. Also set on the short gap
-   so its shorter --about-fade gives shorter fades. */
-:root,
-.section-gap-short {
+/* The fade steps, worked out from --about-fade. */
+:root {
   --fade-stops:
     rgba(45, 40, 40, 0) 0,
     rgba(45, 40, 40, 0.05) calc(var(--about-fade) * 0.15),
@@ -732,6 +730,18 @@ button:focus-visible .button-media {
   flex: none;
 }
 
+/* Portrait screens: the logo, name and "out now" line sit in the middle of
+   the screen rather than of the (shorter) hero, by padding its top with the
+   room it leaves at the bottom. The padding is part of the hero's height
+   (border-box), so the hint of About below stays where it is. */
+@media (orientation: portrait) {
+  .home #logo {
+    box-sizing: border-box;
+    padding-top: calc(15vh + var(--about-fade) / 2);
+    padding-top: calc(15svh + var(--about-fade) / 2);
+  }
+}
+
 /* The Konservatoorium live photo behind the hero, darkened in the
    page's colour like the share image. It fades out at the bottom (a mask),
    so the wordmark pattern shows through in the gap below. */
@@ -748,15 +758,15 @@ button:focus-visible .button-media {
      it, before scrolling), so the photo sits between letters above and
      below and the button stands on the pattern. The photo starts half its
      fade earlier, so the middle of the fade (where it reads as the edge)
-     is the same distance below the button as the space above it. */
-  inset: calc(2rem * 2 + 44px - var(--about-fade) / 2) 0 0;
+     is the same distance below the button as the space above it,
+     plus a little extra room (1rem). */
+  inset: calc(2rem * 2 + 44px + 1rem - var(--about-fade) / 2) 0 0;
   z-index: -1;
   background:
     linear-gradient(rgba(45, 40, 40, 0.55), rgba(45, 40, 40, 0.55)),
     image-set(url("../assets/photos/web/konservatoorium-1920.webp") type("image/webp"), url("../assets/photos/web/konservatoorium-1920.jpg") type("image/jpeg")) center / cover;
-  /* The photo fades in at the top over the same short distance as the
-     other fades (--about-fade), eased like them, and out at the bottom
-     twice as fast. */
+  /* The photo fades in at the top and out at the bottom over the same
+     short distance as the other fades (--about-fade), eased like them. */
   mask-image: linear-gradient(to bottom,
     transparent 0,
     rgba(0, 0, 0, 0.05) calc(var(--about-fade) * 0.15),
@@ -765,12 +775,12 @@ button:focus-visible .button-media {
     rgba(0, 0, 0, 0.82) calc(var(--about-fade) * 0.7),
     rgba(0, 0, 0, 0.95) calc(var(--about-fade) * 0.85),
     #000 var(--about-fade),
-    #000 calc(100% - var(--about-fade) / 2),
-    rgba(0, 0, 0, 0.95) calc(100% - var(--about-fade) * 0.425),
-    rgba(0, 0, 0, 0.82) calc(100% - var(--about-fade) * 0.35),
-    rgba(0, 0, 0, 0.5) calc(100% - var(--about-fade) * 0.25),
-    rgba(0, 0, 0, 0.18) calc(100% - var(--about-fade) * 0.15),
-    rgba(0, 0, 0, 0.05) calc(100% - var(--about-fade) * 0.075),
+    #000 calc(100% - var(--about-fade)),
+    rgba(0, 0, 0, 0.95) calc(100% - var(--about-fade) * 0.85),
+    rgba(0, 0, 0, 0.82) calc(100% - var(--about-fade) * 0.7),
+    rgba(0, 0, 0, 0.5) calc(100% - var(--about-fade) * 0.5),
+    rgba(0, 0, 0, 0.18) calc(100% - var(--about-fade) * 0.3),
+    rgba(0, 0, 0, 0.05) calc(100% - var(--about-fade) * 0.15),
     transparent 100%);
 }
 
@@ -780,7 +790,15 @@ button:focus-visible .button-media {
    logo's own dark glow keeps it clear in the middle. */
 @media (max-width: 900px) {
   .home #logo::before {
-    top: calc(1.25rem * 2 + 44px - var(--about-fade) / 2);
+    top: calc(1.25rem * 2 + 44px + 1rem - var(--about-fade) / 2);
+  }
+}
+
+/* Portrait screens: the photo reaches a little further down, into the top
+   half of the gap below the hero, so it frames the "out now" line. */
+@media (orientation: portrait) {
+  .home #logo::before {
+    bottom: -7svh;
   }
 }
 
@@ -1265,9 +1283,13 @@ button:focus-visible .button-media {
 /* Open stretch between About and Shows: no background of its own, so the
    wordmark pattern shows through, with the sections on either side fading
    into it (About's solid background above, Shows' below). */
+/* Every gap shows the same stretch of plain letters (15svh) between two
+   fades. Next to the Shows, Press and footer sections, which have solid
+   backgrounds, the gap holds those fades itself, so it is taller by two
+   fades. */
 .section-gap {
   width: 100%;
-  height: 30svh;
+  height: calc(15svh + var(--about-fade) * 2);
   flex: none;
   background:
     linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat,
@@ -1275,17 +1297,39 @@ button:focus-visible .button-media {
 }
 
 /* The gap under the hero: no fades of its own, since the hero's photo
-   fades out and the About section fades in by themselves. Half the
-   height of the other gaps. */
+   fades out and the About section fades in by themselves, so only the
+   stretch of plain letters. */
 .section-gap-after-hero {
   height: 15svh;
   background: none;
 }
 
-/* A half-size gap (before the footer), with fades to match. */
-.section-gap-short {
-  --about-fade: min(6svh, 8vw);
-  height: 15svh;
+/* Portrait screens: the hero's photo reaches 7svh into the gap under it,
+   so the other gaps lose 7svh too, to look the same. */
+@media (orientation: portrait) {
+  .section-gap {
+    height: calc(8svh + var(--about-fade) * 2);
+  }
+
+  .section-gap-after-hero {
+    height: 15svh;
+  }
+}
+
+/* The gap before the footer looks like the strip of letters above the
+   hero: a fade on one side (here from the Press section above), a hard
+   edge on the other (the footer's line), and the same room between them:
+   the navbar's padding twice, the menu button and 1rem, measured to the
+   middle of the fade, where it reads as the edge. */
+.section-gap-footer {
+  height: calc(2rem * 2 + 44px + 1rem + var(--about-fade) / 2);
+  background: linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat;
+}
+
+@media (max-width: 900px) {
+  .section-gap-footer {
+    height: calc(1.25rem * 2 + 44px + 1rem + var(--about-fade) / 2);
+  }
 }
 
 /* Shows and Press: lists with one row per show or quote, in the same type
