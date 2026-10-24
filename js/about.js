@@ -1,13 +1,88 @@
+// Photos for the About carousel, from data/photos.json: builds one slide per
+// photo (a <picture> with WebP and JPEG sizes from assets/photos/web, named
+// "<file>-<width>.jpg/.webp") into the carousel, in the order of the JSON.
+// A photo can have a "portrait" crop for portrait screens, and a "position"
+// (object-position) saying what to keep when it is cropped. Resolves with the
+// slides once they are in the page (an empty list if the JSON can't load).
+const aboutPhotos = (() => {
+  const carousel = document.querySelector('.about-photo');
+  if (!carousel) return Promise.resolve([]);
+  const controls = carousel.querySelector('.carousel-controls');
+  const SIZES = '(max-width: 900px) 100vw, 50vw';
+
+  const srcset = (file, widths, ext) =>
+    widths.map(w => `assets/photos/web/${file}-${w}.${ext} ${w}w`).join(', ');
+
+  function source(file, widths, ext, media) {
+    const el = document.createElement('source');
+    if (media) el.media = media;
+    if (ext === 'webp') el.type = 'image/webp';
+    el.sizes = SIZES;
+    el.srcset = srcset(file, widths, ext);
+    return el;
+  }
+
+  function slide(photo, i, count) {
+    const picture = document.createElement('picture');
+    picture.className = 'about-slide';
+    picture.setAttribute('role', 'group');
+    picture.setAttribute('aria-roledescription', 'slide');
+    picture.setAttribute('aria-label', `${i + 1} of ${count}`);
+    if (photo.position) picture.style.setProperty('--position', photo.position);
+
+    const portrait = photo.portrait;
+    if (portrait) {
+      const media = '(orientation: portrait)';
+      picture.append(source(portrait.file, portrait.widths, 'webp', media), source(portrait.file, portrait.widths, 'jpg', media));
+      if (portrait.position) picture.style.setProperty('--position-portrait', portrait.position);
+    }
+    picture.append(source(photo.file, photo.widths, 'webp'));
+
+    const img = document.createElement('img');
+    const middle = photo.widths[Math.floor(photo.widths.length / 2)];
+    img.src = `assets/photos/web/${photo.file}-${middle}.jpg`;
+    img.sizes = SIZES;
+    img.srcset = srcset(photo.file, photo.widths, 'jpg');
+    img.width = photo.width;
+    img.height = photo.height;
+    img.decoding = 'async';
+    // The first photo loads with the page (after the hero); the rest when
+    // the carousel gets near.
+    if (i === 0) img.fetchPriority = 'low';
+    else img.loading = 'lazy';
+    img.alt = photo.alt;
+    picture.append(img);
+    return picture;
+  }
+
+  return fetch('data/photos.json')
+    .then(response => {
+      if (!response.ok) throw new Error(`photos.json: ${response.status}`);
+      return response.json();
+    })
+    .then(photos => {
+      const slides = photos.map((photo, i) => slide(photo, i, photos.length));
+      controls.before(...slides);
+      return slides;
+    })
+    .catch(error => {
+      console.error(error);
+      return [];
+    });
+})();
+
 // Fades the About section's photo and text in as it scrolls into view, once
-// the photo has loaded (it starts loading with the page, after the hero).
+// the first photo has loaded (it starts loading with the page, after the
+// hero).
 // Skipped for visitors who prefer less motion (the section is then just shown).
 (() => {
   const about = document.getElementById('about');
   if (!about || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
-  const photo = about.querySelector('.about-photo img');
-  const photoReady = photo.decode().catch(() => {});
+  const photoReady = aboutPhotos
+    .then(slides => slides[0]?.querySelector('img').decode())
+    .catch(() => {});
 
   about.classList.add('will-reveal');
   const observer = new IntersectionObserver(entries => {
@@ -23,10 +98,9 @@
 // pausing while the pointer or keyboard focus is on it, and stops for good
 // once someone uses the arrows, the indicators or a swipe. Visitors who
 // prefer less motion only get the manual controls.
-(() => {
+aboutPhotos.then(slides => {
   const carousel = document.querySelector('.about-photo');
   if (!carousel) return;
-  const slides = [...carousel.querySelectorAll('.about-slide')];
   const dots = carousel.querySelector('.carousel-dots');
   if (slides.length < 2) {
     carousel.querySelector('.carousel-controls')?.remove();
@@ -98,4 +172,4 @@
   }
 
   show(0);
-})();
+});

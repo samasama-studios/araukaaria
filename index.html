@@ -132,40 +132,11 @@
     </div>
   </div>
   <section id="about" aria-labelledby="about-heading">
-    <!-- Photo carousel (about.js): the slides sit on top of each other and
-         cross-fade. To add a photo, add another <picture class="about-slide">
-         (made like the ones below, with web-sized copies in
-         assets/photos/web); the indicators are made by about.js. -->
+    <!-- Photo carousel: the photos come from data/photos.json, and about.js
+         builds the slides (and their indicators) from it; the slides sit on
+         top of each other and cross-fade. To add a photo, put web-sized
+         copies in assets/photos/web and add a line to the JSON. -->
     <div class="about-photo" role="group" aria-roledescription="carousel" aria-label="Photos of the band">
-      <!-- Portrait screens get the portrait crop of this photo, landscape screens the landscape one. -->
-      <picture class="about-slide about-slide-barn is-active" role="group" aria-roledescription="slide" aria-label="1 of 3">
-        <source media="(orientation: portrait)" type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/portrait-800.webp 800w, assets/photos/web/portrait-1200.webp 1200w, assets/photos/web/portrait-1600.webp 1600w">
-        <source media="(orientation: portrait)" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/portrait-800.jpg 800w, assets/photos/web/portrait-1200.jpg 1200w, assets/photos/web/portrait-1600.jpg 1600w">
-        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/landscape-640.webp 640w, assets/photos/web/landscape-960.webp 960w, assets/photos/web/landscape-1280.webp 1280w, assets/photos/web/landscape-1920.webp 1920w">
-        <img src="assets/photos/web/landscape-1280.jpg" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/landscape-640.jpg 640w, assets/photos/web/landscape-960.jpg 960w, assets/photos/web/landscape-1280.jpg 1280w, assets/photos/web/landscape-1920.jpg 1920w"
-          width="1920" height="1280" fetchpriority="low" decoding="async"
-          alt="Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof.">
-      </picture>
-      <picture class="about-slide about-slide-stage" role="group" aria-roledescription="slide" aria-label="2 of 3">
-        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/stage-640.webp 640w, assets/photos/web/stage-960.webp 960w, assets/photos/web/stage-1280.webp 1280w, assets/photos/web/stage-1920.webp 1920w">
-        <img src="assets/photos/web/stage-1280.jpg" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/stage-640.jpg 640w, assets/photos/web/stage-960.jpg 960w, assets/photos/web/stage-1280.jpg 1280w, assets/photos/web/stage-1920.jpg 1920w"
-          width="1920" height="1280" loading="lazy" decoding="async"
-          alt="The band playing on a small stage with keyboards and guitars, in a black-and-white double exposure.">
-      </picture>
-      <picture class="about-slide about-slide-above" role="group" aria-roledescription="slide" aria-label="3 of 3">
-        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/above-800.webp 800w, assets/photos/web/above-1200.webp 1200w, assets/photos/web/above-1600.webp 1600w">
-        <img src="assets/photos/web/above-1200.jpg" sizes="(max-width: 900px) 100vw, 50vw"
-          srcset="assets/photos/web/above-800.jpg 800w, assets/photos/web/above-1200.jpg 1200w, assets/photos/web/above-1600.jpg 1600w"
-          width="1600" height="1600" loading="lazy" decoding="async"
-          alt="The band seen from above, standing together on the grass, in a black-and-white double exposure.">
-      </picture>
       <div class="carousel-controls">
         <button class="carousel-button" id="carousel-prev" aria-label="Previous photo">
           <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">

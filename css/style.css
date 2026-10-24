@@ -735,15 +735,15 @@ button:focus-visible .button-media {
   opacity: 1;
 }
 
+/* What to keep when a photo is cropped comes from its "position" in
+   data/photos.json (about.js sets --position, and --position-portrait for
+   a photo's portrait crop). */
 .about-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.about-slide-barn img {
-  object-position: 47% center;
+  object-position: var(--position, center);
 }
 
 /* Arrows and indicators along the bottom of the photo, above the dark
@@ -1644,10 +1644,9 @@ html.nav-scrolled {
   }
 }
 
-/* The portrait photo (portrait screens) is taller, and centred on the singer. */
 @media (orientation: portrait) {
-  .about-slide-barn img {
-    object-position: 40% center;
+  .about-slide img {
+    object-position: var(--position-portrait, var(--position, center));
   }
 }
 
