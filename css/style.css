@@ -730,22 +730,22 @@ button:focus-visible .button-media {
   flex: none;
 }
 
-/* Portrait screens: the logo, name and "out now" line sit in the middle of
-   the screen rather than of the (shorter) hero, by padding its top with the
-   room it leaves at the bottom. The padding is part of the hero's height
+/* The logo, name and "out now" line sit in the middle of the screen
+   rather than of the (shorter) hero, by padding its top with the room it
+   leaves at the bottom. The padding is part of the hero's height
    (border-box), so the hint of About below stays where it is. */
-@media (orientation: portrait) {
-  .home #logo {
-    box-sizing: border-box;
-    padding-top: calc(15vh + var(--about-fade) / 2);
-    padding-top: calc(15svh + var(--about-fade) / 2);
-  }
+.home #logo {
+  box-sizing: border-box;
+  padding-top: calc(15vh + var(--about-fade) / 2);
+  padding-top: calc(15svh + var(--about-fade) / 2);
 }
 
 /* The Konservatoorium live photo behind the hero, darkened in the
    page's colour like the share image. It fades out at the bottom (a mask),
    so the wordmark pattern shows through in the gap below. */
 .home #logo {
+  /* Where the photo starts (see ::before below). */
+  --photo-top: calc(2rem * 2 + 44px + 1rem - var(--about-fade) / 2);
   position: relative;
   isolation: isolate;
 }
@@ -760,7 +760,7 @@ button:focus-visible .button-media {
      fade earlier, so the middle of the fade (where it reads as the edge)
      is the same distance below the button as the space above it,
      plus a little extra room (1rem). */
-  inset: calc(2rem * 2 + 44px + 1rem - var(--about-fade) / 2) 0 0;
+  inset: var(--photo-top) 0 0;
   z-index: -1;
   background:
     linear-gradient(rgba(45, 40, 40, 0.55), rgba(45, 40, 40, 0.55)),
@@ -789,16 +789,21 @@ button:focus-visible .button-media {
    and darker toward the "out now" line so it reads over the drums. The
    logo's own dark glow keeps it clear in the middle. */
 @media (max-width: 900px) {
-  .home #logo::before {
-    top: calc(1.25rem * 2 + 44px + 1rem - var(--about-fade) / 2);
+  .home #logo {
+    --photo-top: calc(1.25rem * 2 + 44px + 1rem - var(--about-fade) / 2);
   }
 }
 
-/* Portrait screens: the photo reaches a little further down, into the top
-   half of the gap below the hero, so it frames the "out now" line. */
-@media (orientation: portrait) {
+/* The photo reaches a little further down, into the top half of the gap
+   below the hero, so it frames the "out now" line. */
+.home #logo::before {
+  bottom: -7svh;
+}
+
+/* Desktop: further still, so less of the gap shows below the photo. */
+@media (orientation: landscape) {
   .home #logo::before {
-    bottom: -7svh;
+    bottom: -13svh;
   }
 }
 
@@ -816,16 +821,25 @@ button:focus-visible .button-media {
 
 /* About: photo on the left from the page edge, text on the right (stacked on
    phones). A solid background keeps the wordmark pattern out from behind the
-   text. */
+   text. It sits on its own layer (::before, below) so it can fade in with
+   the photo and text. */
 #about {
   position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  background: var(--background);
   color: #E2FDE1;
+}
+
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--background);
 }
 
 /* Photo carousel: the slides fill the photo area on top of each other and
@@ -990,7 +1004,7 @@ button:focus-visible .button-media {
    distance): the bright photo hides the pattern sooner than the dark
    background does, so this way the letters fade out at the same point on
    both sides. */
-#about {
+#about::before {
   background:
     linear-gradient(to bottom,
       rgba(45, 40, 40, 0) 0,
@@ -1006,7 +1020,7 @@ button:focus-visible .button-media {
 /* Phones: the text sits under the photo, so the background only needs to
    start once the photo is fully in (below its top fade). */
 @media (max-width: 900px) {
-  #about {
+  #about::before {
     background: linear-gradient(var(--background), var(--background)) 0 var(--about-fade) / 100% 100% no-repeat;
   }
 }
@@ -1322,16 +1336,14 @@ button:focus-visible .button-media {
   background: none;
 }
 
-/* Portrait screens: the hero's photo reaches 7svh into the gap under it,
-   so the other gaps lose 7svh too, to look the same. */
-@media (orientation: portrait) {
-  .section-gap {
-    height: calc(8svh + var(--about-fade) * 2);
-  }
+/* The hero's photo reaches 7svh into the gap under it, so the other gaps
+   lose 7svh too, to look the same. */
+.section-gap {
+  height: calc(8svh + var(--about-fade) * 2);
+}
 
-  .section-gap-after-hero {
-    height: 15svh;
-  }
+.section-gap-after-hero {
+  height: 15svh;
 }
 
 /* The gap before the footer looks like the strip of letters above the
@@ -1845,6 +1857,26 @@ body:has(#spotify-bar.open) #footer {
   opacity: 0;
   transform: translateY(1.5rem);
   transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* The background behind the text fades in with them (without moving), so
+   it doesn't show on its own under the hero during the intro. */
+#about.will-reveal::before {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+#about.in-view::before {
+  opacity: 1;
+}
+
+/* about.js only runs once the page has loaded, so until the intro is over
+   About is hidden here too: otherwise it shows for a moment on load, before
+   the script hides it for its fade-in. */
+.intro #about:not(.in-view)::before,
+.intro #about:not(.in-view) .about-photo,
+.intro #about:not(.in-view) .about-text {
+  opacity: 0;
 }
 
 #about.will-reveal .about-text {
