@@ -41,6 +41,12 @@
      linear-gradient(<direction>, var(--fade-stops)): transparent at the
      start, solid at the end. */
   --about-fade: min(12svh, 16vw);
+}
+
+/* The fade steps, worked out from --about-fade. Also set on the short gap
+   so its shorter --about-fade gives shorter fades. */
+:root,
+.section-gap-short {
   --fade-stops:
     rgba(45, 40, 40, 0) 0,
     rgba(45, 40, 40, 0.05) calc(var(--about-fade) * 0.15),
@@ -956,11 +962,17 @@ button:focus-visible .button-media {
    into it (About's solid background above, Shows' below). */
 .section-gap {
   width: 100%;
-  height: 60svh;
+  height: 30svh;
   flex: none;
   background:
     linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat,
     linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
+}
+
+/* A half-size gap (before the footer), with fades to match. */
+.section-gap-short {
+  --about-fade: min(6svh, 8vw);
+  height: 15svh;
 }
 
 /* Shows and Press: lists with one row per show or quote, in the same type
@@ -970,7 +982,7 @@ button:focus-visible .button-media {
 #press {
   width: 100%;
   box-sizing: border-box;
-  padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 7rem;
+  padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 2.5rem;
   background: var(--background);
   color: #E2FDE1;
   font-family: "Jura", system-ui, sans-serif;
