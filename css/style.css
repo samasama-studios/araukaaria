@@ -57,12 +57,18 @@ body {
    #svgView(viewBox(...)) part pads the 1952×149 wordmark out to a 1952×600
    tile: no space between words in a row, only between rows. The second copy
    is shifted half a tile to stagger the rows. --tile sets the word width,
-   opacity the strength. */
+   opacity the strength. Pinned to the bottom and as tall as the screen with
+   the address bar hidden (lvh): on phones the bar slides away on the first
+   scroll, and a layer pinned to the top would jump up with it. */
 .home::before {
   --tile: 240px;
   content: "";
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  height: 100lvh;
   z-index: -1;
   opacity: 0.06;
   pointer-events: none;
