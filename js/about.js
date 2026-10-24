@@ -89,7 +89,7 @@ const aboutPhotos = (() => {
     if (!entries[0].isIntersecting) return;
     observer.disconnect();
     photoReady.then(() => about.classList.add('in-view'));
-  }, { threshold: 0.2 });
+  }); // as soon as any of it peeks in under the hero
   observer.observe(about);
 })();
 

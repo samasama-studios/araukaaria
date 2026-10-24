@@ -695,8 +695,11 @@ button:focus-visible .button-media {
 .home #logo {
   overflow-x: clip;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  /* A little shorter than the screen, so a hint of the About section shows
+     at the bottom and invites scrolling: the first half of its top fade
+     (--about-fade), with the photo's colour just coming through. */
+  min-height: calc(100vh - var(--about-fade) / 2);
+  min-height: calc(100svh - var(--about-fade) / 2);
   flex: none;
 }
 
