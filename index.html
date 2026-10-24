@@ -74,6 +74,11 @@
       <img class="button-media" src="assets/icons/shows.svg" alt="">
       <span class="visually-hidden">Shows</span>
     </a>
+    <a class="menu-icon" href="#press">
+      <span class="menu-label" aria-hidden="true">Press</span>
+      <img class="button-media" src="assets/icons/press.svg" alt="">
+      <span class="visually-hidden">Press</span>
+    </a>
     <div class="menu-item">
       <div class="menu-sub" id="social-links" hidden>
         <a class="menu-icon" href="https://www.instagram.com/araukaaria/">
@@ -223,6 +228,30 @@
       </li>
     </template>
   </section>
+  <div class="section-gap" aria-hidden="true"></div>
+  <section id="press" aria-labelledby="press-heading">
+    <h2 id="press-heading">Press</h2>
+    <!-- The press quotes come from data/press.json: press.js fills the
+         list below from it, newest first, using the row template. Edit the
+         JSON, not this markup. -->
+    <ol class="press-list" id="press-list"></ol>
+    <template id="press-row">
+      <li class="press-item">
+        <time class="press-date"></time>
+        <div class="press-body">
+          <blockquote class="press-quote"></blockquote>
+          <p class="press-translation" lang="en"></p>
+          <p class="press-source"><span class="press-outlet"></span> <span class="press-author"></span></p>
+        </div>
+        <a class="press-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M22 35L35 22M25 22H35V32" stroke="currentColor" stroke-width="1.54054" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </li>
+    </template>
+  </section>
   <footer id="footer">
     <a class="footer-mail" href="mailto:contact@araukaaria.com">contact@araukaaria.com</a>
     <span aria-hidden="true" class="footer-mail-sep">·</span>
@@ -254,7 +283,9 @@
   <script src="js/glitch.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/about.js"></script>
+  <script src="js/load-more.js"></script>
   <script src="js/shows.js"></script>
+  <script src="js/press.js"></script>
   <script src="js/spotify.js"></script>
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>

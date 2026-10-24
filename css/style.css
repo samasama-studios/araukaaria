@@ -899,7 +899,7 @@ button:focus-visible .button-media {
 }
 
 .about-link,
-.shows-more {
+.load-more {
   display: inline-block;
   margin-top: 0.5rem;
   color: inherit;
@@ -914,8 +914,8 @@ button:focus-visible .button-media {
 
 .about-link:hover,
 .about-link:focus-visible,
-.shows-more:hover,
-.shows-more:focus-visible {
+.load-more:hover,
+.load-more:focus-visible {
   opacity: 1;
   outline: none;
   filter:
@@ -956,10 +956,11 @@ button:focus-visible .button-media {
     linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
 }
 
-/* Shows: a list of dates, one row each: date, event and place. Same type
+/* Shows and Press: lists with one row per show or quote, in the same type
    as the About section. The background runs the full width; the side
    padding keeps the list at most 60rem wide, centred. */
-#shows {
+#shows,
+#press {
   width: 100%;
   box-sizing: border-box;
   padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 7rem;
@@ -970,7 +971,8 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
-#shows h2 {
+#shows h2,
+#press h2 {
   margin: 0 0 2rem;
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 2rem;
@@ -998,20 +1000,21 @@ button:focus-visible .button-media {
   border-bottom: 1px solid rgba(226, 253, 225, 0.2);
 }
 
-/* Shows not yet revealed by "Load more" (the grid above would show them). */
-.show[hidden] {
+/* Rows not yet revealed by "Load more" (their grid would show them). */
+.show[hidden],
+.press-item[hidden] {
   display: none;
 }
 
 /* Rows revealed by "Load more" fade and rise in like the menu, one after
-   another (shows.js sets --i to each row's place in the batch). */
-.show.is-new {
+   another (load-more.js sets --i to each row's place in the batch). */
+.is-new {
   animation: reveal 0.35s ease backwards;
   animation-delay: calc(var(--i) * 60ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .show.is-new {
+  .is-new {
     animation: none;
   }
 }
@@ -1061,8 +1064,10 @@ button:focus-visible .button-media {
 /* Tickets: a small ticket icon in the same thin outlined style as the
    other icon buttons, on every row so the rows all look the same. It links
    to the ticket shop on upcoming shows that have one; on the others it is
-   faded and does nothing (shows.js). */
-.show-tickets {
+   faded and does nothing (shows.js). The press list's "read" buttons look
+   the same. */
+.show-tickets,
+.press-link {
   display: block;
   justify-self: end;
   align-self: center;
@@ -1071,13 +1076,16 @@ button:focus-visible .button-media {
   transition: transform 0.2s, filter 0.2s;
 }
 
-.show-tickets svg {
+.show-tickets svg,
+.press-link svg {
   width: 32px;
   height: 32px;
 }
 
 .show-tickets[href]:hover,
-.show-tickets[href]:focus-visible {
+.show-tickets[href]:focus-visible,
+.press-link[href]:hover,
+.press-link[href]:focus-visible {
   outline: none;
   transform: scale(1.12);
   filter:
@@ -1085,7 +1093,8 @@ button:focus-visible .button-media {
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
 }
 
-.show-tickets:not([href]) {
+.show-tickets:not([href]),
+.press-link:not([href]) {
   color: rgba(226, 253, 225, 0.2);
 }
 
@@ -1139,7 +1148,7 @@ button:focus-visible .button-media {
 
 /* Under the past shows: reveals the next few (shows.js). Looks like the
    other small text links. */
-.shows-more {
+.load-more {
   margin-top: 1.5rem;
   padding: 0;
   border: 0;
@@ -1190,6 +1199,106 @@ button:focus-visible .button-media {
 
   .show-tickets {
     grid-area: tickets;
+  }
+}
+
+/* Press: one row per quote, laid out like the shows: the date, the quote
+   (with an English translation under it when it isn't in English) and the
+   outlet and writer, and a button to the full piece. */
+.press-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+.press-item {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr) 32px;
+  column-gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+.press-date {
+  align-self: start;
+  padding-top: 0.2em;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.press-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.press-quote {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+/* The translation: upright and quieter than the quote it translates. */
+.press-translation {
+  margin: -0.15rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.55;
+}
+
+.press-source {
+  margin: 0;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.press-outlet {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.press-author {
+  font-weight: 300;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+.press-author::before {
+  content: "— ";
+}
+
+/* Phones: the same columns, narrower, as in the shows list. */
+@media (max-width: 640px) {
+  .press-item {
+    grid-template-columns: 4.5rem minmax(0, 1fr) 32px;
+    column-gap: 1rem;
+  }
+
+  .press-date {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* Day and month over the year, the year fainter. */
+  .press-date span {
+    display: block;
+  }
+
+  .press-date span + span {
+    opacity: 0.6;
+  }
+
+  .press-quote {
+    font-size: 1rem;
+    line-height: 1.5;
   }
 }
 

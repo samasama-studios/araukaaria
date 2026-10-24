@@ -2,9 +2,8 @@
 // show from the row template in index.html. A show counts as upcoming until
 // the end of its day; upcoming shows run soonest first, past shows newest
 // first. Upcoming shows with a "tickets" link get a working tickets button.
-// Only the most recent past shows are shown at first, with a "Load
-// more" button under the list that reveals the next few each time and goes
-// away once all are shown.
+// Only the most recent past shows are shown at first, behind "Load more"
+// (load-more.js).
 (() => {
   const section = document.getElementById('shows');
   const template = document.getElementById('show-row');
@@ -66,33 +65,6 @@
     String(now.getDate()).padStart(2, '0'),
   ].join('-');
 
-  function addLoadMore(rows) {
-    rows.slice(STEP).forEach(item => { item.hidden = true; });
-    if (rows.length <= STEP) return;
-
-    const button = document.createElement('button');
-    button.className = 'shows-more';
-    button.textContent = 'Load more';
-    pastList.after(button);
-
-    button.addEventListener('click', () => {
-      const next = rows.filter(item => item.hidden).slice(0, STEP);
-      // The new rows fade in one after another (see "is-new" in style.css).
-      next.forEach((item, i) => {
-        item.hidden = false;
-        item.style.setProperty('--i', i);
-        item.classList.add('is-new');
-      });
-      if (!rows.some(item => item.hidden)) {
-        // Nothing left to load: hand focus to the first newly shown show so
-        // keyboard users don't lose their place when the button goes.
-        next[0].tabIndex = -1;
-        next[0].focus({ preventScroll: true });
-        button.remove();
-      }
-    });
-  }
-
   fetch('data/shows.json')
     .then(response => {
       if (!response.ok) throw new Error(`shows.json: ${response.status}`);
@@ -115,7 +87,7 @@
         pastList.append(...rows);
         pastHeading.hidden = false;
         pastList.hidden = false;
-        addLoadMore(rows);
+        addLoadMore(pastList, rows, STEP);
       }
     })
     .catch(error => console.error(error));
