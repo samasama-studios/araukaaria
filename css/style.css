@@ -207,17 +207,27 @@ body {
   transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-/* On hover (or keyboard focus), zoom in and add the logo's red and blue
-   fringes. */
-a:hover .button-media,
+/* On hover (or keyboard focus),
 a:focus-visible .button-media,
-button:hover .button-media,
 button:focus-visible .button-media {
   opacity: 1;
   transform: scale(1.12);
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  zoom in and add the logo's red and blue
+   fringes. */
+a:hover .button-media,
+  button:hover .button-media {
+    opacity: 1;
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 /* Menu button, in the navbar; same style as the other icon buttons. */
@@ -469,13 +479,22 @@ button:focus-visible .button-media {
   transition: opacity 0.2s, filter 0.2s;
 }
 
-#cta:hover,
 #cta:focus-visible {
   opacity: 1;
   outline: none;
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  #cta:hover {
+    opacity: 1;
+    outline: none;
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 /* The icon and the equaliser take up the same fixed space, so swapping them
@@ -653,7 +672,6 @@ button:focus-visible .button-media {
   transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-.skip-button:hover,
 .skip-button:focus-visible {
   opacity: 1;
   outline: none;
@@ -661,6 +679,17 @@ button:focus-visible .button-media {
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .skip-button:hover {
+    opacity: 1;
+    outline: none;
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 /* Until the logo's entry animation is over, only the logo shows; then the
@@ -776,7 +805,6 @@ button:focus-visible .button-media {
   transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-.carousel-button:hover,
 .carousel-button:focus-visible {
   opacity: 1;
   outline: none;
@@ -784,6 +812,17 @@ button:focus-visible .button-media {
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .carousel-button:hover {
+    opacity: 1;
+    outline: none;
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 .carousel-button svg {
@@ -816,10 +855,16 @@ button:focus-visible .button-media {
   opacity: 1;
 }
 
-.carousel-dots button:hover,
 .carousel-dots button:focus-visible {
   opacity: 1;
   outline: none;
+}
+
+@media (hover: hover) {
+  .carousel-dots button:hover {
+    opacity: 1;
+    outline: none;
+  }
 }
 
 /* Dark overlay in the background colour, stronger toward the text, so the
@@ -940,14 +985,24 @@ button:focus-visible .button-media {
   filter: saturate(0.75) contrast(0.9) brightness(1.08);
 }
 
-.video-cover:hover img,
 .video-cover:focus-visible img {
   filter: none;
 }
 
-.video-cover:hover::after,
+@media (hover: hover) {
+  .video-cover:hover img {
+    filter: none;
+  }
+}
+
 .video-cover:focus-visible::after {
   opacity: 0;
+}
+
+@media (hover: hover) {
+  .video-cover:hover::after {
+    opacity: 0;
+  }
 }
 
 .video-play {
@@ -961,12 +1016,20 @@ button:focus-visible .button-media {
   transition: transform 0.2s, filter 0.2s;
 }
 
-.video-cover:hover .video-play,
 .video-cover:focus-visible .video-play {
   transform: scale(1.12);
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .video-cover:hover .video-play {
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 .video-cover:focus-visible {
@@ -1071,15 +1134,24 @@ button:focus-visible .button-media {
   transition: opacity 0.2s, filter 0.2s;
 }
 
-.about-link:hover,
 .about-link:focus-visible,
-.load-more:hover,
 .load-more:focus-visible {
   opacity: 1;
   outline: none;
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .about-link:hover,
+  .load-more:hover {
+    opacity: 1;
+    outline: none;
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 @media (max-width: 900px) {
@@ -1247,15 +1319,24 @@ button:focus-visible .button-media {
   height: 32px;
 }
 
-.show-tickets[href]:hover,
 .show-tickets[href]:focus-visible,
-.press-link[href]:hover,
 .press-link[href]:focus-visible {
   outline: none;
   transform: scale(1.12);
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .show-tickets[href]:hover,
+  .press-link[href]:hover {
+    outline: none;
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 .show-tickets:not([href]),
@@ -1270,9 +1351,14 @@ button:focus-visible .button-media {
   animation: tickets-nudge 4s ease-in-out 1s infinite;
 }
 
-.show-tickets[href]:hover,
 .show-tickets[href]:focus-visible {
   animation: none;
+}
+
+@media (hover: hover) {
+  .show-tickets[href]:hover {
+    animation: none;
+  }
 }
 
 @keyframes tickets-nudge {
@@ -1526,9 +1612,14 @@ button:focus-visible .button-media {
   }
 }
 
-#footer .footer-links a:hover,
 #footer .footer-links a:focus-visible {
   transform: scale(1.12);
+}
+
+@media (hover: hover) {
+  #footer .footer-links a:hover {
+    transform: scale(1.12);
+  }
 }
 
 /* "Booking & press" in small capitals, then the address. */
@@ -1574,12 +1665,20 @@ body:has(#spotify-bar.open) #footer {
   color: #E2FDE1;
 }
 
-#footer a:hover,
 #footer a:focus-visible {
   outline: none;
   filter:
     drop-shadow(-1px 0 0 #2f6bff)
     drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  #footer a:hover {
+    outline: none;
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
 }
 
 /* Gentle fade-in as the section scrolls into view (about.js adds these
