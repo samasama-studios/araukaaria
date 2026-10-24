@@ -207,7 +207,8 @@ body {
   transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-/* On hover (or keyboard focus),
+/* On hover (or keyboard focus), zoom in and add the logo's red and blue
+   fringes. */
 a:focus-visible .button-media,
 button:focus-visible .button-media {
   opacity: 1;
@@ -218,9 +219,7 @@ button:focus-visible .button-media {
 }
 
 @media (hover: hover) {
-  zoom in and add the logo's red and blue
-   fringes. */
-a:hover .button-media,
+  a:hover .button-media,
   button:hover .button-media {
     opacity: 1;
     transform: scale(1.12);
