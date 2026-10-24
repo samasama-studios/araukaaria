@@ -742,18 +742,46 @@ button:focus-visible .button-media {
 .home #logo::before {
   content: "";
   position: absolute;
-  inset: 0;
+  /* It starts below a strip of the wordmark pattern at the top, just tall
+     enough to wrap the menu button (the navbar's padding above and below
+     it, before scrolling), so the photo sits between letters above and
+     below and the button stands on the pattern. The photo starts half its
+     fade earlier, so the middle of the fade (where it reads as the edge)
+     is the same distance below the button as the space above it. */
+  inset: calc(2rem * 2 + 44px - var(--about-fade) / 2) 0 0;
   z-index: -1;
   background:
     linear-gradient(rgba(45, 40, 40, 0.55), rgba(45, 40, 40, 0.55)),
     image-set(url("../assets/photos/web/konservatoorium-1920.webp") type("image/webp"), url("../assets/photos/web/konservatoorium-1920.jpg") type("image/jpeg")) center / cover;
-  mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  /* The photo fades in at the top and out at the bottom over the same
+     short distance as the other fades (--about-fade), eased like them. */
+  mask-image: linear-gradient(to bottom,
+    transparent 0,
+    rgba(0, 0, 0, 0.05) calc(var(--about-fade) * 0.15),
+    rgba(0, 0, 0, 0.18) calc(var(--about-fade) * 0.3),
+    rgba(0, 0, 0, 0.5) calc(var(--about-fade) * 0.5),
+    rgba(0, 0, 0, 0.82) calc(var(--about-fade) * 0.7),
+    rgba(0, 0, 0, 0.95) calc(var(--about-fade) * 0.85),
+    #000 var(--about-fade),
+    #000 calc(100% - var(--about-fade)),
+    rgba(0, 0, 0, 0.95) calc(100% - var(--about-fade) * 0.85),
+    rgba(0, 0, 0, 0.82) calc(100% - var(--about-fade) * 0.7),
+    rgba(0, 0, 0, 0.5) calc(100% - var(--about-fade) * 0.5),
+    rgba(0, 0, 0, 0.18) calc(100% - var(--about-fade) * 0.3),
+    rgba(0, 0, 0, 0.05) calc(100% - var(--about-fade) * 0.15),
+    transparent 100%);
 }
 
 /* Portrait screens get their own upright crop of the photo (Pepi on the
    left, Lisanna on the right, the drums at the bottom), lighter at the top
    and darker toward the "out now" line so it reads over the drums. The
    logo's own dark glow keeps it clear in the middle. */
+@media (max-width: 900px) {
+  .home #logo::before {
+    top: calc(1.25rem * 2 + 44px - var(--about-fade) / 2);
+  }
+}
+
 @media (orientation: portrait) {
   .home #logo::before {
     background:
@@ -1235,8 +1263,10 @@ button:focus-visible .button-media {
 }
 
 /* The gap under the hero: the hero's photo already fades out on its own,
-   so only the fade into the About section below. */
+   so only the fade into the About section below. Half the height of the
+   other gaps. */
 .section-gap-after-hero {
+  height: 15svh;
   background: linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
 }
 
