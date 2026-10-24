@@ -73,7 +73,9 @@ const aboutPhotos = (() => {
 
 // Fades the About section's photo and text in as it scrolls into view, once
 // the first photo has loaded (it starts loading with the page, after the
-// hero).
+// hero). When it already peeks in under the hero on arrival, it waits for
+// the logo's entry and the "out now" line, so the first screen settles
+// before the hint to scroll appears.
 // Skipped for visitors who prefer less motion (the section is then just shown).
 (() => {
   const about = document.getElementById('about');
@@ -84,11 +86,26 @@ const aboutPhotos = (() => {
     .then(slides => slides[0]?.querySelector('img').decode())
     .catch(() => {});
 
+  // Resolves a moment after glitch.js swaps "intro" for "revealed" on <html>
+  // (the "out now" line fades in over 0.75s), or straight away if the
+  // visitor scrolls before that.
+  const root = document.documentElement;
+  const introDone = new Promise(resolve => {
+    if (!root.classList.contains('intro')) return resolve();
+    const observer = new MutationObserver(() => {
+      if (root.classList.contains('intro')) return;
+      observer.disconnect();
+      setTimeout(resolve, 900);
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    addEventListener('scroll', resolve, { once: true, passive: true });
+  });
+
   about.classList.add('will-reveal');
   const observer = new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) return;
     observer.disconnect();
-    photoReady.then(() => about.classList.add('in-view'));
+    Promise.all([photoReady, introDone]).then(() => about.classList.add('in-view'));
   }); // as soon as any of it peeks in under the hero
   observer.observe(about);
 })();
