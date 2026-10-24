@@ -1467,17 +1467,18 @@ button:focus-visible .button-media {
   }
 }
 
-/* Footer: contact address and credit in one small line under the about
-   section. While the Spotify player is open it gets extra room at the bottom
-   so the player doesn't cover it. */
+/* Footer: three centred rows: the band's links as small icon buttons, the
+   booking and press address, and the site version with the copyright
+   (quietest). While the Spotify player is open it gets extra room at the
+   bottom so the player doesn't cover it. */
 #footer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 0.75rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
   width: 100%;
   box-sizing: border-box;
-  padding: 2rem 1.5rem;
+  padding: 2.25rem 1.5rem 2rem;
   /* Same colour as the icon outlines. */
   border-top: 1px solid rgba(226, 253, 225, 0.85);
   background: var(--background);
@@ -1485,26 +1486,78 @@ button:focus-visible .button-media {
   font-family: "Jura", system-ui, sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
+  text-align: center;
 }
 
-/* Site version and credit, a step quieter than the address. */
-.footer-version,
-.footer-credit {
+#footer p {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-links a {
+  display: block;
+  line-height: 0;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.footer-links img {
+  width: 36px;
+  height: 36px;
+}
+
+/* Narrow phones: a little smaller, so all seven fit on one row. */
+@media (max-width: 380px) {
+  .footer-links {
+    gap: 0.5rem;
+  }
+
+  .footer-links img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+#footer .footer-links a:hover,
+#footer .footer-links a:focus-visible {
+  transform: scale(1.12);
+}
+
+/* "Booking & press" in small capitals, then the address. */
+.footer-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+}
+
+.footer-label {
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
   opacity: 0.6;
 }
 
-/* Phones: the line doesn't fit, so the address gets the top line on its own
-   (without the dot after it) and the version and credit, which belong
-   together, share the line under it. */
-@media (max-width: 640px) {
-  .footer-mail-sep {
-    display: none;
-  }
+.footer-contact a {
+  color: #E2FDE1;
+}
 
-  #footer .footer-mail {
-    flex-basis: 100%;
-    text-align: center;
-  }
+.footer-meta {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  opacity: 0.5;
 }
 
 body:has(#spotify-bar.open) #footer {
@@ -1514,7 +1567,11 @@ body:has(#spotify-bar.open) #footer {
 #footer a {
   color: inherit;
   text-decoration: none;
-  transition: filter 0.2s;
+  transition: filter 0.2s, transform 0.2s;
+}
+
+#footer .footer-contact a {
+  color: #E2FDE1;
 }
 
 #footer a:hover,
