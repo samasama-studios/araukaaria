@@ -69,6 +69,11 @@
       <img class="button-media" src="assets/icons/about.svg" alt="">
       <span class="visually-hidden">About</span>
     </a>
+    <a class="menu-icon" href="#shows">
+      <span class="menu-label" aria-hidden="true">Shows</span>
+      <img class="button-media" src="assets/icons/shows.svg" alt="">
+      <span class="visually-hidden">Shows</span>
+    </a>
     <div class="menu-item">
       <div class="menu-sub" id="social-links" hidden>
         <a class="menu-icon" href="https://www.instagram.com/araukaaria/">
@@ -175,14 +180,48 @@
     <div class="about-text">
       <h2 id="about-heading">About</h2>
       <p>Araukaaria brings Latin American psychedelia to the Baltic: an Argentine-Estonian five-piece from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, the songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk.</p>
-      <p>The debut album arrives 6 February 2027.</p>
-      <!-- Line-up, hidden for now. Fill in the names and remove this comment around it to show it.
-      <p class="about-lineup">José “Pepi” Prieto — vocals, guitar · [name] — [instrument] · …</p>
-      -->
+      <p>The self-titled debut album, <cite>Araukaaria</cite>, arrives 6 February 2027.</p>
+      <!-- Line-up: the five members, then the musicians who play with them. -->
+      <h3 class="subheading">Band</h3>
+      <ul class="about-lineup">
+        <li><span class="lineup-name">José “Pepi” Prieto</span> — vocals, electric &amp; acoustic guitar, electric organ</li>
+        <li><span class="lineup-name">Lisanna Kuningas</span> — vocals, acoustic guitar, keys</li>
+        <li><span class="lineup-name">Norbert de Varenne</span> — electric guitar</li>
+        <li><span class="lineup-name">Fedor Bezrukov</span> — electric bass</li>
+        <li><span class="lineup-name">Rauno Vaher</span> — drums &amp; percussion</li>
+        <li class="lineup-guest">with <span class="lineup-name">Artur Leppik</span> — saxophone</li>
+      </ul>
       <!-- Press kit link, hidden until the press kit exists. Point href at it and remove this comment around it to show it.
       <a class="about-link" href="#">Press kit →</a>
       -->
     </div>
+  </section>
+  <!-- Open stretch between About and Shows where the wordmark pattern shows
+       through as the page scrolls. -->
+  <div class="section-gap" aria-hidden="true"></div>
+  <section id="shows" aria-labelledby="shows-heading">
+    <h2 id="shows-heading">Shows</h2>
+    <!-- The shows come from data/shows.json: shows.js fills the two lists
+         below from it, using the row template, and sorts each show into
+         upcoming or past by its date. Edit the JSON, not this markup. -->
+    <ol class="show-list" id="upcoming-shows" hidden></ol>
+    <p class="shows-none" id="no-upcoming">No upcoming shows right now. New dates soon.</p>
+    <h3 class="subheading" id="past-heading" hidden>Past shows</h3>
+    <ol class="show-list" id="past-shows" hidden></ol>
+    <template id="show-row">
+      <li class="show">
+        <time class="show-date"></time>
+        <span class="show-event"></span>
+        <span class="show-place"></span>
+        <a class="show-tickets" target="_blank" rel="noopener">
+          <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M15 18H42C43.1 18 44 18.9 44 20V25C42.1 25 40.5 26.6 40.5 28.5C40.5 30.4 42.1 32 44 32V37C44 38.1 43.1 39 42 39H15C13.9 39 13 38.1 13 37V32C14.9 32 16.5 30.4 16.5 28.5C16.5 26.6 14.9 25 13 25V20C13 18.9 13.9 18 15 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
+            <path d="M34 20.5V37" stroke="currentColor" stroke-width="1.54054" stroke-dasharray="2.5 2" />
+          </svg>
+        </a>
+      </li>
+    </template>
   </section>
   <footer id="footer">
     <a href="mailto:contact@araukaaria.com">contact@araukaaria.com</a>
@@ -215,6 +254,7 @@
   <script src="js/glitch.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/about.js"></script>
+  <script src="js/shows.js"></script>
   <script src="js/spotify.js"></script>
   <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>

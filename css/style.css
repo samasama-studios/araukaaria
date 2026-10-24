@@ -35,6 +35,20 @@
   /* Letter spacing for Midnight Motion text, the same as the araukaaria
      wordmark (3.5% in Figma). */
   --tracking: 0.035em;
+  /* Where a section meets the wordmark pattern, its solid background fades
+     out over --about-fade instead of ending with a hard edge. The steps are
+     eased so there's no visible line where the fade ends. Used as
+     linear-gradient(<direction>, var(--fade-stops)): transparent at the
+     start, solid at the end. */
+  --about-fade: min(12svh, 16vw);
+  --fade-stops:
+    rgba(45, 40, 40, 0) 0,
+    rgba(45, 40, 40, 0.05) calc(var(--about-fade) * 0.15),
+    rgba(45, 40, 40, 0.18) calc(var(--about-fade) * 0.3),
+    rgba(45, 40, 40, 0.5) calc(var(--about-fade) * 0.5),
+    rgba(45, 40, 40, 0.82) calc(var(--about-fade) * 0.7),
+    rgba(45, 40, 40, 0.95) calc(var(--about-fade) * 0.85),
+    var(--background) var(--about-fade);
 }
 
 html, body {
@@ -787,29 +801,24 @@ button:focus-visible .button-media {
 }
 
 /* Dark overlay in the background colour, stronger toward the text, so the
-   photo sits in the page instead of glowing out of it. */
+   photo sits in the page instead of glowing out of it. On wide screens the
+   photo reaches the bottom of the section, so it also fades out there into
+   the open stretch below. */
 .about-photo::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
+  background:
+    linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat,
+    linear-gradient(to right, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
 }
 
 /* The top of the section fades in over the wordmark pattern instead of
    starting with a hard edge: the photo through a mask, the section's solid
-   background through its own gradient, both over the same distance
-   (--about-fade) so they match. The steps are eased so there's no visible
-   line where the fade ends. */
+   background through its own gradient (--fade-stops), both over the same
+   distance (--about-fade) so they match. */
 #about {
-  --about-fade: min(12svh, 16vw);
-  background: linear-gradient(to bottom,
-    rgba(45, 40, 40, 0) 0,
-    rgba(45, 40, 40, 0.05) calc(var(--about-fade) * 0.15),
-    rgba(45, 40, 40, 0.18) calc(var(--about-fade) * 0.3),
-    rgba(45, 40, 40, 0.5) calc(var(--about-fade) * 0.5),
-    rgba(45, 40, 40, 0.82) calc(var(--about-fade) * 0.7),
-    rgba(45, 40, 40, 0.95) calc(var(--about-fade) * 0.85),
-    var(--background) var(--about-fade));
+  background: linear-gradient(to bottom, var(--fade-stops));
 }
 
 .about-photo {
@@ -850,13 +859,47 @@ button:focus-visible .button-media {
   opacity: 0.85;
 }
 
-.about-text .about-lineup {
-  margin-top: 2rem;
-  font-size: 0.85rem;
-  opacity: 0.55;
+.about-text cite {
+  font-style: normal;
 }
 
-.about-link {
+/* Small heading inside a section (BAND, PAST SHOWS), in the same type as
+   the section titles. */
+.subheading {
+  margin: 2.5rem 0 0.75rem;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+/* Line-up: one person per line at the paragraph size, names brighter than
+   the instruments. The guest player sits a little apart. */
+.about-text .about-lineup {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  color: rgba(226, 253, 225, 0.55);
+}
+
+/* Lines that wrap are indented, so each person still reads as one entry. */
+.about-lineup li {
+  padding-left: 1.25em;
+  text-indent: -1.25em;
+}
+
+.lineup-name {
+  color: rgba(226, 253, 225, 0.9);
+}
+
+.about-lineup .lineup-guest {
+  margin-top: 0.6rem;
+}
+
+.about-link,
+.shows-more {
   display: inline-block;
   margin-top: 0.5rem;
   color: inherit;
@@ -870,7 +913,9 @@ button:focus-visible .button-media {
 }
 
 .about-link:hover,
-.about-link:focus-visible {
+.about-link:focus-visible,
+.shows-more:hover,
+.shows-more:focus-visible {
   opacity: 1;
   outline: none;
   filter:
@@ -888,6 +933,7 @@ button:focus-visible .button-media {
     aspect-ratio: 3 / 2;
   }
 
+  /* Text sits under the photo here, so no fade at its bottom. */
   .about-photo::after {
     background: linear-gradient(to bottom, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
   }
@@ -895,6 +941,255 @@ button:focus-visible .button-media {
   .about-text {
     max-width: none;
     padding: 2.5rem 1.5rem;
+  }
+}
+
+/* Open stretch between About and Shows: no background of its own, so the
+   wordmark pattern shows through, with the sections on either side fading
+   into it (About's solid background above, Shows' below). */
+.section-gap {
+  width: 100%;
+  height: 60svh;
+  flex: none;
+  background:
+    linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat,
+    linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
+}
+
+/* Shows: a list of dates, one row each: date, event and place. Same type
+   as the About section. The background runs the full width; the side
+   padding keeps the list at most 60rem wide, centred. */
+#shows {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 7rem;
+  background: var(--background);
+  color: #E2FDE1;
+  font-family: "Jura", system-ui, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+#shows h2 {
+  margin: 0 0 2rem;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.show-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* Thin lines between the rows, as thin as the icon outlines. */
+  border-top: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+/* Date, event, place, and the tickets button in a fixed last column. */
+.show {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr) auto 32px;
+  align-items: baseline;
+  gap: 0.25rem 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+/* Shows not yet revealed by "Load more" (the grid above would show them). */
+.show[hidden] {
+  display: none;
+}
+
+/* Rows revealed by "Load more" fade and rise in like the menu, one after
+   another (shows.js sets --i to each row's place in the batch). */
+.show.is-new {
+  animation: reveal 0.35s ease backwards;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show.is-new {
+    animation: none;
+  }
+}
+
+.show-date {
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.show-event {
+  opacity: 0.85;
+}
+
+/* Smaller and lighter than the event, in the date's typeface, so the event
+   and place fit on one line on phones. */
+.show-place {
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: var(--tracking);
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
+/* Shown while there are no upcoming dates. */
+.shows-none {
+  margin: 0 0 3.5rem;
+  opacity: 0.85;
+}
+
+/* Same room under the upcoming list as under the message it replaces. */
+#upcoming-shows {
+  margin-bottom: 3.5rem;
+}
+
+/* Upcoming shows: the place matters as much as the event here (is it near
+   me?), so it is as bright and a bit larger than in the past list. */
+#upcoming-shows .show-place {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* Tickets: a small ticket icon in the same thin outlined style as the
+   other icon buttons, on every row so the rows all look the same. It links
+   to the ticket shop on upcoming shows that have one; on the others it is
+   faded and does nothing (shows.js). */
+.show-tickets {
+  display: block;
+  justify-self: end;
+  align-self: center;
+  color: #E2FDE1;
+  line-height: 0;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.show-tickets svg {
+  width: 32px;
+  height: 32px;
+}
+
+.show-tickets[href]:hover,
+.show-tickets[href]:focus-visible {
+  outline: none;
+  transform: scale(1.12);
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+.show-tickets:not([href]) {
+  color: rgba(226, 253, 225, 0.2);
+}
+
+/* Working tickets buttons wobble and grow a little every few seconds, to
+   invite a click. They hold still while pointed at or focused (the hover
+   effect above takes over), and for visitors who prefer less motion. */
+.show-tickets[href] {
+  animation: tickets-nudge 4s ease-in-out 1s infinite;
+}
+
+.show-tickets[href]:hover,
+.show-tickets[href]:focus-visible {
+  animation: none;
+}
+
+@keyframes tickets-nudge {
+  0%, 76%, 100% {
+    transform: none;
+  }
+  80% {
+    transform: scale(1.12) rotate(-8deg);
+  }
+  84% {
+    transform: scale(1.12) rotate(7deg);
+  }
+  88% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  92% {
+    transform: scale(1.06) rotate(3deg);
+  }
+  96% {
+    transform: scale(1.02) rotate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show-tickets[href] {
+    animation: none;
+  }
+}
+
+/* Past shows are history: a step quieter than upcoming ones. */
+#past-shows .show > * {
+  opacity: 0.7;
+}
+
+#past-shows .show-place {
+  opacity: 0.45;
+}
+
+/* Under the past shows: reveals the next few (shows.js). Looks like the
+   other small text links. */
+.shows-more {
+  margin-top: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Phones: the same columns as on wide screens, narrower. The date stacks
+   (day and month over the year), the place moves under the event, and the
+   tickets button stays at the end, so the dates, events and buttons still
+   line up down the list. */
+@media (max-width: 640px) {
+  .show {
+    grid-template-columns: 4.5rem minmax(0, 1fr) 32px;
+    grid-template-areas:
+      "date event tickets"
+      "date place tickets";
+    column-gap: 1rem;
+    row-gap: 0.2rem;
+    align-items: center;
+  }
+
+  .show-date {
+    grid-area: date;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .show-day,
+  .show-year {
+    display: block;
+  }
+
+  .show-year {
+    opacity: 0.6;
+  }
+
+  .show-event {
+    grid-area: event;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .show-place {
+    grid-area: place;
+    text-align: left;
+  }
+
+  .show-tickets {
+    grid-area: tickets;
   }
 }
 
