@@ -1008,7 +1008,7 @@ button:focus-visible .button-media {
   align-self: center;
   max-width: 60ch;
   /* More room on top, clear of the navbar. */
-  padding: 9rem clamp(2rem, 6vw, 6rem) 4rem;
+  padding: 9rem clamp(2rem, 6vw, 6rem) 1.5rem;
   font-family: "Jura", system-ui, sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
@@ -1276,7 +1276,7 @@ button:focus-visible .button-media {
 
   .about-text {
     max-width: none;
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 1.5rem 0.5rem;
   }
 }
 
@@ -1339,7 +1339,7 @@ button:focus-visible .button-media {
 #press {
   width: 100%;
   box-sizing: border-box;
-  padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 2.5rem;
+  padding: 4rem max(clamp(1.5rem, 6vw, 6rem), (100% - 60rem) / 2) 0.5rem;
   background: var(--background);
   color: #E2FDE1;
   font-family: "Jura", system-ui, sans-serif;
