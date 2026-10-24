@@ -1213,9 +1213,24 @@ button:focus-visible .button-media {
   letter-spacing: 0.05em;
 }
 
-/* Site version, a step quieter than the rest of the line. */
-.footer-version {
+/* Site version and credit, a step quieter than the address. */
+.footer-version,
+.footer-credit {
   opacity: 0.6;
+}
+
+/* Phones: the line doesn't fit, so the address gets the top line on its own
+   (without the dot after it) and the version and credit, which belong
+   together, share the line under it. */
+@media (max-width: 640px) {
+  .footer-mail-sep {
+    display: none;
+  }
+
+  #footer .footer-mail {
+    flex-basis: 100%;
+    text-align: center;
+  }
 }
 
 body:has(#spotify-bar.open) #footer {
