@@ -875,6 +875,24 @@ button:focus-visible .button-media {
   color: #E2FDE1;
 }
 
+/* A soft dark glow behind the arrows and indicators, like the one behind
+   the logo, so they stay readable over bright photos. */
+.carousel-controls::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 18rem;
+  height: 5.5rem;
+  border-radius: 999px;
+  background: var(--background);
+  opacity: 0.9;
+  filter: blur(18px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 .carousel-button {
   display: block;
   padding: 0;
