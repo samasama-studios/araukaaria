@@ -240,6 +240,13 @@ button:focus-visible .button-media {
   overflow: visible;
 }
 
+/* Once the navbar has its line (scrolled), the menu starts as far below the
+   line as the close button sits above it, so the line runs midway between
+   the two buttons: padding, line (1px), padding. */
+.nav-scrolled #menu {
+  top: calc(var(--nav-pad-y) * 3 + 44px + 1px);
+}
+
 #menu:popover-open {
   display: flex;
   flex-direction: column;
