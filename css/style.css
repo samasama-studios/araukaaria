@@ -61,6 +61,12 @@ html, body {
   margin: 0;
 }
 
+/* No blue box flashing over links and buttons when tapped on phones: they
+   have their own hover and press effects. */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* The page scrolls: the logo fills the first screen (the hero) and the About
    section and footer follow. overflow-x: clip prevents sideways scrolling
    without making the body a second scroll area (a nested scroll area makes
