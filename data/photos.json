@@ -1,6 +1,6 @@
 [
   {"file":"band","widths":[800,1200,1330],"width":1330,"height":1994,"position":"center 40%","alt":"The six members of Araukaaria posing together in front of a wooden house, seen from below."},
-  {"file":"landscape","widths":[640,960,1280,1920],"width":1920,"height":1280,"position":"47% center","portrait":{"file":"portrait","widths":[800,1200,1600],"position":"40% center"},"alt":"Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof."},
   {"file":"konservatoorium","widths":[640,960,1280,1920],"width":1920,"height":1280,"position":"45% center","alt":"Araukaaria live at Konservatoorium in Viljandi under neon lights, in a colour double exposure: Pepi on guitar, Lisanna at the keys and a saxophonist."},
+  {"file":"landscape","widths":[640,960,1280,1920],"width":1920,"height":1280,"position":"47% center","portrait":{"file":"portrait","widths":[800,1200,1600],"position":"40% center"},"alt":"Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof."},
   {"file":"above","widths":[800,1200,1600],"width":1600,"height":1600,"alt":"The band seen from above, standing together on the grass, in a black-and-white double exposure."}
 ]
