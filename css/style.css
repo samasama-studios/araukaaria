@@ -723,11 +723,12 @@ button:focus-visible .button-media {
 .home #logo {
   overflow-x: clip;
   width: 100%;
-  /* A little shorter than the screen, so a hint of the About section shows
-     at the bottom and invites scrolling: the first half of its top fade
-     (--about-fade), with the photo's colour just coming through. */
-  min-height: calc(100vh - var(--about-fade) / 2);
-  min-height: calc(100svh - var(--about-fade) / 2);
+  /* Shorter than the screen by the gap below it (15svh) and half of the
+     About section's top fade, so a strip of letters and then a hint of
+     About (its photo's colour just coming through) show at the bottom
+     and invite scrolling. */
+  min-height: calc(85vh - var(--about-fade) / 2);
+  min-height: calc(85svh - var(--about-fade) / 2);
   flex: none;
 }
 
@@ -753,8 +754,9 @@ button:focus-visible .button-media {
   background:
     linear-gradient(rgba(45, 40, 40, 0.55), rgba(45, 40, 40, 0.55)),
     image-set(url("../assets/photos/web/konservatoorium-1920.webp") type("image/webp"), url("../assets/photos/web/konservatoorium-1920.jpg") type("image/jpeg")) center / cover;
-  /* The photo fades in at the top and out at the bottom over the same
-     short distance as the other fades (--about-fade), eased like them. */
+  /* The photo fades in at the top over the same short distance as the
+     other fades (--about-fade), eased like them, and out at the bottom
+     twice as fast. */
   mask-image: linear-gradient(to bottom,
     transparent 0,
     rgba(0, 0, 0, 0.05) calc(var(--about-fade) * 0.15),
@@ -763,12 +765,12 @@ button:focus-visible .button-media {
     rgba(0, 0, 0, 0.82) calc(var(--about-fade) * 0.7),
     rgba(0, 0, 0, 0.95) calc(var(--about-fade) * 0.85),
     #000 var(--about-fade),
-    #000 calc(100% - var(--about-fade)),
-    rgba(0, 0, 0, 0.95) calc(100% - var(--about-fade) * 0.85),
-    rgba(0, 0, 0, 0.82) calc(100% - var(--about-fade) * 0.7),
-    rgba(0, 0, 0, 0.5) calc(100% - var(--about-fade) * 0.5),
-    rgba(0, 0, 0, 0.18) calc(100% - var(--about-fade) * 0.3),
-    rgba(0, 0, 0, 0.05) calc(100% - var(--about-fade) * 0.15),
+    #000 calc(100% - var(--about-fade) / 2),
+    rgba(0, 0, 0, 0.95) calc(100% - var(--about-fade) * 0.425),
+    rgba(0, 0, 0, 0.82) calc(100% - var(--about-fade) * 0.35),
+    rgba(0, 0, 0, 0.5) calc(100% - var(--about-fade) * 0.25),
+    rgba(0, 0, 0, 0.18) calc(100% - var(--about-fade) * 0.15),
+    rgba(0, 0, 0, 0.05) calc(100% - var(--about-fade) * 0.075),
     transparent 100%);
 }
 
@@ -946,7 +948,9 @@ button:focus-visible .button-media {
    starting with a hard edge: the photo through a mask, the section's solid
    background through its own gradient (--fade-stops), both over the same
    distance (--about-fade) so they match. */
-/* The background reaches solid sooner than the photo's mask (60% of the
+/* The section's own background sits only behind the text column: the
+   photo column needs none (the photo fades in over the pattern through its
+   mask). It reaches solid sooner than the photo's mask (60% of the
    distance): the bright photo hides the pattern sooner than the dark
    background does, so this way the letters fade out at the same point on
    both sides. */
@@ -959,8 +963,16 @@ button:focus-visible .button-media {
       rgba(45, 40, 40, 0.5) 50%,
       rgba(45, 40, 40, 0.82) 70%,
       rgba(45, 40, 40, 0.95) 85%,
-      var(--background) 100%) top / 100% calc(var(--about-fade) * 0.6) no-repeat,
-    linear-gradient(var(--background), var(--background)) 0 calc(var(--about-fade) * 0.6) / 100% 100% no-repeat;
+      var(--background) 100%) 100% 0 / 50% calc(var(--about-fade) * 0.6) no-repeat,
+    linear-gradient(var(--background), var(--background)) 100% calc(var(--about-fade) * 0.6) / 50% 100% no-repeat;
+}
+
+/* Phones: the text sits under the photo, so the background only needs to
+   start once the photo is fully in (below its top fade). */
+@media (max-width: 900px) {
+  #about {
+    background: linear-gradient(var(--background), var(--background)) 0 var(--about-fade) / 100% 100% no-repeat;
+  }
 }
 
 .about-photo {
@@ -1262,12 +1274,12 @@ button:focus-visible .button-media {
     linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
 }
 
-/* The gap under the hero: the hero's photo already fades out on its own,
-   so only the fade into the About section below. Half the height of the
-   other gaps. */
+/* The gap under the hero: no fades of its own, since the hero's photo
+   fades out and the About section fades in by themselves. Half the
+   height of the other gaps. */
 .section-gap-after-hero {
   height: 15svh;
-  background: linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
+  background: none;
 }
 
 /* A half-size gap (before the footer), with fades to match. */
