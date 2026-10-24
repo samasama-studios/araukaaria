@@ -918,6 +918,11 @@ button:focus-visible .button-media {
   letter-spacing: 0.05em;
 }
 
+/* Site version, a step quieter than the rest of the line. */
+.footer-version {
+  opacity: 0.6;
+}
+
 body:has(#spotify-bar.open) #footer {
   padding-bottom: calc(80px + 3rem);
 }
