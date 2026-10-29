@@ -1202,9 +1202,9 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-/* Title, place and date, one per line. */
-.about-video figcaption > * {
-  display: block;
+/* Title and place on one line, with a middle dot between them. */
+.video-place::before {
+  content: "· ";
 }
 
 .video-title {
