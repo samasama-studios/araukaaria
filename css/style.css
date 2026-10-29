@@ -1084,7 +1084,7 @@ button:focus-visible .button-media {
   font-style: normal;
 }
 
-/* The link to The name at the end of the first paragraph: the text's own
+/* The link to The name in the About text: the text's own
    colour with a thin, faint underline, lighting up like the other links. */
 .about-inline-link {
   color: inherit;
