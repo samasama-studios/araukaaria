@@ -1396,6 +1396,16 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
+/* Following a menu link to Shows or Press stops with the section's top
+   edge, and the fade above it, just under the navbar (at its slim, scrolled
+   height), rather than tucking the edge and padding under it so the heading
+   lands against the navbar's line. The middle of the fade sits at the line:
+   that is where it reads as the edge (see the gaps above). */
+#shows,
+#press {
+  scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + var(--about-fade) / 2);
+}
+
 #shows h2,
 #press h2 {
   margin: 0 0 2rem;
