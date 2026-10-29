@@ -906,6 +906,20 @@ button:focus-visible .button-media {
   text-transform: uppercase;
 }
 
+/* Its own small glow, wrapped around the text, so it stays readable over
+   bright photos too. */
+.carousel-credit::before {
+  content: "";
+  position: absolute;
+  inset: -0.625rem -1.25rem;
+  z-index: -1;
+  border-radius: 999px;
+  background: var(--background);
+  opacity: 0.6;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
 /* A soft dark glow behind the arrows and indicators, like the one behind
    the logo, so they stay readable over bright photos. */
 .carousel-controls::before {
@@ -915,33 +929,39 @@ button:focus-visible .button-media {
   left: 50%;
   z-index: -1;
   width: 18rem;
-  height: 7rem;
+  height: 5.5rem;
   border-radius: 999px;
   background: var(--background);
-  opacity: 0.9;
+  opacity: 0.45;
   filter: blur(18px);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-/* Phones and tablets: the controls and credit sit a little higher, so the
-   credit has room above the photo's bottom edge. */
+/* Phones and tablets: the controls sit a little higher, and the credit
+   leaves their row to sit halfway between them and the photo's bottom
+   edge (--below is the room under the controls). */
 @media (max-width: 900px) {
   .carousel-controls {
-    bottom: 1.75rem;
+    --below: 2.875rem;
+    bottom: var(--below);
+  }
+
+  .carousel-credit {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: max-content;
+    margin-top: calc((var(--below) - 0.75rem) / 2);
+    transform: translateX(-50%);
   }
 }
 
 /* Wide screens: the credit leaves the controls for the photo's bottom-left
-   corner, like a watermark, where the photo fades into the page; the
-   controls and their glow go back to their own size. */
+   corner, like a watermark, where the photo fades into the page. */
 @media (min-width: 901px) {
   .carousel-controls {
     bottom: 1.5rem;
-  }
-
-  .carousel-controls::before {
-    height: 5.5rem;
   }
 
   .carousel-credit {
