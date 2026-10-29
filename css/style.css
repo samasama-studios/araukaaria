@@ -1336,30 +1336,32 @@ button:focus-visible .button-media {
   background: none;
 }
 
-/* The hero's photo reaches 7svh into the gap under it, so the other gaps
-   lose 7svh too, to look the same. */
+/* The gaps after About and Shows, and the one before the footer, all show
+   the same stretch of letters as the strip above the hero (--gap-room: the
+   navbar's padding twice, the menu button and 1rem), measured to the middle
+   of each fade, where it reads as the edge. The gap before the footer has
+   a fade only at the top (from the Press section above) and a hard edge at
+   the bottom (the footer's line), so it is half a fade shorter. */
 .section-gap {
-  height: calc(8svh + var(--about-fade) * 2);
+  --gap-room: calc(2rem * 2 + 44px + 1rem);
+  height: calc(var(--gap-room) + var(--about-fade));
 }
 
-.section-gap-after-hero {
-  height: 15svh;
-}
-
-/* The gap before the footer looks like the strip of letters above the
-   hero: a fade on one side (here from the Press section above), a hard
-   edge on the other (the footer's line), and the same room between them:
-   the navbar's padding twice, the menu button and 1rem, measured to the
-   middle of the fade, where it reads as the edge. */
 .section-gap-footer {
-  height: calc(2rem * 2 + 44px + 1rem + var(--about-fade) / 2);
+  height: calc(var(--gap-room) + var(--about-fade) / 2);
   background: linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat;
 }
 
 @media (max-width: 900px) {
-  .section-gap-footer {
-    height: calc(1.25rem * 2 + 44px + 1rem + var(--about-fade) / 2);
+  .section-gap {
+    --gap-room: calc(1.25rem * 2 + 44px + 1rem);
   }
+}
+
+/* The gap under the hero keeps its own height (it comes after the rule
+   above so it wins). */
+.section-gap-after-hero {
+  height: 15svh;
 }
 
 /* Shows and Press: lists with one row per show or quote, in the same type
