@@ -2,7 +2,8 @@
 // photo (a <picture> with WebP and JPEG sizes from assets/photos/web, named
 // "<file>-<width>.jpg/.webp") into the carousel, in the order of the JSON.
 // A photo can have a "portrait" crop for portrait screens, and a "position"
-// (object-position) saying what to keep when it is cropped. Resolves with the
+// (object-position) saying what to keep when it is cropped, and a "credit"
+// (the photographer, shown under the controls). Resolves with the
 // slides once they are in the page (an empty list if the JSON can't load).
 const aboutPhotos = (() => {
   const carousel = document.querySelector('.about-photo');
@@ -29,6 +30,7 @@ const aboutPhotos = (() => {
     picture.setAttribute('aria-roledescription', 'slide');
     picture.setAttribute('aria-label', `${i + 1} of ${count}`);
     if (photo.position) picture.style.setProperty('--position', photo.position);
+    if (photo.credit) picture.dataset.credit = photo.credit;
 
     const portrait = photo.portrait;
     if (portrait) {
@@ -119,8 +121,19 @@ aboutPhotos.then(slides => {
   const carousel = document.querySelector('.about-photo');
   if (!carousel) return;
   const dots = carousel.querySelector('.carousel-dots');
+
+  // The photographer of the photo on show, if the JSON names one.
+  const credit = document.getElementById('carousel-credit');
+  function showCredit(slide) {
+    credit.textContent = slide?.dataset.credit ? `Photo: ${slide.dataset.credit}` : '';
+    credit.hidden = !credit.textContent;
+  }
+
+  // With a single photo there is nothing to move between: only its credit.
   if (slides.length < 2) {
-    carousel.querySelector('.carousel-controls')?.remove();
+    if (!slides.length) carousel.querySelector('.carousel-controls')?.remove();
+    carousel.querySelectorAll('.carousel-button, .carousel-dots').forEach(el => el.remove());
+    showCredit(slides[0]);
     return;
   }
 
@@ -148,6 +161,7 @@ aboutPhotos.then(slides => {
       slide.setAttribute('aria-hidden', !active);
     });
     dotButtons.forEach((button, n) => button.setAttribute('aria-current', n === index));
+    showCredit(slides[index]);
   }
 
   function update() {

@@ -875,18 +875,35 @@ button:focus-visible .button-media {
 }
 
 /* Arrows and indicators along the bottom of the photo, above the dark
-   overlay. Same thin outline style as the other buttons. */
+   overlay, with the photographer's credit on its own line under them.
+   Same thin outline style as the other buttons. */
 .carousel-controls {
   position: absolute;
   right: 0;
-  bottom: 1.5rem;
+  bottom: 1rem;
   left: 0;
   z-index: 1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.35rem 1rem;
   color: #E2FDE1;
+}
+
+/* The credit: small and faint, in the same type as the authors under the
+   press quotes. */
+.carousel-credit {
+  flex-basis: 100%;
+  margin: 0;
+  color: rgba(226, 253, 225, 0.35);
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: var(--tracking);
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* A soft dark glow behind the arrows and indicators, like the one behind
@@ -898,7 +915,7 @@ button:focus-visible .button-media {
   left: 50%;
   z-index: -1;
   width: 18rem;
-  height: 5.5rem;
+  height: 7rem;
   border-radius: 999px;
   background: var(--background);
   opacity: 0.9;
