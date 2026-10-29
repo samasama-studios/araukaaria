@@ -924,6 +924,34 @@ button:focus-visible .button-media {
   pointer-events: none;
 }
 
+/* Phones and tablets: the controls and credit sit a little higher, so the
+   credit has room above the photo's bottom edge. */
+@media (max-width: 900px) {
+  .carousel-controls {
+    bottom: 1.75rem;
+  }
+}
+
+/* Wide screens: the credit leaves the controls for the photo's bottom-left
+   corner, like a watermark, where the photo fades into the page; the
+   controls and their glow go back to their own size. */
+@media (min-width: 901px) {
+  .carousel-controls {
+    bottom: 1.5rem;
+  }
+
+  .carousel-controls::before {
+    height: 5.5rem;
+  }
+
+  .carousel-credit {
+    position: absolute;
+    bottom: -0.5rem;
+    left: 1.5rem;
+    text-align: left;
+  }
+}
+
 .carousel-button {
   display: block;
   padding: 0;
