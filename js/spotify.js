@@ -28,10 +28,14 @@
   let index = 0;
   let paused = true;
   let wasPlaying = false;
+  let lastPosition = 0;
+  let lastDuration = 0;
 
   function play(i) {
     index = (i + tracks.length) % tracks.length;
     wasPlaying = false;
+    lastPosition = 0;
+    lastDuration = 0;
     controller.loadUri(tracks[index].uri);
     controller.play();
     updateLine();
@@ -82,10 +86,21 @@
 
       controller.addListener('playback_update', ({ data }) => {
         paused = data.isPaused;
-        if (!paused) wasPlaying = true;
+        if (!paused) {
+          wasPlaying = true;
+          lastPosition = data.position;
+          lastDuration = data.duration;
+        }
 
-        // A song that stopped at its end: move on to the next one.
-        if (paused && wasPlaying && data.duration > 0 && data.position >= data.duration - 1000) {
+        // A song that stopped at its end: move on to the next one. Spotify
+        // doesn't always say so the same way: the stop can come at the end,
+        // or with the position already back at the start (and previews end
+        // after 30 seconds, before the song's full length).
+        const ended = paused && wasPlaying && (
+          (data.duration > 0 && data.position >= data.duration - 1500) ||
+          (lastDuration > 0 && lastPosition >= lastDuration - 3000) ||
+          (data.position === 0 && lastPosition > 0));
+        if (ended) {
           play(index + 1);
           return;
         }
