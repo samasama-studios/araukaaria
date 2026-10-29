@@ -1084,6 +1084,28 @@ button:focus-visible .button-media {
   font-style: normal;
 }
 
+/* The link to The name at the end of the first paragraph: the text's own
+   colour with a thin, faint underline, lighting up like the other links. */
+.about-inline-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(226, 253, 225, 0.4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s, text-shadow 0.2s;
+}
+
+.about-inline-link:focus-visible {
+  outline: none;
+}
+
+.about-inline-link:is(:hover, :focus-visible) {
+  text-decoration-color: currentColor;
+  text-shadow:
+    -1px 0 0 #2f6bff,
+    1.5px -1px 0 rgba(255, 0, 0, 0.6);
+}
+
 /* Live videos under the About text, two side by side (stacked on phones).
    Each is a 16:9 cover image, slightly darkened, with a play button in the
    same thin style as the other buttons; pressed, it becomes YouTube's player
@@ -1191,7 +1213,8 @@ button:focus-visible .button-media {
   outline-offset: 3px;
 }
 
-.about-video figcaption {
+.about-video figcaption,
+.name-figure figcaption {
   margin-top: 0.75rem;
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 0.75rem;
@@ -1381,9 +1404,10 @@ button:focus-visible .button-media {
   height: 15svh;
 }
 
-/* Shows and Press: lists with one row per show or quote, in the same type
-   as the About section. The background runs the full width; the side
-   padding keeps the list at most 60rem wide, centred. */
+/* The name, Shows and Press: in the same type as the About section. The
+   background runs the full width; the side padding keeps the content at
+   most 60rem wide, centred. */
+#name,
 #shows,
 #press {
   width: 100%;
@@ -1396,16 +1420,18 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
-/* Following a menu link to Shows or Press stops with the section's top
+/* Following a menu link to The name, Shows or Press stops with the section's top
    edge, and the fade above it, just under the navbar (at its slim, scrolled
    height), rather than tucking the edge and padding under it so the heading
    lands against the navbar's line. The middle of the fade sits at the line:
    that is where it reads as the edge (see the gaps above). */
+#name,
 #shows,
 #press {
   scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + var(--about-fade) / 2);
 }
 
+#name h2,
 #shows h2,
 #press h2 {
   margin: 0 0 2rem;
@@ -1415,6 +1441,169 @@ button:focus-visible .button-media {
   line-height: 1;
   letter-spacing: var(--tracking);
   text-transform: uppercase;
+}
+
+/* The name: Pepi's story in a centred column at a comfortable reading
+   width, opened by a short italic line. */
+#name h2,
+.name-text {
+  max-width: 46rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.name-text p {
+  margin: 0 0 1.25rem;
+  opacity: 0.85;
+}
+
+.name-text .name-intro {
+  margin-bottom: 0.75rem;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+
+/* Wider screens show the full story; phones the short one with "Read more"
+   (about.js adds "is-collapsible", so without it phones get the full one).
+   The pictures sit in the full story, but show with the short one too. */
+.name-short,
+.name-more {
+  display: none;
+}
+
+.name-story .name-more {
+  margin: 0 0 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .is-collapsible .name-short,
+  .is-collapsible.is-open .name-full p {
+    display: block;
+  }
+
+  .is-collapsible .name-full p,
+  .is-collapsible.is-open .name-short {
+    display: none;
+  }
+
+  .is-collapsible .name-more {
+    display: inline-block;
+  }
+}
+
+/* From the tree to the logo, set into the story like pictures in a book:
+   each picture beside the paragraph it belongs to, on alternate sides
+   (left, right, left), the paragraph centred on the picture itself, with
+   the caption hanging just below the picture (out of the centring, so the
+   rows leave room under them for it). The photos are
+   cropped a little shorter so they sit level with their paragraphs, and
+   their corners are rounded like the square buttons'; the logo sits in a
+   thin square frame, as thin as the lines between the shows. */
+.name-spread {
+  display: grid;
+  grid-template-columns: 32% minmax(0, 1fr);
+  align-items: center;
+  column-gap: 2.5rem;
+  margin: 2rem 0 4.5rem;
+}
+
+.name-spread-right {
+  grid-template-columns: minmax(0, 1fr) 32%;
+}
+
+.name-spread .name-figure {
+  position: relative;
+}
+
+.name-spread figcaption {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+}
+
+.name-spread-right .name-figure {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.name-spread-right > p {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.name-spread:has(.name-figure-logo) {
+  grid-template-columns: 26% minmax(0, 1fr);
+}
+
+.name-text .name-spread p {
+  margin: 0;
+}
+
+.name-figure {
+  margin: 0;
+}
+
+.name-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.name-figure-trees img {
+  object-position: center 40%;
+}
+
+.name-figure-logo img {
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  padding: 14%;
+  object-fit: contain;
+  border: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+/* Phones: each picture above its paragraph, the full width of the screen,
+   edge to edge with square corners, while its caption stays in line with
+   the text. The logo's frame keeps only its top and bottom lines, as the
+   sides meet the screen's. */
+@media (max-width: 640px) {
+  .name-spread,
+  .name-spread-right,
+  .name-spread:has(.name-figure-logo) {
+    display: block;
+  }
+
+  .name-spread {
+    margin: 0;
+  }
+
+  .name-spread .name-figure {
+    margin: 2rem 0 1.25rem;
+  }
+
+  .name-spread figcaption {
+    position: static;
+  }
+
+  .name-figure img {
+    width: 100vw;
+    max-width: none;
+    border-radius: 0;
+    margin-left: calc(50% - 50vw);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .name-figure-logo img {
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-right: 0;
+    border-left: 0;
+  }
 }
 
 .show-list {

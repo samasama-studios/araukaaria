@@ -84,6 +84,11 @@
       <img class="button-media" src="assets/icons/about.svg" alt="">
       <span class="visually-hidden">About</span>
     </a>
+    <a class="menu-icon" href="#name">
+      <span class="menu-label" aria-hidden="true">The name</span>
+      <img class="button-media" src="assets/icons/name.svg" alt="">
+      <span class="visually-hidden">The name</span>
+    </a>
     <a class="menu-icon" href="#shows">
       <span class="menu-label" aria-hidden="true">Shows</span>
       <img class="button-media" src="assets/icons/shows.svg" alt="">
@@ -176,7 +181,7 @@
     </div>
     <div class="about-text">
       <h2 id="about-heading">About</h2>
-      <p>Araukaaria brings Latin American psychedelia to the Baltic: an Argentine-Estonian six-piece from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, the songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk.</p>
+      <p>Araukaaria brings Latin American psychedelia to the Baltic: an Argentine-Estonian six-piece from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, the songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk. The band takes its name from the araucaria, a tree sacred to the Mapuche. <a class="about-inline-link" href="#name">Read Pepi’s story behind the name →</a></p>
       <p>The self-titled debut album, <cite>Araukaaria</cite>, arrives 2 April 2027.</p>
       <!-- Live videos, side by side (stacked on phones): the full-band side,
            then the quieter one. Only the cover images and play buttons are
@@ -236,8 +241,68 @@
       -->
     </div>
   </section>
-  <!-- Open stretch between About and Shows where the wordmark pattern shows
+  <!-- Open stretches between the sections, where the wordmark pattern shows
        through as the page scrolls. -->
+  <div class="section-gap" aria-hidden="true"></div>
+  <!-- The name: the story behind the band's name, in Pepi's words. Phones
+       get the short version with "Read more" to open the full one (about.js);
+       wider screens get the full version straight away. -->
+  <section id="name" aria-labelledby="name-heading">
+    <h2 id="name-heading">The name</h2>
+    <div class="name-text">
+      <p class="name-intro">In Pepi’s words:</p>
+      <div class="name-story">
+        <div class="name-short">
+          <p>Araukaaria is named after the araucaria, a tree sacred to the Mapuche and a symbol across South America.</p>
+          <p>Two giant araucarias stood at my family’s countryside house in Moreno, Buenos Aires, where we played croquet in their shade and where my father now rests.</p>
+          <p>Years later I brought some of their branches to Estonia, and Maarja Palu cast one in silver. The branch burned away in the process, leaving only its shape. A photo of that silver shape became the base for our logo.</p>
+          <p>The original tree can’t survive an Estonian winter. Araukaaria is the one that can grow here.</p>
+        </div>
+        <button class="load-more name-more" aria-expanded="false" aria-controls="name-full">Read more</button>
+        <!-- Each picture sits beside the paragraph it belongs to, on
+             alternate sides like a book (above it on phones). -->
+        <div class="name-full" id="name-full">
+          <p>Araukaaria takes its name from the araucaria, an ancient tree deeply rooted in South America. Across the continent it is more than a tree. It is Chile’s national tree, it appears on the flag of the Argentine province of Neuquén and on the flag of the Brazilian state of Paraná, and it is sacred to the Mapuche people, whom the Spanish called <i lang="es">Araucanos</i>. In their language it is the <i lang="arn">pehuén</i>, and its seeds, the <i lang="es">piñones</i>, have fed the Pehuenche, “the people of the pehuén”, for centuries.</p>
+          <div class="name-spread name-spread-left">
+            <figure class="name-figure name-figure-trees">
+              <picture>
+                <source type="image/webp" sizes="(max-width: 640px) 100vw, 17rem"
+                  srcset="assets/photos/web/araucaria-trees-480.webp 480w, assets/photos/web/araucaria-trees-800.webp 800w, assets/photos/web/araucaria-trees-1080.webp 1080w">
+                <img src="assets/photos/web/araucaria-trees-800.jpg" sizes="(max-width: 640px) 100vw, 17rem"
+                  srcset="assets/photos/web/araucaria-trees-480.jpg 480w, assets/photos/web/araucaria-trees-800.jpg 800w, assets/photos/web/araucaria-trees-1080.jpg 1080w"
+                  width="1080" height="1715" loading="lazy" decoding="async"
+                  alt="Two tall araucaria trees seen from below against a cloudy sky, their long, bare branches ending in tufts of spiky leaves.">
+              </picture>
+              <figcaption>The two araucarias in Moreno, Buenos Aires</figcaption>
+            </figure>
+            <p>For me, the tree is also personal. I grew up in Buenos Aires, but my childhood weekends were spent at our family’s countryside house in Moreno, where two great araucarias stood, enormous and powerful. We played croquet under them with friends and family, and we learned to respect them: their fallen branches were covered in sharp, spiky leaves that hurt to step on, and their seed cones, as big as pineapples, would come crashing down without warning. Today my father rests on that same land, just a few metres from those trees.</p>
+          </div>
+          <div class="name-spread name-spread-right">
+            <figure class="name-figure name-figure-silver">
+              <picture>
+                <source type="image/webp" sizes="(max-width: 640px) 100vw, 17rem"
+                  srcset="assets/photos/web/araucaria-silver-480.webp 480w, assets/photos/web/araucaria-silver-800.webp 800w, assets/photos/web/araucaria-silver-1200.webp 1200w">
+                <img src="assets/photos/web/araucaria-silver-800.jpg" sizes="(max-width: 640px) 100vw, 17rem"
+                  srcset="assets/photos/web/araucaria-silver-480.jpg 480w, assets/photos/web/araucaria-silver-800.jpg 800w, assets/photos/web/araucaria-silver-1200.jpg 1200w"
+                  width="1200" height="2133" loading="lazy" decoding="async"
+                  alt="A small araucaria branch cast in silver, held up between a thumb and finger against a pale wall, every spiky leaf kept in the metal.">
+              </picture>
+              <figcaption>The silver branch, cast by Maarja Palu</figcaption>
+            </figure>
+            <p>Years later, already living in Estonia, I went back to visit and brought home some seeds and branches. Some of the seeds I gave to Rauno, our drummer. The rest I ate. Maarja Palu cast one of the branches in silver, using the branch itself as the mould. The original burned away in the process, and what remains is its exact shape in metal. Later I photographed that silver branch and reduced it to a single colour, and that image became the base for the band’s logo.</p>
+          </div>
+          <div class="name-spread name-spread-left">
+            <figure class="name-figure name-figure-logo">
+              <img src="assets/icons/logo.svg" loading="lazy" decoding="async"
+                alt="The Araukaaria logo: the silver branch reduced to a single pale green shape inside a hand-drawn circle.">
+              <figcaption>The logo</figcaption>
+            </figure>
+            <p>The band started here in Estonia, so I gave the name an Estonian spelling. An araucaria can’t survive an Estonian winter. Araukaaria is the one that can grow here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="section-gap" aria-hidden="true"></div>
   <section id="shows" aria-labelledby="shows-heading">
     <h2 id="shows-heading">Shows</h2>

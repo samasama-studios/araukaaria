@@ -204,3 +204,20 @@ aboutPhotos.then(slides => {
 
   show(0);
 });
+
+// The name: on phones, the short version of Pepi's story with "Read more"
+// to swap in the full one (and "Read less" to go back). Wider screens show
+// the full version and no button (see "is-collapsible" in style.css).
+// Without this script phones also get the full version.
+(() => {
+  const story = document.querySelector('.name-story');
+  const button = story?.querySelector('.name-more');
+  if (!button) return;
+  story.classList.add('is-collapsible');
+  button.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') !== 'true';
+    button.setAttribute('aria-expanded', open);
+    button.textContent = open ? 'Read less' : 'Read more';
+    story.classList.toggle('is-open', open);
+  });
+})();
