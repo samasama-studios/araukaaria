@@ -1075,7 +1075,7 @@ button:focus-visible .button-media {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
-  margin: 2rem 0 0;
+  margin: 0;
 }
 
 .about-video {
@@ -1206,7 +1206,7 @@ button:focus-visible .button-media {
   }
 }
 
-/* Small heading inside a section (BAND, PAST SHOWS), in the same type as
+/* Small heading inside a section (VIDEOS, BAND, PAST SHOWS), in the same type as
    the section titles. */
 .subheading {
   margin: 2.5rem 0 0.75rem;
@@ -1659,7 +1659,6 @@ button:focus-visible .button-media {
 .press-quote {
   margin: 0;
   font-style: italic;
-  font-size: 1.2rem;
   line-height: 1.55;
   opacity: 0.9;
 }
