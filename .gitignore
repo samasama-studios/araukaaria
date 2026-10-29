@@ -1,0 +1,5 @@
+# Full-size photo originals: the site uses the resized copies in
+# assets/photos/web, so these stay local.
+assets/photos/originals/
+
+.DS_Store
