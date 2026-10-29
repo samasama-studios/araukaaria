@@ -1957,6 +1957,55 @@ html.nav-scrolled {
   visibility: visible;
 }
 
+/* Soft dark glows, like the ones behind the logo and the carousel controls,
+   so the menu stays readable over bright photos and the scrolling pattern.
+   They sit behind the navbar's buttons and the open menu. The first is a
+   small round one behind the menu button, until the navbar has its own
+   dark background; the second spreads from the top-right corner while the
+   menu is open, behind the column of buttons, their names and the rows. */
+#navbar::before,
+#navbar::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+#navbar::before {
+  top: calc(var(--nav-pad-y) + 22px - 80px);
+  right: calc(var(--nav-pad) + 22px - 80px);
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(closest-side,
+    rgba(45, 40, 40, 0.85),
+    rgba(45, 40, 40, 0.6) 40%,
+    rgba(45, 40, 40, 0.2) 75%,
+    rgba(45, 40, 40, 0));
+}
+
+.nav-scrolled #navbar::before {
+  opacity: 0;
+}
+
+#navbar::after {
+  top: 0;
+  right: 0;
+  width: min(160vw, 760px);
+  height: 720px;
+  background: radial-gradient(ellipse 100% 100% at 100% 0,
+    rgba(45, 40, 40, 0.88),
+    rgba(45, 40, 40, 0.72) 30%,
+    rgba(45, 40, 40, 0.4) 55%,
+    rgba(45, 40, 40, 0.14) 78%,
+    rgba(45, 40, 40, 0));
+  opacity: 0;
+}
+
+body:has(#menu:popover-open) #navbar::after {
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   html,
   html.nav-scrolled {
