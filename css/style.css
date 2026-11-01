@@ -187,11 +187,61 @@ body {
 /* The name under the logo, as wide as the logo's circle (95% of the logo). */
 #wordmark {
   width: calc(var(--logo) * 0.95);
-  filter: url(#word-fx);
+  /* Fades to black with the page around the logo (see "charging" below). */
+  filter: url(#word-fx) brightness(calc(1 - var(--charge, 0)));
 }
 
 #logo-mark.glitch-pending {
   opacity: 0;
+}
+
+/* Hidden link behind the logo (logo-charge.js): clicking it over and over
+   fills a thin bar along the top of the screen and fades everything but the
+   logo's branch to black. --charge runs from 0 to 1. The shade and the bar
+   are fixed to the screen from inside the hero, and while charging the hero
+   is lifted over the rest of the page (navbar included), so the shade
+   covers it all and only the logo stands above it. No double-tap zoom or
+   text selection from the quick clicks. */
+#logo-mark {
+  position: relative;
+  z-index: 1;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html.charging #logo {
+  z-index: 4;
+}
+
+.charge-shade,
+.charge-bar {
+  position: fixed;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+html.charging .charge-shade,
+html.charging .charge-bar {
+  visibility: visible;
+}
+
+.charge-shade {
+  inset: 0;
+  background: #000;
+  opacity: var(--charge, 0);
+}
+
+.charge-bar {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 2px;
+  background: #E2FDE1;
+  box-shadow: 0 0 8px rgba(226, 253, 225, 0.6);
+  transform: scaleX(var(--charge, 0));
+  transform-origin: left;
 }
 
 .svg-defs {

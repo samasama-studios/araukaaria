@@ -4,6 +4,15 @@
 // artwork itself (or, in the vivid look, splits it into R, G and B), then eases
 // everything back onto the resting look.
 //
+// After the entry it also offers, for logo-charge.js, glitches of the logo
+// alone (the branch, not the name under it):
+// - window.glitchLogo(duration, strength): a shorter, weaker glitch of the
+//   same kind (on each click);
+// - window.glitchLogoOut(duration, done): the entry played backwards, the
+//   glitch growing and the logo blinking out more and more until it's gone
+//   (when the bar is full). The logo stays hidden afterwards, until
+//   window.showLogo().
+//
 // Two looks: assets/icons/logo-fx.svg (muted, the default) and
 // assets/icons/logo-fx-vivid.svg (open the site with ?look=vivid).
 (async () => {
@@ -33,10 +42,11 @@
   // objectBoundingBox). The muted look moves the white artwork as one piece
   // (.fx-shift); the vivid look splits it into channels (.fx-split). Each
   // filter has one or the other.
-  const effects = ['logo-fx', 'word-fx']
+  const allEffects = ['logo-fx', 'word-fx']
     .map(id => document.getElementById(id))
     .filter(Boolean)
     .map(filter => ({
+      id: filter.id,
       shift: filter.querySelector('.fx-shift'),
       splits: [...filter.querySelectorAll('.fx-split')],
       fringes: [...filter.querySelectorAll('.fx-fringe')].map(el => ({
@@ -45,6 +55,12 @@
         dy: parseFloat(el.getAttribute('dy')),
       })),
     }));
+
+  // What the glitch running now moves: the whole mark and both filters for
+  // the entry, or the logo alone and its filter (see glitch below).
+  const logo = document.getElementById('araukaaria');
+  let target = mark;
+  let effects = allEffects;
 
   const DURATION = 1400; // ms
   const STEP = 60;       // ms between glitch frames
@@ -64,16 +80,19 @@
     }
   }
 
-  function burst(t) {
+  // t runs from wild (0) to calm (1). strength scales how far everything
+  // swings (1 for the entry); blink is the chance the logo is hidden on this
+  // frame.
+  function burst(t, strength, blink) {
     const decay = (1 - t) ** 2;
-    const amp = MAX_SWING * decay;
+    const amp = MAX_SWING * decay * strength;
 
     // Calm frames get more frequent as the logo settles.
     if (Math.random() < 0.2 + t * 0.5) {
       rest();
-      mark.style.transform = '';
-      mark.style.clipPath = '';
-      mark.style.opacity = 1;
+      target.style.transform = '';
+      target.style.clipPath = '';
+      target.style.opacity = Math.random() < blink ? 0 : 1;
       return;
     }
 
@@ -92,44 +111,68 @@
       }
     }
 
-    const px = mark.offsetWidth * amp;
-    mark.style.transform = `translateX(${rand(px * 0.5)}px) skewX(${rand(10 * decay)}deg)`;
+    const px = target.offsetWidth * amp;
+    target.style.transform = `translateX(${rand(px * 0.5)}px) skewX(${rand(10 * decay)}deg)`;
 
-    if (Math.random() < 0.35) {
+    if (Math.random() < 0.35 * Math.min(strength, 1)) {
       const top = Math.random() * 60;
       const bottom = Math.random() * (60 - top);
-      mark.style.clipPath = `inset(${top}% 0 ${bottom}% 0)`;
+      target.style.clipPath = `inset(${top}% 0 ${bottom}% 0)`;
     } else {
-      mark.style.clipPath = '';
+      target.style.clipPath = '';
     }
 
-    // Flicker in and out during the first part of the entry.
-    mark.style.opacity = t < 0.35 && Math.random() < 0.5 - t ? 0 : 1;
+    target.style.opacity = Math.random() < blink ? 0 : 1;
   }
 
-  function finish() {
+  function settle() {
     rest();
-    mark.style.transform = '';
-    mark.style.clipPath = '';
-    mark.style.opacity = '';
-    reveal();
+    target.style.transform = '';
+    target.style.clipPath = '';
+    target.style.opacity = '';
+  }
+
+  // Runs one glitch for duration ms, then settles and calls done. A new one
+  // replaces any glitch still running. blink(p) gives the chance the logo is
+  // hidden at p (0 to 1 through the glitch); out plays it backwards, from
+  // calm to wild, and leaves the logo hidden at the end. alone glitches the
+  // logo without the name under it.
+  let current = 0;
+  function glitch(duration, { strength = 1, blink = () => 0, out = false, alone = false, done } = {}) {
+    const id = ++current;
+    settle();
+    target = alone ? logo : mark;
+    effects = alone ? allEffects.filter(e => e.id === 'logo-fx') : allEffects;
+    let start;
+    let last = -Infinity;
+    requestAnimationFrame(function frame(now) {
+      if (id !== current) return;
+      start ??= now;
+      const p = (now - start) / duration;
+      if (p >= 1) {
+        settle();
+        if (out) target.style.opacity = 0;
+        return done?.();
+      }
+      if (now - last >= STEP) {
+        last = now;
+        burst(out ? 1 - p : p, strength, blink(p));
+      }
+      requestAnimationFrame(frame);
+    });
   }
 
   function run() {
-    let start;
-    let last = -Infinity;
-
     mark.classList.remove('glitch-pending');
-
-    requestAnimationFrame(function frame(now) {
-      start ??= now;
-      const t = (now - start) / DURATION;
-      if (t >= 1) return finish();
-      if (now - last >= STEP) {
-        last = now;
-        burst(t);
-      }
-      requestAnimationFrame(frame);
+    // Flicker in and out during the first part of the entry.
+    glitch(DURATION, {
+      blink: p => (p < 0.35 ? 0.5 - p : 0),
+      done: () => {
+        reveal();
+        window.glitchLogo = (duration, strength) => glitch(duration, { strength, alone: true });
+        window.glitchLogoOut = (duration, done) => glitch(duration, { out: true, alone: true, blink: p => 0.9 * p ** 2, done });
+        window.showLogo = () => { current++; settle(); };
+      },
     });
   }
 
