@@ -795,15 +795,25 @@ button:focus-visible .button-media {
 }
 
 /* The photo reaches a little further down, into the top half of the gap
-   below the hero, so it frames the "out now" line. */
-.home #logo::before {
-  bottom: -7svh;
+   below the hero, so it frames the "out now" line. --photo-extend is how
+   much further it reaches than that, to keep the open stretch of letters
+   above About short; it only uncovers more of the photo's bottom, the
+   photo itself stays put (see the landscape rule). */
+.home #logo {
+  --photo-extend: 5svh;
 }
 
-/* Desktop: further still, so less of the gap shows below the photo. */
+.home #logo::before {
+  bottom: calc(-7svh - var(--photo-extend));
+}
+
+/* Desktop: further still, so less of the gap shows below the photo. The
+   photo is centred in its box, so it is lifted by half of --photo-extend
+   to stay where it was. */
 @media (orientation: landscape) {
   .home #logo::before {
-    bottom: -13svh;
+    bottom: calc(-13svh - var(--photo-extend));
+    background-position: center, center calc(50% - var(--photo-extend) / 2);
   }
 }
 
