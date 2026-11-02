@@ -3,7 +3,8 @@
 // "<file>-<width>.jpg/.webp") into the carousel, in the order of the JSON.
 // A photo can have a "portrait" crop for portrait screens, and a "position"
 // (object-position) saying what to keep when it is cropped, and a "credit"
-// (the photographer, shown under the controls). Resolves with the
+// (the photographer, shown under the controls, linked to "creditUrl" when
+// there is one, e.g. their Instagram). Resolves with the
 // slides once they are in the page (an empty list if the JSON can't load).
 const aboutPhotos = (() => {
   const carousel = document.querySelector('.about-photo');
@@ -31,6 +32,7 @@ const aboutPhotos = (() => {
     picture.setAttribute('aria-label', `${i + 1} of ${count}`);
     if (photo.position) picture.style.setProperty('--position', photo.position);
     if (photo.credit) picture.dataset.credit = photo.credit;
+    if (photo.creditUrl) picture.dataset.creditUrl = photo.creditUrl;
 
     const portrait = photo.portrait;
     if (portrait) {
@@ -122,11 +124,25 @@ aboutPhotos.then(slides => {
   if (!carousel) return;
   const dots = carousel.querySelector('.carousel-dots');
 
-  // The photographer of the photo on show, if the JSON names one.
+  // The photographer of the photo on show, if the JSON names one, the whole
+  // line linked to their page if it gives one.
   const credit = document.getElementById('carousel-credit');
   function showCredit(slide) {
-    credit.textContent = slide?.dataset.credit ? `Photo: ${slide.dataset.credit}` : '';
-    credit.hidden = !credit.textContent;
+    const name = slide?.dataset.credit;
+    const url = slide?.dataset.creditUrl;
+    credit.replaceChildren();
+    credit.hidden = !name;
+    if (!name) return;
+    if (!url) {
+      credit.textContent = `Photo: ${name}`;
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = `Photo: ${name}`;
+    credit.append(link);
   }
 
   // With a single photo there is nothing to move between: only its credit.

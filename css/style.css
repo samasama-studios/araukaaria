@@ -980,6 +980,25 @@ button:focus-visible .button-media {
   pointer-events: none;
 }
 
+/* The whole credit links to the photographer's page: faint like the rest of the
+   credit, lighting up like the other links. */
+.carousel-credit a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.carousel-credit a:focus-visible {
+  outline: none;
+}
+
+.carousel-credit a:is(:hover, :focus-visible) {
+  color: #E2FDE1;
+  text-shadow:
+    -1px 0 0 #2f6bff,
+    1.5px -1px 0 rgba(255, 0, 0, 0.6);
+}
+
 /* A soft dark glow behind the arrows and indicators, like the one behind
    the logo, so they stay readable over bright photos. */
 .carousel-controls::before {
