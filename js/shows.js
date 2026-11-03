@@ -23,10 +23,10 @@
     return `${day} ${MONTHS[month - 1]} ${year}`;
   }
 
-  // One row. Every row has the tickets button so they all look the same,
-  // but it only links somewhere on upcoming shows with a "tickets" link; on
-  // the rest it has no link (faded in style.css) and is hidden from screen
-  // readers.
+  // One row. Past shows have no tickets button. Upcoming shows all have one
+  // so they look the same, but it only links somewhere when the show has a
+  // "tickets" link; otherwise it has no link (faded in style.css) and is
+  // hidden from screen readers.
   function row(show, upcoming) {
     const item = template.content.firstElementChild.cloneNode(true);
     const time = item.querySelector('.show-date');
@@ -42,10 +42,24 @@
     yearSpan.textContent = year;
     time.append(dayMonthSpan, ' ', yearSpan);
     item.querySelector('.show-event').textContent = show.event;
-    item.querySelector('.show-place').textContent = [show.city, show.country].filter(Boolean).join(', ');
+    const place = item.querySelector('.show-place');
+    place.textContent = [show.city, show.country].filter(Boolean).join(', ');
+    // An optional "venue" goes before the city ("TBA" reads "Venue TBA"), in
+    // its own span so phones can put it on a line of its own (see style.css).
+    if (show.venue) {
+      const venueSpan = document.createElement('span');
+      venueSpan.className = 'show-venue';
+      venueSpan.textContent = show.venue === 'TBA' ? 'Venue TBA' : show.venue;
+      const separator = document.createElement('span');
+      separator.className = 'show-venue-separator';
+      separator.textContent = ' · ';
+      place.prepend(venueSpan, separator);
+    }
 
     const tickets = item.querySelector('.show-tickets');
-    if (upcoming && show.tickets) {
+    if (!upcoming) {
+      tickets.remove();
+    } else if (show.tickets) {
       tickets.href = show.tickets;
       tickets.setAttribute('aria-label', `Tickets for ${show.event}, ${formatDate(show.date)} (opens in a new tab)`);
     } else {

@@ -1791,9 +1791,9 @@ button:focus-visible .button-media {
 }
 
 /* Tickets: a small ticket icon in the same thin outlined style as the
-   other icon buttons, on every row so the rows all look the same. It links
-   to the ticket shop on upcoming shows that have one; on the others it is
-   faded and does nothing (shows.js). The press list's "read" buttons look
+   other icon buttons, on every upcoming show so those rows all look the
+   same (past shows have none). It links to the ticket shop on the ones that
+   have one; on the others it is faded and does nothing (shows.js). The press list's "read" buttons look
    the same. */
 .show-tickets,
 .press-link {
@@ -1938,6 +1938,15 @@ button:focus-visible .button-media {
   .show-place {
     grid-area: place;
     text-align: left;
+  }
+
+  /* The venue, when there is one, on its own line over the city. */
+  .show-venue {
+    display: block;
+  }
+
+  .show-venue-separator {
+    display: none;
   }
 
   .show-tickets {
@@ -2179,7 +2188,10 @@ button:focus-visible .button-media {
 .footer-links a::after {
   content: attr(aria-label);
   position: absolute;
-  bottom: calc(100% + 0.5rem);
+  /* Midway between the footer's top line and the buttons: the footer's
+     padding above them (2.25rem) less the name's height (1rem of text and
+     0.7rem of padding), halved. */
+  bottom: calc(100% + (2.25rem - 1.7rem) / 2);
   left: 50%;
   padding: 0.35rem 0.6rem;
   border-radius: 6px;
