@@ -1,4 +1,4 @@
-// Phone menu: swaps the menu button's icon to a close icon while the menu is
+// Menu: on phones, swaps the menu button's icon to a close icon while the menu is
 // open, and closes the menu when one of its links is followed. Opening and
 // closing are otherwise handled by the browser (popovertarget on the button).
 (() => {
@@ -6,8 +6,7 @@
   const toggle = document.getElementById('menu-toggle');
   if (!menu || !toggle) return;
 
-  // The music and social buttons each open a row to their left with their
-  // links; opening one closes the other.
+  // The music button opens a row to its left with the streaming links.
   const rowToggles = [...menu.querySelectorAll('button[aria-controls]')];
   function closeRows(except) {
     rowToggles.forEach(button => {
@@ -30,7 +29,19 @@
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
     if (!open) closeRows();
   });
-  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.hidePopover()));
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    closeRows();
+    menu.hidePopover();
+  }));
+
+  // On desktop the menu is always shown (no popover), so a click elsewhere
+  // or Escape closes an open row of links.
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.menu-item')) closeRows();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeRows();
+  });
 })();
 
 // Sticky navbar: once the big logo has scrolled out of view, the navbar gets

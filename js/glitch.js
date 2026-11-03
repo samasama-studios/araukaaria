@@ -19,12 +19,13 @@
   // Fades in the rest of the page (see the "intro" class in index.html).
   const reveal = () => document.documentElement.classList.replace('intro', 'revealed');
 
+  // Pages without the big logo (the-name.html) still load the filters, for
+  // the navbar's wordmark, but have no entry glitch.
   const mark = document.getElementById('logo-mark');
-  if (!mark) return reveal();
 
   // Keep the logo hidden until the filters are in place, so it never shows
   // plain white first.
-  mark.classList.add('glitch-pending');
+  mark?.classList.add('glitch-pending');
   try {
     const vivid = new URLSearchParams(location.search).get('look') === 'vivid';
     const res = await fetch(vivid ? 'assets/icons/logo-fx-vivid.svg' : 'assets/icons/logo-fx.svg');
@@ -32,6 +33,7 @@
   } catch {
     // Without the filters the logo just shows plain white.
   }
+  if (!mark) return reveal();
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     mark.classList.remove('glitch-pending');

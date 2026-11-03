@@ -401,7 +401,7 @@ button:focus-visible .button-media {
   opacity: 0.35;
 }
 
-/* Names under the buttons in the music and social rows, set on a diagonal
+/* Names under the buttons in the music row, set on a diagonal
    so they fit: each rises from bottom-left to top-right and ends just under
    its button. */
 .menu-sub .menu-icon {
@@ -495,7 +495,7 @@ button:focus-visible .button-media {
   }
 }
 
-/* Hidden on screen, still read out by screen readers (the social icons'
+/* Hidden on screen, still read out by screen readers (the menu's icon
    names). */
 .visually-hidden {
   position: absolute;
@@ -1519,6 +1519,13 @@ button:focus-visible .button-media {
   background: linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat;
 }
 
+/* The top of a page of its own (the-name.html), under the navbar: the same
+   stretch of letters, then a fade only at the bottom, into the section. */
+.section-gap-page-top {
+  height: calc(var(--gap-room) + var(--about-fade));
+  background: linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
+}
+
 @media (max-width: 900px) {
   .section-gap {
     --gap-room: calc(1.25rem * 2 + 44px + 1rem);
@@ -1547,18 +1554,17 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
-/* Following a menu link to The name, Shows or Press stops with the section's top
+/* Following a menu link to Shows or Press stops with the section's top
    edge, and the fade above it, just under the navbar (at its slim, scrolled
    height), rather than tucking the edge and padding under it so the heading
    lands against the navbar's line. The middle of the fade sits at the line:
    that is where it reads as the edge (see the gaps above). */
-#name,
 #shows,
 #press {
   scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + var(--about-fade) / 2);
 }
 
-#name h2,
+#name h1,
 #shows h2,
 #press h2 {
   margin: 0 0 2rem;
@@ -1572,7 +1578,7 @@ button:focus-visible .button-media {
 
 /* The name: Pepi's story in a centred column at a comfortable reading
    width, opened by a short italic line. */
-#name h2,
+#name h1,
 .name-text {
   max-width: 46rem;
   margin-right: auto;
@@ -1590,34 +1596,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-
-/* Wider screens show the full story; phones the short one with "Read more"
-   (about.js adds "is-collapsible", so without it phones get the full one).
-   The pictures sit in the full story, but show with the short one too. */
-.name-short,
-.name-more {
-  display: none;
-}
-
-.name-story .name-more {
-  margin: 0 0 0.5rem;
-}
-
-@media (max-width: 640px) {
-  .is-collapsible .name-short,
-  .is-collapsible.is-open .name-full p {
-    display: block;
-  }
-
-  .is-collapsible .name-full p,
-  .is-collapsible.is-open .name-short {
-    display: none;
-  }
-
-  .is-collapsible .name-more {
-    display: inline-block;
-  }
-}
 
 /* From the tree to the logo, set into the story like pictures in a book:
    each picture beside the paragraph it belongs to, on alternate sides
@@ -2384,7 +2362,7 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Phones: the names under the music and social rows are smaller and
+/* Phones: the names under the music row are smaller and
    steeper, so the last (leftmost) one, SoundCloud, stays on screen. */
 @media (max-width: 640px) {
   .menu-sub-label {
@@ -2403,5 +2381,173 @@ body:has(#menu:popover-open) #navbar::after {
   /* Keeps "Canto Oscuro · Out now" on one line. */
   #cta {
     white-space: nowrap;
+  }
+}
+
+/* Desktop: no menu button; the menu's first level sits in the navbar as a
+   row of names, without icons, separated by thin vertical bars. The music
+   name opens its links in a dropdown under it (also names only). The menu stays a popover in the markup (for phones), so it is
+   shown here without being opened. */
+@media (min-width: 901px) {
+  #menu-toggle {
+    display: none;
+  }
+
+  /* Keeps the navbar as tall as before now that the menu button, which set
+     its height, is hidden. */
+  #navbar {
+    grid-template-rows: 44px;
+  }
+
+  #menu,
+  .nav-scrolled #menu {
+    display: flex;
+    z-index: 3;
+    top: var(--nav-pad-y);
+    right: var(--nav-pad);
+    height: 44px;
+    align-items: center;
+    transition: top 0.3s, right 0.3s;
+  }
+
+  #menu > *,
+  .menu-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* The bar between two names. */
+  #menu > * + *::before {
+    content: "";
+    width: 1px;
+    height: 1.1rem;
+    margin: 0 1.1rem;
+    background: rgba(226, 253, 225, 0.45);
+  }
+
+  #menu .button-media {
+    display: none;
+  }
+
+  #menu .menu-icon {
+    display: block;
+    background: none;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  #menu > .menu-icon {
+    display: flex;
+  }
+
+  #menu .menu-label,
+  #menu:has(.menu-sub:not([hidden])) .menu-label {
+    display: block;
+    position: static;
+    padding: 0;
+    background: none;
+    transform: none;
+    transform-origin: center;
+  }
+
+  #menu .menu-icon:is(:hover, :focus-visible, :active) .menu-label {
+    transform: scale(1.08);
+  }
+
+  /* The dropdown: a column of names under its button. */
+  .menu-sub {
+    top: calc(100% + 0.25rem);
+    right: auto;
+    left: -0.9rem;
+    translate: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 0.9rem;
+    max-width: none;
+    padding: 0.9rem;
+    border-radius: 9px;
+    background: rgba(45, 40, 40, 0.92);
+  }
+
+  @starting-style {
+    .menu-sub {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+  }
+
+  .menu-sub-label {
+    position: static;
+    padding: 0;
+    background: none;
+    font-size: 1rem;
+    transform: none;
+    transform-origin: left center;
+  }
+
+  #menu .menu-icon:is(:hover, :focus-visible, :active) .menu-sub-label {
+    transform: scale(1.08);
+  }
+
+  /* No menu button, so no glow behind it. */
+  #navbar::before {
+    display: none;
+  }
+
+  /* A soft black vignette behind each name, so it stays readable over the
+     hero; they fade once the navbar has its own background. */
+  #menu .menu-label {
+    position: relative;
+    inset: auto;
+  }
+
+  #menu .menu-label::before {
+    content: "";
+    position: absolute;
+    inset: -18px -26px;
+    z-index: -1;
+    background: radial-gradient(closest-side,
+      rgba(0, 0, 0, 0.42),
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.1) 80%,
+      rgba(0, 0, 0, 0));
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .nav-scrolled #menu .menu-label::before {
+    opacity: 0;
+  }
+
+  /* Hidden during the logo's entry animation, like the navbar. */
+  .intro #menu {
+    visibility: hidden;
+  }
+
+  .revealed #menu {
+    animation: reveal 0.6s ease backwards;
+  }
+}
+
+/* Wide desktops: the row of names sits in the middle of the navbar. Narrower
+   ones keep it on the right, clear of the wordmark. ("translate" does the
+   centring, so the reveal animation can use "transform".) */
+@media (min-width: 1240px) {
+  #menu,
+  .nav-scrolled #menu {
+    right: auto;
+    left: 50%;
+    translate: -50% 0;
+    transition: top 0.3s;
+  }
+}
+
+/* Narrower desktops: the names sit a little closer, so the row keeps clear
+   of the wordmark. */
+@media (min-width: 901px) and (max-width: 1099px) {
+  #menu > * + *::before {
+    margin: 0 0.7rem;
   }
 }
