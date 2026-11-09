@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="home-page nav-scrolled">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Press kit | Araukaaria</title>
+  <!-- What search engines and link previews (WhatsApp, Facebook, Slack, email…)
+       show for the site. The share image is assets/share-live.jpg (1200 × 630). -->
+  <meta name="description" content="Araukaaria press kit: bios, facts, press quotes, photos, logos, videos and the technical rider.">
+  <link rel="canonical" href="https://araukaaria.ee/press-kit.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Araukaaria">
+  <meta property="og:title" content="Press kit – Araukaaria">
+  <meta property="og:description" content="Bios, facts, press quotes, photos, logos, videos and the technical rider.">
+  <meta property="og:url" content="https://araukaaria.ee/press-kit.html">
+  <meta property="og:image" content="https://araukaaria.ee/assets/share-live.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Araukaaria logo and name over a photo of the band playing live at Konservatoorium.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="Bios, facts, press quotes, photos, logos, videos and the technical rider.">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="home">
+  <!-- Navbar (as on the home page): the small wordmark (home) and the menu button, which
+       opens the menu below. -->
+  <header id="navbar">
+    <a class="navbar-wordmark" href="./" aria-label="araukaaria, home page">
+      <img src="assets/icons/araukaaria.svg" alt="">
+    </a>
+    <!-- Desktop: the social links, on the right of the navbar (phones have
+         them in the footer), from "navbar" in data/links.json (links.js). -->
+    <ul class="navbar-social" data-links="navbar">
+      <template><li><a><img alt=""></a></li></template>
+    </ul>
+    <button class="corner-button" id="menu-toggle" popovertarget="menu" aria-label="Menu">
+      <img class="button-media" src="assets/icons/menu.svg" alt="">
+    </button>
+  </header>
+  <!-- Menu: a column of icon buttons under the menu button. The music button
+       opens a row to its left with the streaming links. -->
+  <nav id="menu" popover aria-label="Menu">
+    <div class="menu-item">
+      <div class="menu-sub" id="music-links" data-links="music" hidden>
+        <!-- The streaming links, from "music" in data/links.json (links.js). -->
+        <template>
+          <a class="menu-icon">
+            <img class="button-media" alt="">
+            <span class="visually-hidden" data-name></span>
+            <span class="menu-sub-label" aria-hidden="true" data-name></span>
+          </a>
+        </template>
+      </div>
+      <button class="menu-icon" aria-expanded="false" aria-controls="music-links">
+        <span class="menu-label" aria-hidden="true">Music</span>
+        <img class="button-media" src="assets/icons/music.svg" alt="">
+        <span class="visually-hidden">Music</span>
+      </button>
+    </div>
+    <a class="menu-icon" href="./#about">
+      <span class="menu-label" aria-hidden="true">About</span>
+      <img class="button-media" src="assets/icons/about.svg" alt="">
+      <span class="visually-hidden">About</span>
+    </a>
+    <a class="menu-icon" href="./#shows">
+      <span class="menu-label" aria-hidden="true">Shows</span>
+      <img class="button-media" src="assets/icons/shows.svg" alt="">
+      <span class="visually-hidden">Shows</span>
+    </a>
+    <a class="menu-icon" href="./#press">
+      <span class="menu-label" aria-hidden="true">Press</span>
+      <img class="button-media" src="assets/icons/press.svg" alt="">
+      <span class="visually-hidden">Press</span>
+    </a>
+    <!-- Contact goes to the footer, where the address is shown, rather than
+         opening an email app straight away. -->
+    <a class="menu-icon" href="#footer">
+      <span class="menu-label" aria-hidden="true">Contact</span>
+      <img class="button-media" src="assets/icons/mail.svg" alt="">
+      <span class="visually-hidden">Contact</span>
+    </a>
+  </nav>
+  <!-- Press kit: everything a booker, promoter or journalist needs, in one
+       place. The press quotes come from data/press.json (press.js) and the
+       rider from data/rider.json (rider.js); the photos, logos and the rider
+       PDF are in assets/press. -->
+  <div class="section-gap section-gap-page-top" aria-hidden="true"></div>
+  <section id="press-kit" aria-labelledby="kit-heading">
+    <h1 id="kit-heading">Press kit</h1>
+    <p class="kit-intro">For bookers, promoters and press: bios, facts, quotes, photos, logos and the technical rider. Anything else, write to <a data-link="email" data-link-text></a>.</p>
+    <!-- Save as PDF: opens the browser's print dialog, laid out for paper
+         by the print styles in style.css; the rider button prints only the
+         rider (print.js). Hidden without JavaScript. -->
+    <p class="kit-print-row"><button class="about-link kit-print" type="button" data-print="all" hidden>Save press kit as PDF ↓</button></p>
+    <nav class="kit-contents" aria-label="On this page">
+      <a href="#kit-bio">Bio</a>
+      <a href="#kit-facts">Facts</a>
+      <a href="#kit-press">Press</a>
+      <a href="#kit-photos">Photos</a>
+      <a href="#kit-logo">Logo</a>
+      <a href="#kit-videos">Videos</a>
+      <a href="#rider">Rider</a>
+    </nav>
+
+    <h2 class="kit-heading" id="kit-bio">Bio</h2>
+    <h3 class="subheading">Short</h3>
+    <div class="kit-text">
+      <p>Araukaaria is an Argentine-Estonian psychedelic art rock band from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, their songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional with a touch of folk. Their self-titled debut album arrives on 2 April 2027.</p>
+    </div>
+    <h3 class="subheading">Long</h3>
+    <div class="kit-text">
+      <p>Araukaaria brings Latin American psychedelia to the Baltic. The six-piece from Viljandi, Estonia, is led by José “Pepi” Prieto, a Buenos Aires-born songwriter who moved to Estonia in 2012 and has led the band for half a decade. Sung in Spanish and English, the music moves from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk.</p>
+      <p>The band takes its name from the araucaria, an ancient South American tree sacred to the Mapuche people. Its logo began as an araucaria branch from Pepi’s family’s countryside house near Buenos Aires, cast in silver by Maarja Palu.</p>
+      <p>Araukaaria has played Tallinn Music Week, Jazzkaar, Sofar Sounds, Tartu Punch and Uus Laine, among other stages across Estonia. The single “Canto Oscuro”, with charango and backing vocals by Chilean songwriter Tomás del Real, is, in the words of north!, “disarmingly sincere”, with “a cinematic quality to it”.</p>
+      <p>The self-titled debut album, <cite>Araukaaria</cite>, arrives on 2 April 2027, with a release show in Viljandi.</p>
+    </div>
+
+    <h2 class="kit-heading" id="kit-facts">Facts</h2>
+    <dl class="kit-facts">
+      <div><dt>Genre</dt><dd>Psychedelic art rock</dd></div>
+      <div><dt>From</dt><dd>Viljandi, Estonia</dd></div>
+      <div><dt>Sung in</dt><dd>Spanish and English</dd></div>
+      <div><dt>Debut album</dt><dd><cite>Araukaaria</cite>, 2 April 2027</dd></div>
+      <div>
+        <dt>Line-up</dt>
+        <dd>
+          <ul class="kit-lineup">
+            <li>José “Pepi” Prieto <span>— vocals, guitars, synth</span></li>
+            <li>Lisanna Kuningas <span>— vocals, guitar, keys</span></li>
+            <li>Norbert de Varenne <span>— electric guitar</span></li>
+            <li>Fedor Bezrukov <span>— electric bass</span></li>
+            <li>Rauno Vaher <span>— drums &amp; percussion</span></li>
+            <li>Artur Leppik <span>— saxophone</span></li>
+          </ul>
+        </dd>
+      </div>
+      <div><dt>Listen</dt><dd data-links="listen" data-separator=" · "><template><a data-name></a></template></dd></div>
+      <div><dt>Contact</dt><dd><a data-link="email" data-link-text></a></dd></div>
+    </dl>
+
+    <h2 class="kit-heading" id="kit-press">Press</h2>
+    <ol class="press-list" id="press-list"></ol>
+    <template id="press-row">
+      <li class="press-item">
+        <time class="press-date"></time>
+        <div class="press-body">
+          <blockquote class="press-quote"></blockquote>
+          <p class="press-translation" lang="en"></p>
+          <p class="press-source"><span class="press-outlet"></span> <span class="press-author"></span></p>
+        </div>
+        <a class="press-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M22 35L35 22M25 22H35V32" stroke="currentColor" stroke-width="1.54054" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </li>
+    </template>
+
+    <!-- Photos: a preview of each, linking to the print-size file in
+         assets/press/photos. Credit the photographer when using them. -->
+    <h2 class="kit-heading" id="kit-photos">Photos</h2>
+    <p class="kit-note">Free to use for press and promotion of Araukaaria. Please credit the photographer.</p>
+    <ul class="kit-photos">
+      <li>
+        <a href="assets/press/photos/araukaaria-band.jpg" download>
+          <img src="assets/photos/web/band-800.jpg" width="800" height="1199" loading="lazy" decoding="async"
+            alt="The six members of Araukaaria posing together in front of a wooden house, seen from below.">
+        </a>
+        <p class="kit-photo-meta">Photo: Kerttu Kruusla · 1330 × 1994 · <a href="assets/press/photos/araukaaria-band.jpg" download>Download</a></p>
+      </li>
+      <li>
+        <a href="assets/press/photos/araukaaria-from-above.jpg" download>
+          <img src="assets/photos/web/above-800.jpg" width="800" height="800" loading="lazy" decoding="async"
+            alt="The band seen from above, standing together on the grass, in a black-and-white double exposure.">
+        </a>
+        <p class="kit-photo-meta">Photo: Kerttu Kruusla · 3000 × 3000 · <a href="assets/press/photos/araukaaria-from-above.jpg" download>Download</a></p>
+      </li>
+      <li>
+        <a href="assets/press/photos/araukaaria-live-barn.jpg" download>
+          <img src="assets/photos/web/landscape-960.jpg" width="960" height="640" loading="lazy" decoding="async"
+            alt="Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof.">
+        </a>
+        <p class="kit-photo-meta">Photo: Kerttu Kruusla · 3000 × 2000 · <a href="assets/press/photos/araukaaria-live-barn.jpg" download>Download</a></p>
+      </li>
+      <li>
+        <a href="assets/press/photos/araukaaria-live-konservatoorium.jpg" download>
+          <img src="assets/photos/web/konservatoorium-960.jpg" width="960" height="640" loading="lazy" decoding="async"
+            alt="Araukaaria live at Konservatoorium in Viljandi under neon lights, in a colour double exposure: Pepi on guitar, Lisanna at the keys and a saxophonist.">
+        </a>
+        <p class="kit-photo-meta">Photo: Kerttu Kruusla · 3000 × 2000 · <a href="assets/press/photos/araukaaria-live-konservatoorium.jpg" download>Download</a></p>
+      </li>
+    </ul>
+
+    <!-- Logo and wordmark: light (for dark backgrounds) and dark (for light
+         ones), as SVG and transparent PNG, in assets/press/logo. -->
+    <h2 class="kit-heading" id="kit-logo">Logo</h2>
+    <ul class="kit-logos">
+      <li class="kit-logo-on-dark">
+        <div class="kit-logo-preview">
+          <img src="assets/press/logo/araukaaria-logo-light.svg" alt="The Araukaaria logo in pale green.">
+          <img src="assets/press/logo/araukaaria-wordmark-light.svg" alt="The Araukaaria wordmark in pale green.">
+        </div>
+        <p class="kit-photo-meta">For dark backgrounds · Logo <a href="assets/press/logo/araukaaria-logo-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-logo-light.png" download>PNG</a> · Wordmark <a href="assets/press/logo/araukaaria-wordmark-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-wordmark-light.png" download>PNG</a></p>
+      </li>
+      <li class="kit-logo-on-light">
+        <div class="kit-logo-preview">
+          <img src="assets/press/logo/araukaaria-logo-dark.svg" alt="The Araukaaria logo in dark brown.">
+          <img src="assets/press/logo/araukaaria-wordmark-dark.svg" alt="The Araukaaria wordmark in dark brown.">
+        </div>
+        <p class="kit-photo-meta">For light backgrounds · Logo <a href="assets/press/logo/araukaaria-logo-dark.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-logo-dark.png" download>PNG</a> · Wordmark <a href="assets/press/logo/araukaaria-wordmark-dark.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-wordmark-dark.png" download>PNG</a></p>
+      </li>
+    </ul>
+
+    <!-- The same live videos as in About (video.js). -->
+    <h2 class="kit-heading" id="kit-videos">Videos</h2>
+    <div class="about-videos">
+      <figure class="about-video">
+        <a class="video-cover" href="https://www.youtube.com/watch?v=RN1yMPY7PAg" data-video="RN1yMPY7PAg"
+          aria-label="Play video: Araukaaria, El Don del Águila, live at Konservatoorium">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 900px) 100vw, 30rem"
+              srcset="assets/photos/web/video-eldon-640.webp 640w, assets/photos/web/video-eldon-1280.webp 1280w">
+            <img src="assets/photos/web/video-eldon-640.jpg" sizes="(max-width: 900px) 100vw, 30rem"
+              srcset="assets/photos/web/video-eldon-640.jpg 640w, assets/photos/web/video-eldon-1280.jpg 1280w"
+              width="1280" height="720" loading="lazy" decoding="async" alt="">
+          </picture>
+          <svg class="video-play" viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <figcaption><span class="video-title">El Don del Águila</span> <span class="video-place">Konservatoorium, Viljandi</span></figcaption>
+      </figure>
+      <figure class="about-video">
+        <a class="video-cover video-cover-soft" href="https://www.youtube.com/watch?v=HKWwaiz4lvg" data-video="HKWwaiz4lvg"
+          aria-label="Play video: Araukaaria, Los Fuegos No Descansan, live at Säsin Stuudio">
+          <picture>
+            <source type="image/webp" sizes="(max-width: 900px) 100vw, 30rem"
+              srcset="assets/photos/web/video-fuegos-640.webp 640w, assets/photos/web/video-fuegos-1280.webp 1280w">
+            <img src="assets/photos/web/video-fuegos-640.jpg" sizes="(max-width: 900px) 100vw, 30rem"
+              srcset="assets/photos/web/video-fuegos-640.jpg 640w, assets/photos/web/video-fuegos-1280.jpg 1280w"
+              width="1280" height="720" loading="lazy" decoding="async" alt="">
+          </picture>
+          <svg class="video-play" viewBox="0 0 57 57" fill="none" aria-hidden="true">
+            <rect x="1.36" y="1.36" width="54.28" height="54.28" rx="10.86" stroke="currentColor" stroke-width="1.54054" />
+            <path d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
+          </svg>
+        </a>
+        <figcaption><span class="video-title">Los Fuegos No Descansan</span> <span class="video-place">Säsin Stuudio, Tartu</span></figcaption>
+      </figure>
+    </div>
+
+    <!-- Technical rider: filled in from data/rider.json (rider.js); the
+         PDF is the same rider, for venues that want a file. The header at
+         its top only shows on paper, when the rider is saved on its own. -->
+    <div class="kit-part" id="rider-part">
+    <p class="print-only rider-print-header"><img src="assets/press/logo/araukaaria-wordmark-dark.svg" alt="Araukaaria"> <span>contact@araukaaria.com · araukaaria.ee</span></p>
+    <h2 class="kit-heading" id="rider">Technical rider</h2>
+    <p class="kit-note kit-print-row"><a class="about-link" href="assets/press/araukaaria-rider.pdf" download>Download rider (PDF) →</a> <button class="about-link kit-print" type="button" data-print="rider" hidden>Save rider as PDF ↓</button></p>
+    <h3 class="subheading">Show info</h3>
+    <div class="rider-groups" id="rider-show"></div>
+    <h3 class="subheading">Equipment needed</h3>
+    <div class="rider-groups" id="rider-equipment"></div>
+    <h3 class="subheading">Comments</h3>
+    <div id="rider-comments"></div>
+    <h3 class="subheading rider-plot-heading">Stage plot</h3>
+    <a class="rider-plot" href="assets/press/araukaaria-stage-plot.png">
+      <img src="assets/press/araukaaria-stage-plot.png" width="1920" height="1357" loading="lazy" decoding="async"
+        alt="Stage plot: drums upstage centre; bass and Norbert's electric guitar stage right; Pepi centre with his electric guitar, amp and the shared acoustic; saxophone upstage left and Lisanna's keys stage left; a floor monitor for each of the six musicians.">
+    </a>
+    <h3 class="subheading">Input list</h3>
+    <div class="rider-table-wrap">
+      <table class="rider-inputs">
+        <thead>
+          <tr><th scope="col">Ch.</th><th scope="col">Instrument</th><th scope="col">Mic / DI</th><th scope="col">Stand</th><th scope="col">Effects</th><th scope="col">Plot</th></tr>
+        </thead>
+        <tbody id="rider-inputs"></tbody>
+      </table>
+    </div>
+    </div>
+  </section>
+  <div class="section-gap section-gap-footer" aria-hidden="true"></div>
+  <!-- Footer: the band's links (music, then social and email), the booking
+       and press address, and the copyright. -->
+  <footer id="footer">
+    <!-- From "music" and "social" in data/links.json (links.js). -->
+    <ul class="footer-links" data-links="music social">
+      <template><li><a><img alt=""></a></li></template>
+    </ul>
+    <p class="footer-contact">
+      <span class="footer-label">Booking &amp; press</span>
+      <a data-link="email" data-link-text></a>
+    </p>
+    <p class="footer-meta">
+      <span>© 2026 <a href="https://samasama.studio">samasama.studio</a></span>
+    </p>
+  </footer>
+  <script src="js/glitch.js"></script>
+  <script src="js/links.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/video.js"></script>
+  <script src="js/load-more.js"></script>
+  <script src="js/press.js"></script>
+  <script src="js/rider.js"></script>
+  <script src="js/print.js"></script>
+</body>
+
+</html>

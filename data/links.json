@@ -1,0 +1,17 @@
+{
+  "links": {
+    "spotify": { "name": "Spotify", "url": "https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg" },
+    "youtube": { "name": "YouTube", "url": "https://www.youtube.com/channel/UC892rpH4PCHJ1TktOKu8bhQ" },
+    "bandcamp": { "name": "Bandcamp", "url": "https://araukaaria.bandcamp.com/" },
+    "tidal": { "name": "TIDAL", "url": "https://tidal.com/artist/44435396" },
+    "soundcloud": { "name": "SoundCloud", "url": "https://soundcloud.com/araukaaria" },
+    "instagram": { "name": "Instagram", "url": "https://www.instagram.com/araukaaria/" },
+    "facebook": { "name": "Facebook", "url": "" },
+    "linktree": { "name": "Linktree", "url": "https://linktr.ee/araukaaria" },
+    "email": { "name": "Email", "url": "mailto:contact@araukaaria.com", "icon": "mail" }
+  },
+  "music": ["spotify", "youtube", "bandcamp", "tidal", "soundcloud"],
+  "social": ["instagram", "facebook", "linktree", "email"],
+  "navbar": ["linktree", "youtube", "spotify", "instagram"],
+  "listen": ["spotify", "bandcamp", "youtube"]
+}

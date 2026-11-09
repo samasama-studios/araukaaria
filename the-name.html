@@ -31,6 +31,11 @@
     <a class="navbar-wordmark" href="./" aria-label="araukaaria, home page">
       <img src="assets/icons/araukaaria.svg" alt="">
     </a>
+    <!-- Desktop: the social links, on the right of the navbar (phones have
+         them in the footer), from "navbar" in data/links.json (links.js). -->
+    <ul class="navbar-social" data-links="navbar">
+      <template><li><a><img alt=""></a></li></template>
+    </ul>
     <button class="corner-button" id="menu-toggle" popovertarget="menu" aria-label="Menu">
       <img class="button-media" src="assets/icons/menu.svg" alt="">
     </button>
@@ -39,32 +44,15 @@
        opens a row to its left with the streaming links. -->
   <nav id="menu" popover aria-label="Menu">
     <div class="menu-item">
-      <div class="menu-sub" id="music-links" hidden>
-        <a class="menu-icon" href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg">
-          <img class="button-media" src="assets/icons/spotify.svg" alt="">
-          <span class="visually-hidden">Spotify</span>
-          <span class="menu-sub-label" aria-hidden="true">Spotify</span>
-        </a>
-        <a class="menu-icon" href="https://www.youtube.com/channel/UC892rpH4PCHJ1TktOKu8bhQ">
-          <img class="button-media" src="assets/icons/youtube.svg" alt="">
-          <span class="visually-hidden">YouTube</span>
-          <span class="menu-sub-label" aria-hidden="true">YouTube</span>
-        </a>
-        <a class="menu-icon" href="https://araukaaria.bandcamp.com/">
-          <img class="button-media" src="assets/icons/bandcamp.svg" alt="">
-          <span class="visually-hidden">Bandcamp</span>
-          <span class="menu-sub-label" aria-hidden="true">Bandcamp</span>
-        </a>
-        <a class="menu-icon" href="https://tidal.com/artist/44435396">
-          <img class="button-media" src="assets/icons/tidal.svg" alt="">
-          <span class="visually-hidden">TIDAL</span>
-          <span class="menu-sub-label" aria-hidden="true">TIDAL</span>
-        </a>
-        <a class="menu-icon" href="https://soundcloud.com/araukaaria">
-          <img class="button-media" src="assets/icons/soundcloud.svg" alt="">
-          <span class="visually-hidden">SoundCloud</span>
-          <span class="menu-sub-label" aria-hidden="true">SoundCloud</span>
-        </a>
+      <div class="menu-sub" id="music-links" data-links="music" hidden>
+        <!-- The streaming links, from "music" in data/links.json (links.js). -->
+        <template>
+          <a class="menu-icon">
+            <img class="button-media" alt="">
+            <span class="visually-hidden" data-name></span>
+            <span class="menu-sub-label" aria-hidden="true" data-name></span>
+          </a>
+        </template>
       </div>
       <button class="menu-icon" aria-expanded="false" aria-controls="music-links">
         <span class="menu-label" aria-hidden="true">Music</span>
@@ -151,28 +139,20 @@
   <!-- Footer: the band's links (music, then social and email), the booking
        and press address, and the copyright. -->
   <footer id="footer">
-    <ul class="footer-links">
-      <li><a href="https://open.spotify.com/artist/22TRB678YM6WldVdrGVE19?si=pOtU78eeR964nWjcawfgTg" aria-label="Spotify"><img src="assets/icons/spotify.svg" alt=""></a></li>
-      <li><a href="https://www.youtube.com/channel/UC892rpH4PCHJ1TktOKu8bhQ" aria-label="YouTube"><img src="assets/icons/youtube.svg" alt=""></a></li>
-      <li><a href="https://araukaaria.bandcamp.com/" aria-label="Bandcamp"><img src="assets/icons/bandcamp.svg" alt=""></a></li>
-      <li><a href="https://tidal.com/artist/44435396" aria-label="Tidal"><img src="assets/icons/tidal.svg" alt=""></a></li>
-      <li><a href="https://soundcloud.com/araukaaria" aria-label="SoundCloud"><img src="assets/icons/soundcloud.svg" alt=""></a></li>
-      <li class="footer-social-start"><a href="https://www.instagram.com/araukaaria/" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt=""></a></li>
-      <!-- Facebook: add the page address and remove this comment around it.
-      <li><a href="FACEBOOK_URL" aria-label="Facebook"><img src="assets/icons/facebook.svg" alt=""></a></li>
-      -->
-      <li><a href="https://linktr.ee/araukaaria" aria-label="Linktree"><img src="assets/icons/linktree.svg" alt=""></a></li>
-      <li><a href="mailto:contact@araukaaria.com" aria-label="Email"><img src="assets/icons/mail.svg" alt=""></a></li>
+    <!-- From "music" and "social" in data/links.json (links.js). -->
+    <ul class="footer-links" data-links="music social">
+      <template><li><a><img alt=""></a></li></template>
     </ul>
     <p class="footer-contact">
       <span class="footer-label">Booking &amp; press</span>
-      <a href="mailto:contact@araukaaria.com">contact@araukaaria.com</a>
+      <a data-link="email" data-link-text></a>
     </p>
     <p class="footer-meta">
       <span>© 2026 <a href="https://samasama.studio">samasama.studio</a></span>
     </p>
   </footer>
   <script src="js/glitch.js"></script>
+  <script src="js/links.js"></script>
   <script src="js/menu.js"></script>
 </body>
 

@@ -1,0 +1,41 @@
+{
+  "showInfo": [
+    {"title": "Timing", "items": ["Soundcheck: 60 min (45 min minimum)", "Changeover: 30 min", "Set length: 45–75 min"]},
+    {"title": "Stage", "items": ["Minimum stage: 6 × 4 m. Ideal: 8 × 5 m", "Drum riser welcome, not required"]},
+    {"title": "Travelling party", "items": ["7 people (6 + sound engineer)"]},
+    {"title": "Sound engineer", "items": ["We prefer to bring our own sound engineer. If that is not possible, we will need the venue’s front-of-house engineer. Happy to discuss."]}
+  ],
+  "equipment": [
+    {"title": "Instruments", "items": ["1 × Drum kit: bass drum 18–20\", snare 14\", 1 × rack tom, 1 × floor tom, hi-hat stand, snare stand, 3 × cymbal stands, kick pedal, drum stool and drum rug. Cymbals are brought by the drummer."]},
+    {"title": "Amplifiers / Monitors", "items": ["6 × Floor monitors (separate mixes)"]},
+    {"title": "Microphones", "items": ["3 × Vocal microphones (1 × for sax)", "1 × Guitar amplifier microphone (dynamic)", "5 × Dynamic for drums (kick, snare top/bottom, rack tom, floor tom)", "2 × Condenser for drums (overheads)"]},
+    {"title": "Stands", "items": ["5 × Long boom microphone stands (2 × vocals, 2 × OH, 1 × sax)", "2 × Short boom microphone stands (1 × guitar amplifier, 1 × kick)", "4 × Clamps for snare & toms", "1 × Keyboard stand (X shape)", "3 × Guitar stands", "1 × Bass stand"]},
+    {"title": "Other", "items": ["1 × Stereo DI box (electric guitar)", "1 × Stereo DI box (keys)", "1 × Mono DI box (acoustic guitar)", "1 × Mono DI box (bass)", "Extension cords with multiple outlets on the stage, plus extra extension cords", "Extra XLR and 6.5 mm instrument cables"]}
+  ],
+  "comments": [
+    "We will bring our personal instruments, including cymbals.",
+    "We will bring 1 × guitar amp.",
+    "We will need a PA, mics & stands, a bass amp, lighting equipment and a monitoring system.",
+    "We would require the assistance of local stage hands, a sound engineer, a monitor engineer and a lighting technician.",
+    "The acoustic guitar (GTR3) is shared by Pepi and Lisanna."
+  ],
+  "inputs": [
+    {"ch": 1, "instrument": "Kick", "source": "Dynamic", "stand": "S/B", "effects": "", "plot": "DRUMS"},
+    {"ch": 2, "instrument": "Snare top", "source": "Dynamic", "stand": "Clamp", "effects": "", "plot": "DRUMS"},
+    {"ch": 3, "instrument": "Snare bottom", "source": "Dynamic", "stand": "Clamp", "effects": "", "plot": "DRUMS"},
+    {"ch": 4, "instrument": "Rack tom", "source": "Dynamic", "stand": "Clamp", "effects": "", "plot": "DRUMS"},
+    {"ch": 5, "instrument": "Floor tom", "source": "Dynamic", "stand": "Clamp", "effects": "", "plot": "DRUMS"},
+    {"ch": 6, "instrument": "OH L", "source": "Condenser", "stand": "L/B", "effects": "", "plot": "DRUMS"},
+    {"ch": 7, "instrument": "OH R", "source": "Condenser", "stand": "L/B", "effects": "", "plot": "DRUMS"},
+    {"ch": 8, "instrument": "Bass amp", "source": "Mono DI", "stand": "", "effects": "", "plot": "BASS"},
+    {"ch": 9, "instrument": "Electric guitar 1 (amp)", "source": "Dynamic", "stand": "S/B", "effects": "", "plot": "GTR1"},
+    {"ch": 10, "instrument": "Electric guitar 2 (L)", "source": "Stereo DI", "stand": "", "effects": "", "plot": "GTR2"},
+    {"ch": 11, "instrument": "Electric guitar 2 (R)", "source": "Stereo DI", "stand": "", "effects": "", "plot": "GTR2"},
+    {"ch": 12, "instrument": "Acoustic guitar", "source": "Mono DI", "stand": "", "effects": "", "plot": "GTR3"},
+    {"ch": 13, "instrument": "Keys (L)", "source": "Stereo DI", "stand": "X-shape", "effects": "", "plot": "KEY1"},
+    {"ch": 14, "instrument": "Keys (R)", "source": "Stereo DI", "stand": "X-shape", "effects": "", "plot": "KEY1"},
+    {"ch": 15, "instrument": "Vocal 1 (Pepi)", "source": "Dynamic", "stand": "L/B", "effects": "Reverb, delay", "plot": "VOX1"},
+    {"ch": 16, "instrument": "Vocal 2 (Lisanna)", "source": "Dynamic", "stand": "L/B", "effects": "Reverb, delay", "plot": "VOX2"},
+    {"ch": 17, "instrument": "Saxophone", "source": "Dynamic", "stand": "L/B", "effects": "Reverb", "plot": "SAX"}
+  ]
+}

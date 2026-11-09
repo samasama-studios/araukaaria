@@ -43,6 +43,13 @@
   --about-fade: min(12svh, 16vw);
 }
 
+/* Registered as a length so scripts can read it in pixels (menu.js). */
+@property --about-fade {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 /* The fade steps, worked out from --about-fade. */
 :root {
   --fade-stops:
@@ -1542,6 +1549,7 @@ button:focus-visible .button-media {
    background runs the full width; the side padding keeps the content at
    most 60rem wide, centred. */
 #name,
+#press-kit,
 #shows,
 #press {
   width: 100%;
@@ -1565,6 +1573,7 @@ button:focus-visible .button-media {
 }
 
 #name h1,
+#press-kit h1,
 #shows h2,
 #press h2 {
   margin: 0 0 2rem;
@@ -1708,6 +1717,318 @@ button:focus-visible .button-media {
     object-fit: contain;
     border-right: 0;
     border-left: 0;
+  }
+}
+
+/* Press kit (press-kit.html): one long section, its parts under headings a
+   size down from the page title, with a row of jump links at the top. Text
+   links are underlined thinly; the buttons and the press list look as they
+   do on the home page. */
+.kit-intro,
+.kit-text {
+  max-width: 46rem;
+}
+
+.kit-intro,
+.kit-text p {
+  margin: 0 0 1.25rem;
+  opacity: 0.85;
+}
+
+.kit-intro a,
+.kit-facts a,
+.kit-photo-meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.kit-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 1.5rem 0 0;
+}
+
+.kit-contents a {
+  color: inherit;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: var(--tracking);
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.kit-contents a:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+@media (hover: hover) {
+  .kit-contents a:hover {
+    opacity: 1;
+  }
+}
+
+.kit-print-row {
+  margin: 0;
+}
+
+/* The "Save as PDF" buttons, styled like the links next to them. */
+.kit-print {
+  margin: 0 1.5rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.kit-print:focus-visible {
+  opacity: 1;
+  outline: none;
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .kit-print:hover {
+    opacity: 1;
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
+}
+
+.kit-note .about-link {
+  margin-right: 1.5rem;
+}
+
+/* Only on paper (see the print styles at the end). */
+.print-only {
+  display: none;
+}
+
+/* Each part's heading, with a thin line above it; jump links stop with it
+   just under the slim navbar. */
+.kit-heading {
+  margin: 4.5rem 0 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(226, 253, 225, 0.2);
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + 1rem);
+}
+
+.kit-heading + .subheading {
+  margin-top: 0;
+}
+
+.kit-note {
+  margin: -0.5rem 0 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.6;
+}
+
+/* Facts: the label in small capitals on the left, the fact beside it. */
+.kit-facts {
+  margin: 0;
+}
+
+.kit-facts > div {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 0.25rem 1.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+.kit-facts dt,
+.kit-photo-meta,
+.rider-group h4,
+.rider-inputs th {
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+}
+
+.kit-facts dt {
+  padding-top: 0.35em;
+  opacity: 0.6;
+}
+
+.kit-facts dd {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.kit-lineup {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-lineup span {
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+/* Photos and logos: two to a row, with the credit and links under each. */
+.kit-photos,
+.kit-logos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.kit-photo-meta {
+  margin: 0.6rem 0 0;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+
+.kit-photo-meta a {
+  opacity: 1;
+}
+
+.kit-logo-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(226, 253, 225, 0.2);
+  border-radius: 9px;
+}
+
+.kit-logo-on-light .kit-logo-preview {
+  background: #E2FDE1;
+}
+
+.kit-logo-preview img:first-child {
+  width: 34%;
+  height: auto;
+}
+
+.kit-logo-preview img:last-child {
+  width: 60%;
+  height: auto;
+}
+
+/* Rider: the show info and equipment in columns of small titled lists, the
+   stage plot full width, and the input list as a table with the same thin
+   lines as the shows. */
+.rider-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem 2.5rem;
+}
+
+.rider-group h4 {
+  margin: 0 0 0.4rem;
+  opacity: 0.6;
+}
+
+.rider-list {
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.rider-list li + li {
+  margin-top: 0.3rem;
+}
+
+.rider-plot {
+  display: block;
+}
+
+.rider-plot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+}
+
+.rider-table-wrap {
+  overflow-x: auto;
+}
+
+.rider-inputs {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.rider-inputs th,
+.rider-inputs td {
+  padding: 0.45rem 0.75rem 0.45rem 0;
+  text-align: left;
+  border-bottom: 1px solid rgba(226, 253, 225, 0.2);
+}
+
+.rider-inputs th {
+  opacity: 0.6;
+}
+
+.rider-inputs td {
+  opacity: 0.85;
+}
+
+.rider-inputs td:first-child {
+  width: 2.5rem;
+}
+
+@media (max-width: 640px) {
+  /* The jump links stay on one line, scrolling sideways if they run out of
+     room. */
+  .kit-contents {
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .kit-contents a {
+    flex: none;
+  }
+
+  .kit-facts > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kit-photos,
+  .kit-logos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rider-inputs {
+    font-size: 0.85rem;
   }
 }
 
@@ -2103,15 +2424,16 @@ button:focus-visible .button-media {
   transition: transform 0.2s, filter 0.2s;
 }
 
-/* Two groups: the music links, then the social ones (from Instagram on), a
+/* Two groups: the music links, then the social ones (from Instagram on, the
+   first with "links-group-start" from links.js), a
    little further apart, with a thin bar midway between them like the ones
    between the desktop menu's names. */
-.footer-links .footer-social-start {
+.footer-links .links-group-start {
   position: relative;
   margin-left: var(--split);
 }
 
-.footer-links .footer-social-start::before {
+.footer-links .links-group-start::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -2324,7 +2646,8 @@ body:has(#spotify-bar.open) #footer {
 }
 
 /* Sticky navbar: the small wordmark on the left, the menu button on the
-   right. Transparent over the hero (its wordmark hidden, since the big one is
+   right (on desktop: the names on the left, the wordmark in the middle and
+   the social links on the right; see below). Transparent over the hero (its wordmark hidden, since the big one is
    right there); once the big logo has scrolled away it gets a dark
    background, tightens, and the wordmark fades in. menu.js sets
    "nav-scrolled" on <html>. --nav-pad is the space at the navbar's sides,
@@ -2372,6 +2695,11 @@ html.nav-scrolled {
   width: auto;
   height: 16px;
   filter: url(#word-fx);
+}
+
+/* The social links show in the navbar on desktop only (see below). */
+.navbar-social {
+  display: none;
 }
 
 #navbar .corner-button .button-media {
@@ -2505,10 +2833,68 @@ body:has(#menu:popover-open) #navbar::after {
     display: none;
   }
 
+  /* The same room at the sides once sticky as before, so the names and the
+     social buttons keep clear of the screen's edges and don't shift. */
+  html.nav-scrolled {
+    --nav-pad: 2rem;
+  }
+
   /* Keeps the navbar as tall as before now that the menu button, which set
-     its height, is hidden. */
+     its height, is hidden. Three columns: the names (placed over the first,
+     see #menu below), the wordmark in the middle, the social links. */
   #navbar {
+    grid-template-columns: 1fr auto 1fr;
     grid-template-rows: 44px;
+  }
+
+  .navbar-wordmark {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  .navbar-social {
+    grid-column: 3;
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .navbar-social a {
+    position: relative;
+    display: block;
+    line-height: 0;
+  }
+
+  /* As big as the footer's buttons, and as far apart. */
+  .navbar-social img {
+    width: 36px;
+    height: 36px;
+    transition: transform 0.2s, filter 0.2s;
+  }
+
+  /* The zoom and red and blue fringes of the footer's buttons. */
+  .navbar-social a:focus-visible {
+    outline: none;
+  }
+
+  .navbar-social a:focus-visible img {
+    transform: scale(1.12);
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
+
+  @media (hover: hover) {
+    .navbar-social a:hover img {
+      transform: scale(1.12);
+      filter:
+        drop-shadow(-1px 0 0 #2f6bff)
+        drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+    }
   }
 
   #menu,
@@ -2516,10 +2902,11 @@ body:has(#menu:popover-open) #navbar::after {
     display: flex;
     z-index: 3;
     top: var(--nav-pad-y);
-    right: var(--nav-pad);
+    right: auto;
+    left: var(--nav-pad);
     height: 44px;
     align-items: center;
-    transition: top 0.3s, right 0.3s;
+    transition: top 0.3s, left 0.3s;
   }
 
   #menu > *,
@@ -2559,6 +2946,9 @@ body:has(#menu:popover-open) #navbar::after {
     position: static;
     padding: 0;
     background: none;
+    /* A little bigger than on phones, so the names hold their own next to
+       the social buttons on the right. */
+    font-size: 1.15rem;
     transform: none;
     transform-origin: center;
   }
@@ -2608,14 +2998,18 @@ body:has(#menu:popover-open) #navbar::after {
     display: none;
   }
 
-  /* A soft black vignette behind each name, so it stays readable over the
-     hero; they fade once the navbar has its own background. */
+  /* A soft black vignette behind each name and social button, so it stays readable over the
+     hero. On the home page it fades in only once the hero's photo has
+     scrolled up behind the names (over the strip of letters above it, it
+     isn't needed; menu.js sets "nav-over-photo" on <html>), and fades out
+     again once the navbar has its own background. */
   #menu .menu-label {
     position: relative;
     inset: auto;
   }
 
-  #menu .menu-label::before {
+  #menu .menu-label::before,
+  .navbar-social a::before {
     content: "";
     position: absolute;
     inset: -18px -26px;
@@ -2629,7 +3023,10 @@ body:has(#menu:popover-open) #navbar::after {
     transition: opacity 0.3s;
   }
 
-  .nav-scrolled #menu .menu-label::before {
+  .nav-scrolled #menu .menu-label::before,
+  html.home-page:not(.nav-over-photo) #menu .menu-label::before,
+  .nav-scrolled .navbar-social a::before,
+  html.home-page:not(.nav-over-photo) .navbar-social a::before {
     opacity: 0;
   }
 
@@ -2643,23 +3040,270 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Wide desktops: the row of names sits in the middle of the navbar. Narrower
-   ones keep it on the right, clear of the wordmark. ("translate" does the
-   centring, so the reveal animation can use "transform".) */
-@media (min-width: 1240px) {
-  #menu,
-  .nav-scrolled #menu {
-    right: auto;
-    left: 50%;
-    translate: -50% 0;
-    transition: top 0.3s;
+/* Narrower desktops: the wordmark would run into the names in the middle of
+   the screen, so it sits in the middle of the room between the names and
+   the social links instead (--menu-width is the row of names' width, from
+   menu.js). */
+@media (min-width: 901px) and (max-width: 1439px) {
+  #navbar {
+    grid-template-columns: 1fr auto;
+    padding-left: calc(var(--nav-pad) + var(--menu-width, 0px));
+  }
+
+  .navbar-wordmark {
+    grid-column: 1;
+  }
+
+  .navbar-social {
+    grid-column: 2;
   }
 }
 
-/* Narrower desktops: the names sit a little closer, so the row keeps clear
-   of the wordmark. */
+/* Narrower desktops: the names and the wordmark are a little smaller, and
+   the names closer, so the row keeps clear of the wordmark. */
 @media (min-width: 901px) and (max-width: 1099px) {
   #menu > * + *::before {
-    margin: 0 0.7rem;
+    margin: 0 0.6rem;
+  }
+
+  #menu .menu-label,
+  #menu:has(.menu-sub:not([hidden])) .menu-label {
+    font-size: 1.05rem;
+  }
+
+  .navbar-wordmark img {
+    height: 13px;
+  }
+}
+
+/* Paper (the press kit's "Save as PDF" buttons, or printing any page): dark
+   text on white in the site's typefaces and thin lines, without the navbar,
+   the wordmark pattern and the footer's buttons. Headings stay with what
+   follows them, and pictures, groups and table rows aren't split across
+   pages. Everything hidden behind "Load more" is printed. With
+   "print-rider" on <html> (print.js) only the rider is printed, under its
+   own header. */
+@media print {
+  /* The side margins are padding on the page instead of @page margins, so
+     they hold even when the print dialog's Margins is set to None. */
+  @page {
+    size: A4;
+    margin: 16mm 0;
+  }
+
+  html,
+  body {
+    background: #fff;
+    color: #2D2828;
+  }
+
+  body {
+    display: block;
+  }
+
+  .home::before,
+  #navbar,
+  #menu,
+  #spotify-bar,
+  .section-gap,
+  .kit-contents,
+  .kit-print-row,
+  .load-more,
+  .video-play,
+  #footer {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  #name,
+  #press-kit,
+  #shows,
+  #press {
+    padding: 0;
+    background: none;
+    color: #2D2828;
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  #press-kit {
+    padding: 0 15mm;
+  }
+
+  #press-kit h1 {
+    margin-bottom: 1rem;
+  }
+
+  .kit-intro a,
+  .kit-facts a {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .kit-heading,
+  .subheading {
+    break-after: avoid;
+  }
+
+  .kit-heading {
+    margin-top: 2rem;
+    border-top-color: rgba(45, 40, 40, 0.25);
+  }
+
+  .kit-facts > div,
+  .press-list,
+  .press-item,
+  .rider-inputs th,
+  .rider-inputs td {
+    border-color: rgba(45, 40, 40, 0.2);
+  }
+
+  .press-item[hidden] {
+    display: grid !important;
+  }
+
+  .press-item,
+  .kit-facts > div,
+  .kit-photos li,
+  .kit-logos li,
+  .about-video,
+  .rider-group,
+  .rider-plot,
+  .rider-inputs tr {
+    break-inside: avoid;
+  }
+
+  .press-link {
+    display: none;
+  }
+
+  /* Photos four to a row, the logos side by side, both smaller. The
+     download links give way to where the files are. */
+  .kit-photos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .kit-logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .kit-photo-meta a {
+    display: none;
+  }
+
+  .kit-photos + .print-only,
+  .kit-logos + .print-only {
+    margin: 0.75rem 0 0;
+    font-size: 9pt;
+    opacity: 0.7;
+  }
+
+  .kit-logo-preview {
+    border-color: rgba(45, 40, 40, 0.25);
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .kit-logo-on-dark .kit-logo-preview {
+    background: #2D2828;
+  }
+
+  .kit-logo-on-light .kit-logo-preview {
+    background: #fff;
+  }
+
+  /* Videos: the cover small, with the address to watch it at. */
+  .about-videos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .video-cover::after {
+    display: none;
+  }
+
+  .about-video figcaption::after {
+    content: attr(data-url);
+    display: block;
+    font-size: 8.5pt;
+    opacity: 0.7;
+  }
+
+  /* The rider starts on a page of its own. */
+  #rider-part {
+    break-before: page;
+  }
+
+  .rider-print-header {
+    display: none;
+  }
+
+  .rider-table-wrap {
+    overflow: visible;
+  }
+
+  .rider-inputs {
+    min-width: 0;
+    font-size: 9.5pt;
+  }
+
+  .rider-inputs th,
+  .rider-inputs td {
+    padding: 0.25rem 0.6rem 0.25rem 0;
+  }
+
+  .rider-list {
+    font-size: 9.5pt;
+  }
+
+  /* Only the rider, under its own header: the wordmark and the contact. */
+  .print-rider #press-kit > :not(#rider-part) {
+    display: none !important;
+  }
+
+  .print-rider #rider-part {
+    break-before: auto;
+  }
+
+  .print-rider .rider-print-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(45, 40, 40, 0.25);
+    font-size: 9pt;
+  }
+
+  .rider-print-header img {
+    height: 12pt;
+  }
+
+  .print-rider #rider {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  /* The stage plot starts a page, with its heading, and is kept short
+     enough to leave room for the input list under it. */
+  .rider-plot-heading {
+    break-before: page;
+  }
+
+  .rider-plot img {
+    width: auto;
+    max-width: 100%;
+    max-height: 95mm;
+    margin: 0 auto;
   }
 }
