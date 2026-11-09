@@ -1,7 +1,3 @@
-// Live video in the About section: the page shows only a cover image with a
-// play button, so nothing is loaded from YouTube until someone presses play.
-// Pressing it swaps the cover for YouTube's player (the privacy-enhanced
-// youtube-nocookie.com one), playing straight away.
 (() => {
   document.querySelectorAll('.video-cover[data-video]').forEach(cover => {
     cover.addEventListener('click', event => {

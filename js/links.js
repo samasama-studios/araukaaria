@@ -1,13 +1,3 @@
-// Links: fills every list of the band's links from data/links.json, so each
-// address is written only there. A list is an element with data-links (one or
-// more of the JSON's lists, e.g. "music social") and a <template> for one
-// link inside it, copied per link: the <a> gets the address, the <img> the
-// icon (assets/icons/<icon, or the link's key>.svg) and the name goes in the
-// [data-name] elements or, without any, in the <a>'s aria-label. Each list
-// after the first starts with class "links-group-start", and data-separator
-// goes between the links (for a list in running text). A link without a
-// "url" is left out. A single <a data-link="<key>"> gets its address, and
-// with data-link-text also shows it (for the email address).
 (() => {
   const lists = document.querySelectorAll('[data-links]');
   const singles = document.querySelectorAll('[data-link]');

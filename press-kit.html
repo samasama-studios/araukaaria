@@ -5,8 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Press kit | Araukaaria</title>
-  <!-- What search engines and link previews (WhatsApp, Facebook, Slack, email…)
-       show for the site. The share image is assets/share-live.jpg (1200 × 630). -->
   <meta name="description" content="Araukaaria press kit: bios, facts, press quotes, photos, logos, videos and the technical rider.">
   <link rel="canonical" href="https://araukaaria.ee/press-kit.html">
   <meta property="og:type" content="website">
@@ -25,14 +23,10 @@
 </head>
 
 <body class="home">
-  <!-- Navbar (as on the home page): the small wordmark (home) and the menu button, which
-       opens the menu below. -->
   <header id="navbar">
     <a class="navbar-wordmark" href="./" aria-label="araukaaria, home page">
       <img src="assets/icons/araukaaria.svg" alt="">
     </a>
-    <!-- Desktop: the social links, on the right of the navbar (phones have
-         them in the footer), from "navbar" in data/links.json (links.js). -->
     <ul class="navbar-social" data-links="navbar">
       <template><li><a><img alt=""></a></li></template>
     </ul>
@@ -40,12 +34,9 @@
       <img class="button-media" src="assets/icons/menu.svg" alt="">
     </button>
   </header>
-  <!-- Menu: a column of icon buttons under the menu button. The music button
-       opens a row to its left with the streaming links. -->
   <nav id="menu" popover aria-label="Menu">
     <div class="menu-item">
       <div class="menu-sub" id="music-links" data-links="music" hidden>
-        <!-- The streaming links, from "music" in data/links.json (links.js). -->
         <template>
           <a class="menu-icon">
             <img class="button-media" alt="">
@@ -75,25 +66,16 @@
       <img class="button-media" src="assets/icons/press.svg" alt="">
       <span class="visually-hidden">Press</span>
     </a>
-    <!-- Contact goes to the footer, where the address is shown, rather than
-         opening an email app straight away. -->
     <a class="menu-icon" href="#footer">
       <span class="menu-label" aria-hidden="true">Contact</span>
       <img class="button-media" src="assets/icons/mail.svg" alt="">
       <span class="visually-hidden">Contact</span>
     </a>
   </nav>
-  <!-- Press kit: everything a booker, promoter or journalist needs, in one
-       place. The press quotes come from data/press.json (press.js) and the
-       rider from data/rider.json (rider.js); the photos, logos and the rider
-       PDF are in assets/press. -->
   <div class="section-gap section-gap-page-top" aria-hidden="true"></div>
   <section id="press-kit" aria-labelledby="kit-heading">
     <h1 id="kit-heading">Press kit</h1>
     <p class="kit-intro">For bookers, promoters and press: bios, facts, quotes, photos, logos and the technical rider. Anything else, write to <a data-link="email" data-link-text></a>.</p>
-    <!-- Save as PDF: opens the browser's print dialog, laid out for paper
-         by the print styles in style.css; the rider button prints only the
-         rider (print.js). Hidden without JavaScript. -->
     <p class="kit-print-row"><button class="about-link kit-print" type="button" data-print="all" hidden>Save press kit as PDF ↓</button></p>
     <nav class="kit-contents" aria-label="On this page">
       <a href="#kit-bio">Bio</a>
@@ -160,8 +142,6 @@
       </li>
     </template>
 
-    <!-- Photos: a preview of each, linking to the print-size file in
-         assets/press/photos. Credit the photographer when using them. -->
     <h2 class="kit-heading" id="kit-photos">Photos</h2>
     <p class="kit-note">Free to use for press and promotion of Araukaaria. Please credit the photographer.</p>
     <ul class="kit-photos">
@@ -195,8 +175,6 @@
       </li>
     </ul>
 
-    <!-- Logo and wordmark: light (for dark backgrounds) and dark (for light
-         ones), as SVG and transparent PNG, in assets/press/logo. -->
     <h2 class="kit-heading" id="kit-logo">Logo</h2>
     <ul class="kit-logos">
       <li class="kit-logo-on-dark">
@@ -215,7 +193,6 @@
       </li>
     </ul>
 
-    <!-- The same live videos as in About (video.js). -->
     <h2 class="kit-heading" id="kit-videos">Videos</h2>
     <div class="about-videos">
       <figure class="about-video">
@@ -254,9 +231,6 @@
       </figure>
     </div>
 
-    <!-- Technical rider: filled in from data/rider.json (rider.js); the
-         PDF is the same rider, for venues that want a file. The header at
-         its top only shows on paper, when the rider is saved on its own. -->
     <div class="kit-part" id="rider-part">
     <p class="print-only rider-print-header"><img src="assets/press/logo/araukaaria-wordmark-dark.svg" alt="Araukaaria"> <span>contact@araukaaria.com · araukaaria.ee</span></p>
     <h2 class="kit-heading" id="rider">Technical rider</h2>
@@ -284,10 +258,7 @@
     </div>
   </section>
   <div class="section-gap section-gap-footer" aria-hidden="true"></div>
-  <!-- Footer: the band's links (music, then social and email), the booking
-       and press address, and the copyright. -->
   <footer id="footer">
-    <!-- From "music" and "social" in data/links.json (links.js). -->
     <ul class="footer-links" data-links="music social">
       <template><li><a><img alt=""></a></li></template>
     </ul>

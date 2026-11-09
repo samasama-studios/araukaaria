@@ -5,8 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Araukaaria | Psychedelic art rock from Viljandi, Estonia</title>
-  <!-- What search engines and link previews (WhatsApp, Facebook, Slack, email…)
-       show for the site. The share image is assets/share-live.jpg (1200 × 630). -->
   <meta name="description" content="Psychedelic art rock with Argentine roots from Viljandi, Estonia, sung in Spanish and English. Debut album Araukaaria out 2 April 2027.">
   <link rel="canonical" href="https://araukaaria.ee/">
   <meta property="og:type" content="website">
@@ -23,23 +21,16 @@
   <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <script>
-    // Hide the navbar and the "out now" line until the logo's
-    // entry animation is over (glitch.js reveals them). The timeout is a
-    // safety net in case that never happens.
     document.documentElement.classList.add('intro');
     setTimeout(() => document.documentElement.classList.replace('intro', 'revealed'), 5000);
   </script>
 </head>
 
 <body class="home">
-  <!-- Navbar: the small wordmark (back to top) and the menu button, which
-       opens the menu below. -->
   <header id="navbar">
     <a class="navbar-wordmark" href="#" aria-label="araukaaria, back to top">
       <img src="assets/icons/araukaaria.svg" alt="">
     </a>
-    <!-- Desktop: the social links, on the right of the navbar (phones have
-         them in the footer), from "navbar" in data/links.json (links.js). -->
     <ul class="navbar-social" data-links="navbar">
       <template><li><a><img alt=""></a></li></template>
     </ul>
@@ -47,12 +38,9 @@
       <img class="button-media" src="assets/icons/menu.svg" alt="">
     </button>
   </header>
-  <!-- Menu: a column of icon buttons under the menu button. The music button
-       opens a row to its left with the streaming links. -->
   <nav id="menu" popover aria-label="Menu">
     <div class="menu-item">
       <div class="menu-sub" id="music-links" data-links="music" hidden>
-        <!-- The streaming links, from "music" in data/links.json (links.js). -->
         <template>
           <a class="menu-icon">
             <img class="button-media" alt="">
@@ -82,8 +70,6 @@
       <img class="button-media" src="assets/icons/press.svg" alt="">
       <span class="visually-hidden">Press</span>
     </a>
-    <!-- Contact goes to the footer, where the address is shown, rather than
-         opening an email app straight away. -->
     <a class="menu-icon" href="#footer">
       <span class="menu-label" aria-hidden="true">Contact</span>
       <img class="button-media" src="assets/icons/mail.svg" alt="">
@@ -112,10 +98,6 @@
   </div>
   <div class="section-gap section-gap-after-hero" aria-hidden="true"></div>
   <section id="about" aria-labelledby="about-heading">
-    <!-- Photo carousel: the photos come from data/photos.json, and about.js
-         builds the slides (and their indicators) from it; the slides sit on
-         top of each other and cross-fade. To add a photo, put web-sized
-         copies in assets/photos/web and add a line to the JSON. -->
     <div class="about-photo" role="group" aria-roledescription="carousel" aria-label="Photos of the band">
       <div class="carousel-controls">
         <button class="carousel-button" id="carousel-prev" aria-label="Previous photo">
@@ -131,8 +113,6 @@
             <path d="M25 19L34.5 28.5L25 38" stroke="currentColor" stroke-width="1.54054" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <!-- The photographer of the photo on show, from "credit" (linked to "creditUrl") in
-             data/photos.json (about.js). -->
         <p class="carousel-credit" id="carousel-credit" hidden></p>
       </div>
     </div>
@@ -141,12 +121,6 @@
       <p>Araukaaria brings Latin American psychedelia to the Baltic: an Argentine-Estonian six-piece from Viljandi, led by Buenos Aires-born songwriter José “Pepi” Prieto. Sung in Spanish and English, the songs move from quiet, close arrangements to long electric builds, rooted in Argentine rock nacional, from Charly García to Mi Amigo Invencible, with a touch of folk.</p>
       <p>The band takes its name from the araucaria, a tree sacred to the Mapuche. <a class="about-inline-link" href="the-name.html">Read Pepi’s story behind the name →</a></p>
       <p>The self-titled debut album, <cite>Araukaaria</cite>, arrives 2 April 2027.</p>
-      <!-- Live videos, side by side (stacked on phones): the full-band side,
-           then the quieter one. Only the cover images and play buttons are
-           on the page; video.js loads YouTube's player when one is pressed
-           (without JavaScript the links open the videos on YouTube). To change
-           a video, change its link, data-video (the YouTube id), cover images
-           (assets/photos/web) and caption. -->
       <h3 class="subheading">Videos</h3>
       <div class="about-videos">
         <figure class="about-video">
@@ -184,7 +158,6 @@
           <figcaption><span class="video-title">Los Fuegos No Descansan</span> <span class="video-place">Säsin Stuudio, Tartu</span></figcaption>
         </figure>
       </div>
-      <!-- Line-up: the five members, then the musicians who play with them. -->
       <h3 class="subheading">Band</h3>
       <ul class="about-lineup">
         <li><span class="lineup-name">José “Pepi” Prieto</span> <span class="lineup-role">— vocals, guitars, synth</span></li>
@@ -194,18 +167,12 @@
         <li><span class="lineup-name">Rauno Vaher</span> <span class="lineup-role">— drums &amp; percussion</span></li>
         <li class="lineup-guest">with <span class="lineup-name">Artur Leppik</span> <span class="lineup-role">— saxophone</span></li>
       </ul>
-      <!-- The press kit: bios, photos, logos and the rider (press-kit.html). -->
       <a class="about-link" href="press-kit.html">Press kit →</a>
     </div>
   </section>
-  <!-- Open stretches between the sections, where the wordmark pattern shows
-       through as the page scrolls. -->
   <div class="section-gap" aria-hidden="true"></div>
   <section id="shows" aria-labelledby="shows-heading">
     <h2 id="shows-heading">Shows</h2>
-    <!-- The shows come from data/shows.json: shows.js fills the two lists
-         below from it, using the row template, and sorts each show into
-         upcoming or past by its date. Edit the JSON, not this markup. -->
     <ol class="show-list" id="upcoming-shows" hidden></ol>
     <p class="shows-none" id="no-upcoming">No upcoming shows right now. New dates soon.</p>
     <h3 class="subheading" id="past-heading" hidden>Past shows</h3>
@@ -228,9 +195,6 @@
   <div class="section-gap" aria-hidden="true"></div>
   <section id="press" aria-labelledby="press-heading">
     <h2 id="press-heading">Press</h2>
-    <!-- The press quotes come from data/press.json: press.js fills the
-         list below from it, newest first, using the row template. Edit the
-         JSON, not this markup. -->
     <ol class="press-list" id="press-list"></ol>
     <template id="press-row">
       <li class="press-item">
@@ -250,10 +214,7 @@
     </template>
   </section>
   <div class="section-gap section-gap-footer" aria-hidden="true"></div>
-  <!-- Footer: the band's links (music, then social and email), the booking
-       and press address, and the copyright. -->
   <footer id="footer">
-    <!-- From "music" and "social" in data/links.json (links.js). -->
     <ul class="footer-links" data-links="music social">
       <template><li><a><img alt=""></a></li></template>
     </ul>

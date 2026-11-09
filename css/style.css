@@ -12,8 +12,6 @@
   font-display: swap;
 }
 
-/* Jura (Google Fonts, SIL Open Font License), hosted with the site so
-   visitors' browsers don't contact Google. Latin and extended Latin. */
 @font-face {
   font-family: "Jura";
   src: url("../assets/fonts/Jura-Regular-latin.woff2") format("woff2");
@@ -32,25 +30,16 @@
 
 :root {
   --background: #2D2828;
-  /* Letter spacing for Midnight Motion text, the same as the araukaaria
-     wordmark (3.5% in Figma). */
   --tracking: 0.035em;
-  /* Where a section meets the wordmark pattern, its solid background fades
-     out over --about-fade instead of ending with a hard edge. The steps are
-     eased so there's no visible line where the fade ends. Used as
-     linear-gradient(<direction>, var(--fade-stops)): transparent at the
-     start, solid at the end. */
   --about-fade: min(12svh, 16vw);
 }
 
-/* Registered as a length so scripts can read it in pixels (menu.js). */
 @property --about-fade {
   syntax: "<length>";
   inherits: true;
   initial-value: 0px;
 }
 
-/* The fade steps, worked out from --about-fade. */
 :root {
   --fade-stops:
     rgba(45, 40, 40, 0) 0,
@@ -66,16 +55,10 @@ html, body {
   margin: 0;
 }
 
-/* No blue box flashing over links and buttons when tapped on phones: they
-   have their own hover and press effects. */
 html {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* The page scrolls: the logo fills the first screen (the hero) and the About
-   section and footer follow. overflow-x: clip prevents sideways scrolling
-   without making the body a second scroll area (a nested scroll area makes
-   trackpad and touch scrolling stick). */
 body {
   overflow-x: clip;
   display: flex;
@@ -84,13 +67,6 @@ body {
   background: var(--background);
 }
 
-/* Repeated wordmark behind the home page, in staggered rows. The
-   #svgView(viewBox(...)) part pads the 1952×149 wordmark out to a 1952×600
-   tile: no space between words in a row, only between rows. The second copy
-   is shifted half a tile to stagger the rows. --tile sets the word width,
-   opacity the strength. Pinned to the bottom and as tall as the screen with
-   the address bar hidden (lvh): on phones the bar slides away on the first
-   scroll, and a layer pinned to the top would jump up with it. */
 .home::before {
   --tile: 240px;
   content: "";
@@ -110,15 +86,6 @@ body {
   background-position: 0 0, calc(var(--tile) / 2) calc(var(--tile) * 300 / 1952);
 }
 
-/* Soft dark glow behind the logo, name and "out now" line, so the pattern
-   fades out around them: a circle behind the logo and rounded bands behind
-   the name and the line, blurred and sized from the logo, so they follow its
-   shape on every screen. The line's band fades in with the line after the
-   intro (see "intro" below). */
-/* --logo is the logo's width: sized from the smaller screen dimension so it
-   scales smoothly from phones to tablets to desktops, and leaves room for
-   the rest of the hero on short screens. A bit wider on phones, where half
-   the width looks small. */
 .hero-group {
   --logo: min(50vw, 35svh, 360px);
   position: relative;
@@ -191,10 +158,8 @@ body {
   filter: url(#logo-fx);
 }
 
-/* The name under the logo, as wide as the logo's circle (95% of the logo). */
 #wordmark {
   width: calc(var(--logo) * 0.95);
-  /* Fades to black with the page around the logo (see "charging" below). */
   filter: url(#word-fx) brightness(calc(1 - var(--charge, 0)));
 }
 
@@ -202,13 +167,6 @@ body {
   opacity: 0;
 }
 
-/* Hidden link behind the logo (logo-charge.js): clicking it over and over
-   fills a thin bar along the top of the screen and fades everything but the
-   logo's branch to black. --charge runs from 0 to 1. The shade and the bar
-   are fixed to the screen from inside the hero, and while charging the hero
-   is lifted over the rest of the page (navbar included), so the shade
-   covers it all and only the logo stands above it. No double-tap zoom or
-   text selection from the quick clicks. */
 #logo-mark {
   position: relative;
   z-index: 1;
@@ -262,8 +220,6 @@ html.charging .charge-bar {
   transition: opacity 0.2s, transform 0.2s, filter 0.2s;
 }
 
-/* On hover (or keyboard focus), zoom in and add the logo's red and blue
-   fringes. */
 a:focus-visible .button-media,
 button:focus-visible .button-media {
   opacity: 1;
@@ -284,7 +240,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Menu button, in the navbar; same style as the other icon buttons. */
 .corner-button {
   display: block;
   justify-self: end;
@@ -295,15 +250,10 @@ button:focus-visible .button-media {
   line-height: 0;
 }
 
-/* Focus is shown by the zoom and colour effect instead. */
 .corner-button:focus-visible {
   outline: none;
 }
 
-/* Menu: a column of icon buttons right under the menu button, the same size
-   and style. The music button opens a row to its left with the
-   streaming links (menu.js). Uses the browser's popover: Escape or a click
-   anywhere else closes it. */
 #menu {
   position: fixed;
   inset: auto;
@@ -316,9 +266,6 @@ button:focus-visible .button-media {
   overflow: visible;
 }
 
-/* Once the navbar has its line (scrolled), the menu starts as far below the
-   line as the close button sits above it, so the line runs midway between
-   the two buttons: padding, line (1px), padding. */
 .nav-scrolled #menu {
   top: calc(var(--nav-pad-y) * 3 + 44px + 1px);
 }
@@ -333,7 +280,6 @@ button:focus-visible .button-media {
   transition: opacity 0.2s, transform 0.2s;
 }
 
-/* Fade and slide down from the menu button. */
 @starting-style {
   #menu:popover-open {
     opacity: 0;
@@ -341,7 +287,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Each button has a dark fill so it stays readable over the photo or text. */
 .menu-icon {
   display: block;
   padding: 0;
@@ -361,10 +306,6 @@ button:focus-visible .button-media {
   height: 44px;
 }
 
-/* Names next to the column buttons, shown while the menu is open (phones have
-   no hover to reveal them). A button's name hides while its row of links is
-   open. The names (here and in the rows) sit inside their button or link, so
-   tapping a name works like tapping its button. */
 #menu > .menu-icon,
 .menu-item > .menu-icon {
   position: relative;
@@ -389,15 +330,10 @@ button:focus-visible .button-media {
   transform: translateY(-50%);
 }
 
-
-/* While a row of links is open its own names take this space, so the
-   column's names hide. */
 #menu:has(.menu-sub:not([hidden])) .menu-label {
   display: none;
 }
 
-/* While a row is open, the column's other buttons are dimmed so the open one
-   and its links stand out. */
 #menu > .menu-icon,
 .menu-item > .menu-icon {
   transition: opacity 0.2s;
@@ -408,9 +344,6 @@ button:focus-visible .button-media {
   opacity: 0.35;
 }
 
-/* Names under the buttons in the music row, set on a diagonal
-   so they fit: each rises from bottom-left to top-right and ends just under
-   its button. */
 .menu-sub .menu-icon {
   position: relative;
 }
@@ -432,14 +365,10 @@ button:focus-visible .button-media {
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0.85;
-  /* The middle of the name's end sits right under the button's centre. */
   transform: translateY(-50%) rotate(var(--angle));
   transform-origin: right center;
 }
 
-/* A button's name lights up with it: full strength, a slight zoom and the
-   same red and blue fringes (as text shadows, so they follow the letters
-   rather than the name's box). */
 .menu-label,
 .menu-sub-label {
   transition: opacity 0.2s, transform 0.2s, text-shadow 0.2s;
@@ -469,9 +398,6 @@ button:focus-visible .button-media {
   position: relative;
 }
 
-/* The streaming links, in a row to the left of the music button, centred on
-   it vertically. ("translate" does the centring, so the slide-in can use
-   "transform".) */
 .menu-sub {
   position: absolute;
   top: 50%;
@@ -481,9 +407,6 @@ button:focus-visible .button-media {
   flex-direction: row-reverse;
   flex-wrap: wrap;
   gap: 0.75rem;
-  /* The row fills outwards from its button (the first link sits next to it).
-     On very narrow phones it wraps onto a second line instead of running off
-     the screen. */
   width: max-content;
   max-width: calc(100vw - 2 * var(--nav-pad) - 44px - 0.75rem);
   opacity: 1;
@@ -502,8 +425,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Hidden on screen, still read out by screen readers (the menu's icon
-   names). */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -513,7 +434,6 @@ button:focus-visible .button-media {
   white-space: nowrap;
 }
 
-/* "Canto Oscuro, out now" line under the logo: plays the song in place. */
 #cta {
   display: flex;
   align-items: center;
@@ -551,8 +471,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* The icon and the equaliser take up the same fixed space, so swapping them
-   doesn't change the line's size and nothing around it moves. */
 #cta {
   height: 32px;
 }
@@ -568,8 +486,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-/* While the Spotify player is open the line is just a quiet "now playing"
-   label: no play icon, not clickable, a small equaliser instead. */
 #cta.now-playing {
   cursor: default;
   opacity: 0.6;
@@ -607,7 +523,6 @@ button:focus-visible .button-media {
   animation-delay: -0.6s;
 }
 
-/* Bars hold still while paused, and for visitors who prefer less motion. */
 #cta.paused .cta-eq i {
   animation-play-state: paused;
 }
@@ -649,8 +564,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Spotify player (trial), centred at the bottom. Spotify draws the card
-   itself inside the iframe. */
 #spotify-bar {
   position: fixed;
   right: 0;
@@ -666,7 +579,6 @@ button:focus-visible .button-media {
   color: #E2FDE1;
 }
 
-/* Hidden until the "out now" line is clicked (spotify.js adds "open"). */
 #spotify-bar:not(.open) {
   visibility: hidden;
 }
@@ -683,13 +595,11 @@ button:focus-visible .button-media {
   border-radius: 12px;
 }
 
-/* Same size and outline as the menu button. */
 .skip-button svg {
   width: 57px;
   height: 57px;
 }
 
-/* Small close button above the right end of the player. */
 #spotify-close {
   position: absolute;
   right: 0;
@@ -712,8 +622,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* The Spotify bar's previous, next and close buttons: zoom in and add the
-   logo's red and blue fringes on hover, like the other buttons. */
 .skip-button {
   display: block;
   padding: 0;
@@ -746,9 +654,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Until the logo's entry animation is over, only the logo shows; then the
-   navbar and the "out now" line fade in one after the other. The
-   "intro" and "revealed" classes are set by index.html and glitch.js. */
 .intro #navbar,
 .intro #cta,
 .intro .hero-glow-cta {
@@ -771,37 +676,21 @@ button:focus-visible .button-media {
   }
 }
 
-/* overflow-x: clip keeps the glows behind the hero (which reach past the
-   "out now" line) from sticking out at the sides on phones. The clip on
-   <body> alone isn't enough: the browser applies it to the whole window, and
-   Android Chrome then still widens the page and zooms out. */
 .home #logo {
   overflow-x: clip;
   width: 100%;
-  /* Shorter than the screen by the gap below it (15svh) and half of the
-     About section's top fade, so a strip of letters and then a hint of
-     About (its photo's colour just coming through) show at the bottom
-     and invite scrolling. */
   min-height: calc(85vh - var(--about-fade) / 2);
   min-height: calc(85svh - var(--about-fade) / 2);
   flex: none;
 }
 
-/* The logo, name and "out now" line sit in the middle of the screen
-   rather than of the (shorter) hero, by padding its top with the room it
-   leaves at the bottom. The padding is part of the hero's height
-   (border-box), so the hint of About below stays where it is. */
 .home #logo {
   box-sizing: border-box;
   padding-top: calc(15vh + var(--about-fade) / 2);
   padding-top: calc(15svh + var(--about-fade) / 2);
 }
 
-/* The Konservatoorium live photo behind the hero, darkened in the
-   page's colour like the share image. It fades out at the bottom (a mask),
-   so the wordmark pattern shows through in the gap below. */
 .home #logo {
-  /* Where the photo starts (see ::before below). */
   --photo-top: calc(2rem * 2 + 44px + 1rem - var(--about-fade) / 2);
   position: relative;
   isolation: isolate;
@@ -810,20 +699,11 @@ button:focus-visible .button-media {
 .home #logo::before {
   content: "";
   position: absolute;
-  /* It starts below a strip of the wordmark pattern at the top, just tall
-     enough to wrap the menu button (the navbar's padding above and below
-     it, before scrolling), so the photo sits between letters above and
-     below and the button stands on the pattern. The photo starts half its
-     fade earlier, so the middle of the fade (where it reads as the edge)
-     is the same distance below the button as the space above it,
-     plus a little extra room (1rem). */
   inset: var(--photo-top) 0 0;
   z-index: -1;
   background:
     linear-gradient(rgba(45, 40, 40, 0.55), rgba(45, 40, 40, 0.55)),
     image-set(url("../assets/photos/web/konservatoorium-1920.webp") type("image/webp"), url("../assets/photos/web/konservatoorium-1920.jpg") type("image/jpeg")) center / cover;
-  /* The photo fades in at the top and out at the bottom over the same
-     short distance as the other fades (--about-fade), eased like them. */
   mask-image: linear-gradient(to bottom,
     transparent 0,
     rgba(0, 0, 0, 0.05) calc(var(--about-fade) * 0.15),
@@ -841,21 +721,12 @@ button:focus-visible .button-media {
     transparent 100%);
 }
 
-/* Portrait screens get their own upright crop of the photo (Pepi on the
-   left, Lisanna on the right, the drums at the bottom), lighter at the top
-   and darker toward the "out now" line so it reads over the drums. The
-   logo's own dark glow keeps it clear in the middle. */
 @media (max-width: 900px) {
   .home #logo {
     --photo-top: calc(1.25rem * 2 + 44px + 1rem - var(--about-fade) / 2);
   }
 }
 
-/* The photo reaches a little further down, into the top half of the gap
-   below the hero, so it frames the "out now" line. --photo-extend is how
-   much further it reaches than that, to keep the open stretch of letters
-   above About short; it only uncovers more of the photo's bottom, the
-   photo itself stays put (see the landscape rule). */
 .home #logo {
   --photo-extend: 5svh;
 }
@@ -864,9 +735,6 @@ button:focus-visible .button-media {
   bottom: calc(-7svh - var(--photo-extend));
 }
 
-/* Desktop: further still, so less of the gap shows below the photo. The
-   photo is centred in its box, so it is lifted by half of --photo-extend
-   to stay where it was. */
 @media (orientation: landscape) {
   .home #logo::before {
     bottom: calc(-13svh - var(--photo-extend));
@@ -886,10 +754,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* About: photo on the left from the page edge, text on the right (stacked on
-   phones). A solid background keeps the wordmark pattern out from behind the
-   text. It sits on its own layer (::before, below) so it can fade in with
-   the photo and text. */
 #about {
   position: relative;
   isolation: isolate;
@@ -909,10 +773,6 @@ button:focus-visible .button-media {
   background: var(--background);
 }
 
-/* Photo carousel: the slides fill the photo area on top of each other and
-   cross-fade (about.js moves "is-active"). The area's size comes from the
-   section (wide screens) or a fixed shape (phones), never from the photos, so
-   photos of any shape fit and nothing moves when they change. */
 .about-photo {
   position: relative;
   min-height: 100%;
@@ -930,9 +790,6 @@ button:focus-visible .button-media {
   opacity: 1;
 }
 
-/* What to keep when a photo is cropped comes from its "position" in
-   data/photos.json (about.js sets --position, and --position-portrait for
-   a photo's portrait crop). */
 .about-slide img {
   display: block;
   width: 100%;
@@ -941,9 +798,6 @@ button:focus-visible .button-media {
   object-position: var(--position, center);
 }
 
-/* Arrows and indicators along the bottom of the photo, above the dark
-   overlay, with the photographer's credit on its own line under them.
-   Same thin outline style as the other buttons. */
 .carousel-controls {
   position: absolute;
   right: 0;
@@ -958,8 +812,6 @@ button:focus-visible .button-media {
   color: #E2FDE1;
 }
 
-/* The credit: small and faint, in the same type as the authors under the
-   press quotes. */
 .carousel-credit {
   flex-basis: 100%;
   margin: 0;
@@ -973,8 +825,6 @@ button:focus-visible .button-media {
   text-transform: uppercase;
 }
 
-/* Its own small glow, wrapped around the text, so it stays readable over
-   bright photos too. */
 .carousel-credit::before {
   content: "";
   position: absolute;
@@ -987,8 +837,6 @@ button:focus-visible .button-media {
   pointer-events: none;
 }
 
-/* The whole credit links to the photographer's page: faint like the rest of the
-   credit, lighting up like the other links. */
 .carousel-credit a {
   color: inherit;
   text-decoration: none;
@@ -1006,8 +854,6 @@ button:focus-visible .button-media {
     1.5px -1px 0 rgba(255, 0, 0, 0.6);
 }
 
-/* A soft dark glow behind the arrows and indicators, like the one behind
-   the logo, so they stay readable over bright photos. */
 .carousel-controls::before {
   content: "";
   position: absolute;
@@ -1024,9 +870,6 @@ button:focus-visible .button-media {
   pointer-events: none;
 }
 
-/* Phones and tablets: the controls sit a little higher, and the credit
-   leaves their row to sit halfway between them and the photo's bottom
-   edge (--below is the room under the controls). */
 @media (max-width: 900px) {
   .carousel-controls {
     --below: 2.875rem;
@@ -1043,8 +886,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Wide screens: the credit leaves the controls for the photo's bottom-left
-   corner, like a watermark, where the photo fades into the page. */
 @media (min-width: 901px) {
   .carousel-controls {
     bottom: 1.5rem;
@@ -1100,8 +941,6 @@ button:focus-visible .button-media {
   gap: 0.5rem;
 }
 
-/* Thin lines; the current photo's is brighter and longer. The button is
-   taller than the line so it's easy to tap. */
 .carousel-dots button {
   display: block;
   width: 18px;
@@ -1132,10 +971,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Dark overlay in the background colour, stronger toward the text, so the
-   photo sits in the page instead of glowing out of it. On wide screens the
-   photo reaches the bottom of the section, so it also fades out there into
-   the open stretch below. */
 .about-photo::after {
   content: "";
   position: absolute;
@@ -1145,16 +980,6 @@ button:focus-visible .button-media {
     linear-gradient(to right, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
 }
 
-/* The top of the section fades in over the wordmark pattern instead of
-   starting with a hard edge: the photo through a mask, the section's solid
-   background through its own gradient (--fade-stops), both over the same
-   distance (--about-fade) so they match. */
-/* The section's own background sits only behind the text column: the
-   photo column needs none (the photo fades in over the pattern through its
-   mask). It reaches solid sooner than the photo's mask (60% of the
-   distance): the bright photo hides the pattern sooner than the dark
-   background does, so this way the letters fade out at the same point on
-   both sides. */
 #about::before {
   background:
     linear-gradient(to bottom,
@@ -1168,8 +993,6 @@ button:focus-visible .button-media {
     linear-gradient(var(--background), var(--background)) 100% calc(var(--about-fade) * 0.6) / 50% 100% no-repeat;
 }
 
-/* Phones: the text sits under the photo, so the background only needs to
-   start once the photo is fully in (below its top fade). */
 @media (max-width: 900px) {
   #about::before {
     background: linear-gradient(var(--background), var(--background)) 0 var(--about-fade) / 100% 100% no-repeat;
@@ -1190,7 +1013,6 @@ button:focus-visible .button-media {
 .about-text {
   align-self: center;
   max-width: 60ch;
-  /* More room on top, clear of the navbar. */
   padding: 9rem clamp(2rem, 6vw, 6rem) 1.5rem;
   font-family: "Jura", system-ui, sans-serif;
   font-size: 1.1rem;
@@ -1198,7 +1020,6 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
-/* Same style as the menu's button names, larger. */
 .about-text h2 {
   margin: 0 0 1.25rem;
   font-family: "Midnight Motion", system-ui, sans-serif;
@@ -1218,8 +1039,6 @@ button:focus-visible .button-media {
   font-style: normal;
 }
 
-/* The link to The name in the About text: the text's own
-   colour with a thin, faint underline, lighting up like the other links. */
 .about-inline-link {
   color: inherit;
   text-decoration: underline;
@@ -1240,10 +1059,6 @@ button:focus-visible .button-media {
     1.5px -1px 0 rgba(255, 0, 0, 0.6);
 }
 
-/* Live videos under the About text, two side by side (stacked on phones).
-   Each is a 16:9 cover image, slightly darkened, with a play button in the
-   same thin style as the other buttons; pressed, it becomes YouTube's player
-   (video.js). The captions are set like the press sources. */
 .about-videos {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1270,9 +1085,6 @@ button:focus-visible .button-media {
   color: #E2FDE1;
 }
 
-/* Muted colour, like the colour photos in the carousel, under a light
-   veil of the page background. On hover or focus the full colour comes
-   back. */
 .video-cover img {
   display: block;
   width: 100%;
@@ -1290,7 +1102,6 @@ button:focus-visible .button-media {
   transition: opacity 0.4s;
 }
 
-/* A darker, more contrasty cover (Los Fuegos No Descansan): gentler. */
 .video-cover-soft img {
   filter: saturate(0.75) contrast(0.9) brightness(1.08);
 }
@@ -1359,7 +1170,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-/* Title and place on one line, with a middle dot between them. */
 .video-place::before {
   content: "· ";
 }
@@ -1380,8 +1190,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Small heading inside a section (VIDEOS, BAND, PAST SHOWS), in the same type as
-   the section titles. */
 .subheading {
   margin: 2.5rem 0 0.75rem;
   font-family: "Midnight Motion", system-ui, sans-serif;
@@ -1392,8 +1200,6 @@ button:focus-visible .button-media {
   text-transform: uppercase;
 }
 
-/* Line-up: one person per line at the paragraph size, names brighter than
-   the instruments. The guest player sits a little apart. */
 .about-text .about-lineup {
   margin: 0 0 1.25rem;
   padding: 0;
@@ -1401,7 +1207,6 @@ button:focus-visible .button-media {
   color: rgba(226, 253, 225, 0.55);
 }
 
-/* Lines that wrap are indented, so each person still reads as one entry. */
 .about-lineup li {
   padding-left: 1.25em;
   text-indent: -1.25em;
@@ -1411,12 +1216,10 @@ button:focus-visible .button-media {
   color: rgba(226, 253, 225, 0.9);
 }
 
-/* The instruments, smaller than the names so each person fits on one line. */
 .lineup-role {
   font-size: 0.8em;
 }
 
-/* Narrow phones: a little smaller still, so nobody wraps. */
 @media (max-width: 380px) {
   .about-text .about-lineup {
     font-size: 0.95rem;
@@ -1475,7 +1278,6 @@ button:focus-visible .button-media {
     aspect-ratio: 3 / 2;
   }
 
-  /* Text sits under the photo here, so no fade at its bottom. */
   .about-photo::after {
     background: linear-gradient(to bottom, rgba(45, 40, 40, 0.15), rgba(45, 40, 40, 0.45));
   }
@@ -1486,13 +1288,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Open stretch between About and Shows: no background of its own, so the
-   wordmark pattern shows through, with the sections on either side fading
-   into it (About's solid background above, Shows' below). */
-/* Every gap shows the same stretch of plain letters (15svh) between two
-   fades. Next to the Shows, Press and footer sections, which have solid
-   backgrounds, the gap holds those fades itself, so it is taller by two
-   fades. */
 .section-gap {
   width: 100%;
   height: calc(15svh + var(--about-fade) * 2);
@@ -1502,20 +1297,11 @@ button:focus-visible .button-media {
     linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
 }
 
-/* The gap under the hero: no fades of its own, since the hero's photo
-   fades out and the About section fades in by themselves, so only the
-   stretch of plain letters. */
 .section-gap-after-hero {
   height: 15svh;
   background: none;
 }
 
-/* The gaps after About and Shows, and the one before the footer, all show
-   the same stretch of letters as the strip above the hero (--gap-room: the
-   navbar's padding twice, the menu button and 1rem), measured to the middle
-   of each fade, where it reads as the edge. The gap before the footer has
-   a fade only at the top (from the Press section above) and a hard edge at
-   the bottom (the footer's line), so it is half a fade shorter. */
 .section-gap {
   --gap-room: calc(2rem * 2 + 44px + 1rem);
   height: calc(var(--gap-room) + var(--about-fade));
@@ -1526,8 +1312,6 @@ button:focus-visible .button-media {
   background: linear-gradient(to top, var(--fade-stops)) top / 100% var(--about-fade) no-repeat;
 }
 
-/* The top of a page of its own (the-name.html), under the navbar: the same
-   stretch of letters, then a fade only at the bottom, into the section. */
 .section-gap-page-top {
   height: calc(var(--gap-room) + var(--about-fade));
   background: linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
@@ -1539,15 +1323,10 @@ button:focus-visible .button-media {
   }
 }
 
-/* The gap under the hero keeps its own height (it comes after the rule
-   above so it wins). */
 .section-gap-after-hero {
   height: 15svh;
 }
 
-/* The name, Shows and Press: in the same type as the About section. The
-   background runs the full width; the side padding keeps the content at
-   most 60rem wide, centred. */
 #name,
 #press-kit,
 #shows,
@@ -1562,11 +1341,6 @@ button:focus-visible .button-media {
   line-height: 1.7;
 }
 
-/* Following a menu link to Shows or Press stops with the section's top
-   edge, and the fade above it, just under the navbar (at its slim, scrolled
-   height), rather than tucking the edge and padding under it so the heading
-   lands against the navbar's line. The middle of the fade sits at the line:
-   that is where it reads as the edge (see the gaps above). */
 #shows,
 #press {
   scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + var(--about-fade) / 2);
@@ -1585,8 +1359,6 @@ button:focus-visible .button-media {
   text-transform: uppercase;
 }
 
-/* The name: Pepi's story in a centred column at a comfortable reading
-   width, opened by a short italic line. */
 #name h1,
 .name-text {
   max-width: 46rem;
@@ -1605,15 +1377,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-
-/* From the tree to the logo, set into the story like pictures in a book:
-   each picture beside the paragraph it belongs to, on alternate sides
-   (left, right, left), the paragraph centred on the picture itself, with
-   the caption hanging just below the picture (out of the centring, so the
-   rows leave room under them for it). The photos are
-   cropped a little shorter so they sit level with their paragraphs, and
-   their corners are rounded like the square buttons'; the logo sits in a
-   thin square frame, as thin as the lines between the shows. */
 .name-spread {
   display: grid;
   grid-template-columns: 32% minmax(0, 1fr);
@@ -1680,10 +1443,6 @@ button:focus-visible .button-media {
   border: 1px solid rgba(226, 253, 225, 0.2);
 }
 
-/* Phones: each picture above its paragraph, the full width of the screen,
-   edge to edge with square corners, while its caption stays in line with
-   the text. The logo's frame keeps only its top and bottom lines, as the
-   sides meet the screen's. */
 @media (max-width: 640px) {
   .name-spread,
   .name-spread-right,
@@ -1720,10 +1479,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Press kit (press-kit.html): one long section, its parts under headings a
-   size down from the page title, with a row of jump links at the top. Text
-   links are underlined thinly; the buttons and the press list look as they
-   do on the home page. */
 .kit-intro,
 .kit-text {
   max-width: 46rem;
@@ -1777,7 +1532,6 @@ button:focus-visible .button-media {
   margin: 0;
 }
 
-/* The "Save as PDF" buttons, styled like the links next to them. */
 .kit-print {
   margin: 0 1.5rem 0 0;
   padding: 0;
@@ -1807,13 +1561,10 @@ button:focus-visible .button-media {
   margin-right: 1.5rem;
 }
 
-/* Only on paper (see the print styles at the end). */
 .print-only {
   display: none;
 }
 
-/* Each part's heading, with a thin line above it; jump links stop with it
-   just under the slim navbar. */
 .kit-heading {
   margin: 4.5rem 0 1.5rem;
   padding-top: 1.5rem;
@@ -1837,7 +1588,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-/* Facts: the label in small capitals on the left, the fact beside it. */
 .kit-facts {
   margin: 0;
 }
@@ -1882,7 +1632,6 @@ button:focus-visible .button-media {
   opacity: 0.6;
 }
 
-/* Photos and logos: two to a row, with the credit and links under each. */
 .kit-photos,
 .kit-logos {
   display: grid;
@@ -1937,9 +1686,6 @@ button:focus-visible .button-media {
   height: auto;
 }
 
-/* Rider: the show info and equipment in columns of small titled lists, the
-   stage plot full width, and the input list as a table with the same thin
-   lines as the shows. */
 .rider-groups {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
@@ -2005,8 +1751,6 @@ button:focus-visible .button-media {
 }
 
 @media (max-width: 640px) {
-  /* The jump links stay on one line, scrolling sideways if they run out of
-     room. */
   .kit-contents {
     flex-wrap: nowrap;
     gap: 1rem;
@@ -2036,11 +1780,9 @@ button:focus-visible .button-media {
   margin: 0;
   padding: 0;
   list-style: none;
-  /* Thin lines between the rows, as thin as the icon outlines. */
   border-top: 1px solid rgba(226, 253, 225, 0.2);
 }
 
-/* Date, event, place, and the tickets button in a fixed last column. */
 .show {
   display: grid;
   grid-template-columns: 10rem minmax(0, 1fr) auto 32px;
@@ -2050,14 +1792,11 @@ button:focus-visible .button-media {
   border-bottom: 1px solid rgba(226, 253, 225, 0.2);
 }
 
-/* Rows not yet revealed by "Load more" (their grid would show them). */
 .show[hidden],
 .press-item[hidden] {
   display: none;
 }
 
-/* Rows revealed by "Load more" fade and rise in like the menu, one after
-   another (load-more.js sets --i to each row's place in the batch). */
 .is-new {
   animation: reveal 0.35s ease backwards;
   animation-delay: calc(var(--i) * 60ms);
@@ -2080,8 +1819,6 @@ button:focus-visible .button-media {
   opacity: 0.85;
 }
 
-/* Smaller and lighter than the event, in the date's typeface, so the event
-   and place fit on one line on phones. */
 .show-place {
   font-family: "Midnight Motion", system-ui, sans-serif;
   font-size: 0.75rem;
@@ -2093,29 +1830,20 @@ button:focus-visible .button-media {
   opacity: 0.55;
 }
 
-/* Shown while there are no upcoming dates. */
 .shows-none {
   margin: 0 0 3.5rem;
   opacity: 0.85;
 }
 
-/* Same room under the upcoming list as under the message it replaces. */
 #upcoming-shows {
   margin-bottom: 3.5rem;
 }
 
-/* Upcoming shows: the place matters as much as the event here (is it near
-   me?), so it is as bright and a bit larger than in the past list. */
 #upcoming-shows .show-place {
   font-size: 0.85rem;
   opacity: 0.85;
 }
 
-/* Tickets: a small ticket icon in the same thin outlined style as the
-   other icon buttons, on every upcoming show so those rows all look the
-   same (past shows have none). It links to the ticket shop on the ones that
-   have one; on the others it is faded and does nothing (shows.js). The press list's "read" buttons look
-   the same. */
 .show-tickets,
 .press-link {
   display: block;
@@ -2157,9 +1885,6 @@ button:focus-visible .button-media {
   color: rgba(226, 253, 225, 0.2);
 }
 
-/* Working tickets buttons wobble and grow a little every few seconds, to
-   invite a click. They hold still while pointed at or focused (the hover
-   effect above takes over), and for visitors who prefer less motion. */
 .show-tickets[href] {
   animation: tickets-nudge 4s ease-in-out 1s infinite;
 }
@@ -2201,7 +1926,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Past shows are history: a step quieter than upcoming ones. */
 #past-shows .show > * {
   opacity: 0.7;
 }
@@ -2210,8 +1934,6 @@ button:focus-visible .button-media {
   opacity: 0.45;
 }
 
-/* Under the past shows: reveals the next few (shows.js). Looks like the
-   other small text links. */
 .load-more {
   margin-top: 1.5rem;
   padding: 0;
@@ -2220,10 +1942,6 @@ button:focus-visible .button-media {
   cursor: pointer;
 }
 
-/* Phones: the same columns as on wide screens, narrower. The date stacks
-   (day and month over the year), the place moves under the event, and the
-   tickets button stays at the end, so the dates, events and buttons still
-   line up down the list. */
 @media (max-width: 640px) {
   .show {
     grid-template-columns: 4.5rem minmax(0, 1fr) 32px;
@@ -2261,7 +1979,6 @@ button:focus-visible .button-media {
     text-align: left;
   }
 
-  /* The venue, when there is one, on its own line over the city. */
   .show-venue {
     display: block;
   }
@@ -2275,9 +1992,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Press: one row per quote, laid out like the shows: the date, the quote
-   (with an English translation under it when it isn't in English) and the
-   outlet and writer, and a button to the full piece. */
 .press-list {
   margin: 0;
   padding: 0;
@@ -2316,7 +2030,6 @@ button:focus-visible .button-media {
   opacity: 0.9;
 }
 
-/* The translation: upright and quieter than the quote it translates. */
 .press-translation {
   margin: -0.15rem 0 0;
   font-size: 0.9rem;
@@ -2347,7 +2060,6 @@ button:focus-visible .button-media {
   content: "— ";
 }
 
-/* Phones: the same columns, narrower, as in the shows list. */
 @media (max-width: 640px) {
   .press-item {
     grid-template-columns: 4.5rem minmax(0, 1fr) 32px;
@@ -2359,7 +2071,6 @@ button:focus-visible .button-media {
     line-height: 1.4;
   }
 
-  /* Day and month over the year, the year fainter. */
   .press-date span {
     display: block;
   }
@@ -2374,10 +2085,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Footer: three centred rows: the band's links as small icon buttons, the
-   booking and press address, and the site version with the copyright
-   (quietest). While the Spotify player is open it gets extra room at the
-   bottom so the player doesn't cover it. */
 #footer {
   display: flex;
   flex-direction: column;
@@ -2386,7 +2093,6 @@ button:focus-visible .button-media {
   width: 100%;
   box-sizing: border-box;
   padding: 2.25rem 1.5rem 2rem;
-  /* Same colour as the icon outlines. */
   border-top: 1px solid rgba(226, 253, 225, 0.85);
   background: var(--background);
   color: rgba(226, 253, 225, 0.7);
@@ -2401,7 +2107,6 @@ button:focus-visible .button-media {
 }
 
 .footer-links {
-  /* --gap between the buttons, --split the extra room between the groups. */
   --gap: 0.75rem;
   --split: 1.25rem;
   display: flex;
@@ -2424,10 +2129,6 @@ button:focus-visible .button-media {
   transition: transform 0.2s, filter 0.2s;
 }
 
-/* Two groups: the music links, then the social ones (from Instagram on, the
-   first with "links-group-start" from links.js), a
-   little further apart, with a thin bar midway between them like the ones
-   between the desktop menu's names. */
 .footer-links .links-group-start {
   position: relative;
   margin-left: var(--split);
@@ -2444,8 +2145,6 @@ button:focus-visible .button-media {
   translate: -50% -50%;
 }
 
-/* Phones: a little smaller, so all of them fit on one row; smaller again,
-   and closer together, on the narrowest ones (down to 320px). */
 @media (max-width: 440px) {
   .footer-links {
     --gap: 0.5rem;
@@ -2475,8 +2174,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* The zoom and the red and blue fringes go on the icon alone, as in the
-   menu, so the name above it stays clean. */
 #footer .footer-links a:focus-visible {
   filter: none;
 }
@@ -2501,8 +2198,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* Each button's name, from its aria-label, above it while it's hovered or
-   focused; the same as the menu's names on phones, lit like a hovered one. */
 .footer-links a {
   position: relative;
 }
@@ -2510,9 +2205,6 @@ button:focus-visible .button-media {
 .footer-links a::after {
   content: attr(aria-label);
   position: absolute;
-  /* Midway between the footer's top line and the buttons: the footer's
-     padding above them (2.25rem) less the name's height (1rem of text and
-     0.7rem of padding), halved. */
   bottom: calc(100% + (2.25rem - 1.7rem) / 2);
   left: 50%;
   padding: 0.35rem 0.6rem;
@@ -2547,7 +2239,6 @@ button:focus-visible .button-media {
   }
 }
 
-/* "Booking & press" in small capitals, then the address. */
 .footer-contact {
   display: flex;
   flex-wrap: wrap;
@@ -2606,8 +2297,6 @@ body:has(#spotify-bar.open) #footer {
   }
 }
 
-/* Gentle fade-in as the section scrolls into view (about.js adds these
-   classes; skipped for visitors who prefer less motion). */
 #about.will-reveal .about-photo,
 #about.will-reveal .about-text {
   opacity: 0;
@@ -2615,8 +2304,6 @@ body:has(#spotify-bar.open) #footer {
   transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-/* The background behind the text fades in with them (without moving), so
-   it doesn't show on its own under the hero during the intro. */
 #about.will-reveal::before {
   opacity: 0;
   transition: opacity 0.9s ease;
@@ -2626,9 +2313,6 @@ body:has(#spotify-bar.open) #footer {
   opacity: 1;
 }
 
-/* about.js only runs once the page has loaded, so until the intro is over
-   About is hidden here too: otherwise it shows for a moment on load, before
-   the script hides it for its fade-in. */
 .intro #about:not(.in-view)::before,
 .intro #about:not(.in-view) .about-photo,
 .intro #about:not(.in-view) .about-text {
@@ -2645,15 +2329,6 @@ body:has(#spotify-bar.open) #footer {
   transform: none;
 }
 
-/* Sticky navbar: the small wordmark on the left, the menu button on the
-   right (on desktop: the names on the left, the wordmark in the middle and
-   the social links on the right; see below). Transparent over the hero (its wordmark hidden, since the big one is
-   right there); once the big logo has scrolled away it gets a dark
-   background, tightens, and the wordmark fades in. menu.js sets
-   "nav-scrolled" on <html>. --nav-pad is the space at the navbar's sides,
-   --nav-pad-y above and below it (less once it has its background, so the
-   bar stays slim); the menu (#menu) is placed from them so it always opens
-   right under the button. */
 html {
   --nav-pad: 2rem;
   --nav-pad-y: 2rem;
@@ -2697,7 +2372,6 @@ html.nav-scrolled {
   filter: url(#word-fx);
 }
 
-/* The social links show in the navbar on desktop only (see below). */
 .navbar-social {
   display: none;
 }
@@ -2708,7 +2382,7 @@ html.nav-scrolled {
 }
 
 .nav-scrolled #navbar {
-  border-bottom-color: rgba(226, 253, 225, 0.85); /* same colour as the icon outlines */
+  border-bottom-color: rgba(226, 253, 225, 0.85);
   background-color: rgba(45, 40, 40, 0.92);
   backdrop-filter: blur(6px);
 }
@@ -2718,12 +2392,6 @@ html.nav-scrolled {
   visibility: visible;
 }
 
-/* Soft dark glows, like the ones behind the logo and the carousel controls,
-   so the menu stays readable over bright photos and the scrolling pattern.
-   They sit behind the navbar's buttons and the open menu. The first is a
-   small round one behind the menu button, until the navbar has its own
-   dark background; the second spreads from the top-right corner while the
-   menu is open, behind the column of buttons, their names and the rows. */
 #navbar::before,
 #navbar::after {
   content: "";
@@ -2783,7 +2451,6 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Scrolls smoothly to a section when its link is clicked. */
 @media (prefers-reduced-motion: no-preference) {
   html.home-page {
     scroll-behavior: smooth;
@@ -2802,8 +2469,6 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Phones: the names under the music row are smaller and
-   steeper, so the last (leftmost) one, SoundCloud, stays on screen. */
 @media (max-width: 640px) {
   .menu-sub-label {
     --angle: -74deg;
@@ -2811,37 +2476,25 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Very narrow phones: the music row's buttons sit a little closer together,
-   so all of them fit on one line at full size. */
 @media (max-width: 360px) {
   .menu-sub {
     gap: 0.5rem;
   }
 
-  /* Keeps "Canto Oscuro · Out now" on one line. */
   #cta {
     white-space: nowrap;
   }
 }
 
-/* Desktop: no menu button; the menu's first level sits in the navbar as a
-   row of names, without icons, separated by thin vertical bars. The music
-   name opens its links in a dropdown under it (also names only). The menu stays a popover in the markup (for phones), so it is
-   shown here without being opened. */
 @media (min-width: 901px) {
   #menu-toggle {
     display: none;
   }
 
-  /* The same room at the sides once sticky as before, so the names and the
-     social buttons keep clear of the screen's edges and don't shift. */
   html.nav-scrolled {
     --nav-pad: 2rem;
   }
 
-  /* Keeps the navbar as tall as before now that the menu button, which set
-     its height, is hidden. Three columns: the names (placed over the first,
-     see #menu below), the wordmark in the middle, the social links. */
   #navbar {
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: 44px;
@@ -2869,14 +2522,12 @@ body:has(#menu:popover-open) #navbar::after {
     line-height: 0;
   }
 
-  /* As big as the footer's buttons, and as far apart. */
   .navbar-social img {
     width: 36px;
     height: 36px;
     transition: transform 0.2s, filter 0.2s;
   }
 
-  /* The zoom and red and blue fringes of the footer's buttons. */
   .navbar-social a:focus-visible {
     outline: none;
   }
@@ -2916,7 +2567,6 @@ body:has(#menu:popover-open) #navbar::after {
     height: 100%;
   }
 
-  /* The bar between two names. */
   #menu > * + *::before {
     content: "";
     width: 1px;
@@ -2946,8 +2596,6 @@ body:has(#menu:popover-open) #navbar::after {
     position: static;
     padding: 0;
     background: none;
-    /* A little bigger than on phones, so the names hold their own next to
-       the social buttons on the right. */
     font-size: 1.15rem;
     transform: none;
     transform-origin: center;
@@ -2957,7 +2605,6 @@ body:has(#menu:popover-open) #navbar::after {
     transform: scale(1.08);
   }
 
-  /* The dropdown: a column of names under its button. */
   .menu-sub {
     top: calc(100% + 0.25rem);
     right: auto;
@@ -2993,16 +2640,10 @@ body:has(#menu:popover-open) #navbar::after {
     transform: scale(1.08);
   }
 
-  /* No menu button, so no glow behind it. */
   #navbar::before {
     display: none;
   }
 
-  /* A soft black vignette behind each name and social button, so it stays readable over the
-     hero. On the home page it fades in only once the hero's photo has
-     scrolled up behind the names (over the strip of letters above it, it
-     isn't needed; menu.js sets "nav-over-photo" on <html>), and fades out
-     again once the navbar has its own background. */
   #menu .menu-label {
     position: relative;
     inset: auto;
@@ -3030,7 +2671,6 @@ body:has(#menu:popover-open) #navbar::after {
     opacity: 0;
   }
 
-  /* Hidden during the logo's entry animation, like the navbar. */
   .intro #menu {
     visibility: hidden;
   }
@@ -3040,10 +2680,6 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Narrower desktops: the wordmark would run into the names in the middle of
-   the screen, so it sits in the middle of the room between the names and
-   the social links instead (--menu-width is the row of names' width, from
-   menu.js). */
 @media (min-width: 901px) and (max-width: 1439px) {
   #navbar {
     grid-template-columns: 1fr auto;
@@ -3059,8 +2695,6 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Narrower desktops: the names and the wordmark are a little smaller, and
-   the names closer, so the row keeps clear of the wordmark. */
 @media (min-width: 901px) and (max-width: 1099px) {
   #menu > * + *::before {
     margin: 0 0.6rem;
@@ -3076,16 +2710,7 @@ body:has(#menu:popover-open) #navbar::after {
   }
 }
 
-/* Paper (the press kit's "Save as PDF" buttons, or printing any page): dark
-   text on white in the site's typefaces and thin lines, without the navbar,
-   the wordmark pattern and the footer's buttons. Headings stay with what
-   follows them, and pictures, groups and table rows aren't split across
-   pages. Everything hidden behind "Load more" is printed. With
-   "print-rider" on <html> (print.js) only the rider is printed, under its
-   own header. */
 @media print {
-  /* The side margins are padding on the page instead of @page margins, so
-     they hold even when the print dialog's Margins is set to None. */
   @page {
     size: A4;
     margin: 16mm 0;
@@ -3183,8 +2808,6 @@ body:has(#menu:popover-open) #navbar::after {
     display: none;
   }
 
-  /* Photos four to a row, the logos side by side, both smaller. The
-     download links give way to where the files are. */
   .kit-photos {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
@@ -3220,7 +2843,6 @@ body:has(#menu:popover-open) #navbar::after {
     background: #fff;
   }
 
-  /* Videos: the cover small, with the address to watch it at. */
   .about-videos {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3238,7 +2860,6 @@ body:has(#menu:popover-open) #navbar::after {
     opacity: 0.7;
   }
 
-  /* The rider starts on a page of its own. */
   #rider-part {
     break-before: page;
   }
@@ -3265,7 +2886,6 @@ body:has(#menu:popover-open) #navbar::after {
     font-size: 9.5pt;
   }
 
-  /* Only the rider, under its own header: the wordmark and the contact. */
   .print-rider #press-kit > :not(#rider-part) {
     display: none !important;
   }
@@ -3294,8 +2914,6 @@ body:has(#menu:popover-open) #navbar::after {
     border-top: 0;
   }
 
-  /* The stage plot starts a page, with its heading, and is kept short
-     enough to leave room for the input list under it. */
   .rider-plot-heading {
     break-before: page;
   }

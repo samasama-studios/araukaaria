@@ -1,12 +1,3 @@
-// Spotify player for the band's released songs at the bottom of the home page,
-// using Spotify's embed API. It stays hidden until the "Canto Oscuro, out now"
-// line under the logo is clicked, which opens it and plays Canto Oscuro. While
-// the player is open, Spotify's card is the only playback control: the line
-// turns into a quiet "now playing" label. Closing the player pauses it and
-// turns the line back into a play button. The site's own previous/next buttons
-// beside the card switch songs, and it moves on to the next one when a song
-// ends. Visitors who aren't logged into Spotify in their browser hear
-// 30-second previews.
 (() => {
   const tracks = [
     { title: 'Canto Oscuro', uri: 'spotify:track:6XsbDFfa12v06c7PNjo5TP' },
@@ -41,8 +32,6 @@
     updateLine();
   }
 
-  // The line under the logo: a play button while the player is closed, a
-  // "now playing" label for the current song while it's open.
   function updateLine() {
     const open = bar.classList.contains('open');
     cta.disabled = open;
@@ -65,7 +54,6 @@
     else if (index === 0) controller.play();
     else play(0);
     updateLine();
-    // The line is no longer a button, so move keyboard focus to the player.
     bar.querySelector('iframe')?.focus();
   });
 
@@ -78,7 +66,6 @@
   });
 
   window.onSpotifyIframeApiReady = IFrameAPI => {
-    // theme: 'dark' is Spotify's own dark card, close to the site's background.
     const options = { uri: tracks[0].uri, width: '100%', height: 80, theme: 'dark' };
     IFrameAPI.createController(document.getElementById('spotify-embed'), options, ready => {
       controller = ready;
@@ -92,10 +79,6 @@
           lastDuration = data.duration;
         }
 
-        // A song that stopped at its end: move on to the next one. Spotify
-        // doesn't always say so the same way: the stop can come at the end,
-        // or with the position already back at the start (and previews end
-        // after 30 seconds, before the song's full length).
         const ended = paused && wasPlaying && (
           (data.duration > 0 && data.position >= data.duration - 1500) ||
           (lastDuration > 0 && lastPosition >= lastDuration - 3000) ||

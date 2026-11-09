@@ -1,11 +1,3 @@
-// Photos for the About carousel, from data/photos.json: builds one slide per
-// photo (a <picture> with WebP and JPEG sizes from assets/photos/web, named
-// "<file>-<width>.jpg/.webp") into the carousel, in the order of the JSON.
-// A photo can have a "portrait" crop for portrait screens, and a "position"
-// (object-position) saying what to keep when it is cropped, and a "credit"
-// (the photographer, shown under the controls, linked to "creditUrl" when
-// there is one, e.g. their Instagram). Resolves with the
-// slides once they are in the page (an empty list if the JSON can't load).
 const aboutPhotos = (() => {
   const carousel = document.querySelector('.about-photo');
   if (!carousel) return Promise.resolve([]);
@@ -50,8 +42,6 @@ const aboutPhotos = (() => {
     img.width = photo.width;
     img.height = photo.height;
     img.decoding = 'async';
-    // The first photo loads with the page (after the hero); the rest when
-    // the carousel gets near.
     if (i === 0) img.fetchPriority = 'low';
     else img.loading = 'lazy';
     img.alt = photo.alt;
@@ -75,12 +65,6 @@ const aboutPhotos = (() => {
     });
 })();
 
-// Fades the About section's photo and text in as it scrolls into view, once
-// the first photo has loaded (it starts loading with the page, after the
-// hero). When it already peeks in under the hero on arrival, it waits for
-// the logo's entry and the "out now" line, so the first screen settles
-// before the hint to scroll appears.
-// Skipped for visitors who prefer less motion (the section is then just shown).
 (() => {
   const about = document.getElementById('about');
   if (!about || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -90,9 +74,6 @@ const aboutPhotos = (() => {
     .then(slides => slides[0]?.querySelector('img').decode())
     .catch(() => {});
 
-  // Resolves a moment after glitch.js swaps "intro" for "revealed" on <html>
-  // (the "out now" line fades in over 0.75s), or straight away if the
-  // visitor scrolls before that.
   const root = document.documentElement;
   const introDone = new Promise(resolve => {
     if (!root.classList.contains('intro')) return resolve();
@@ -110,22 +91,15 @@ const aboutPhotos = (() => {
     if (!entries[0].isIntersecting) return;
     observer.disconnect();
     Promise.all([photoReady, introDone]).then(() => about.classList.add('in-view'));
-  }); // as soon as any of it peeks in under the hero
+  });
   observer.observe(about);
 })();
 
-// Photo carousel in the About section: cross-fades between the photos. It
-// moves on by itself every few seconds while the section is on screen,
-// pausing while the pointer or keyboard focus is on it, and stops for good
-// once someone uses the arrows, the indicators or a swipe. Visitors who
-// prefer less motion only get the manual controls.
 aboutPhotos.then(slides => {
   const carousel = document.querySelector('.about-photo');
   if (!carousel) return;
   const dots = carousel.querySelector('.carousel-dots');
 
-  // The photographer of the photo on show, if the JSON names one, the whole
-  // line linked to their page if it gives one.
   const credit = document.getElementById('carousel-credit');
   function showCredit(slide) {
     const name = slide?.dataset.credit;
@@ -145,7 +119,6 @@ aboutPhotos.then(slides => {
     credit.append(link);
   }
 
-  // With a single photo there is nothing to move between: only its credit.
   if (slides.length < 2) {
     if (!slides.length) carousel.querySelector('.carousel-controls')?.remove();
     carousel.querySelectorAll('.carousel-button, .carousel-dots').forEach(el => el.remove());
@@ -153,14 +126,13 @@ aboutPhotos.then(slides => {
     return;
   }
 
-  const INTERVAL = 6000; // ms per photo
+  const INTERVAL = 6000;
   let index = 0;
   let timer = null;
   let stopped = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let visible = false;
-  let held = false; // pointer or focus on the carousel
+  let held = false;
 
-  // One indicator per photo.
   const dotButtons = slides.map((slide, i) => {
     const button = document.createElement('button');
     button.setAttribute('aria-label', `Show photo ${i + 1}`);
@@ -193,7 +165,6 @@ aboutPhotos.then(slides => {
   document.getElementById('carousel-prev').addEventListener('click', () => { stop(); show(index - 1); });
   document.getElementById('carousel-next').addEventListener('click', () => { stop(); show(index + 1); });
 
-  // Swipe left or right on touch screens.
   let startX = null;
   carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   carousel.addEventListener('touchend', e => {

@@ -1,12 +1,7 @@
-// Rider (press-kit.html): builds the show info, the equipment, the comments
-// and the input list from data/rider.json. Edit the JSON, not the page.
-// Without this script the page still offers the rider as a PDF.
 (() => {
   const section = document.getElementById('rider');
   if (!section) return;
 
-  // A titled group of lines ("Timing", "Microphones"…): a small heading and
-  // a list.
   function group({ title, items }) {
     const div = document.createElement('div');
     div.className = 'rider-group';
