@@ -1041,6 +1041,20 @@ button:focus-visible .button-media {
   opacity: 0.85;
 }
 
+.about-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.about-text .about-title-row h2,
+.about-title-row .about-link {
+  margin: 0;
+}
+
 .about-text cite {
   font-style: normal;
 }
@@ -1353,6 +1367,40 @@ button:focus-visible .button-media {
   .about-text {
     max-width: none;
     padding: 2.5rem 1.5rem 0.5rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .about-text {
+    max-width: 62ch;
+    padding: calc(0.625rem * 2 + 45px + clamp(1.25rem, 6svh - 1.5rem, 3rem)) clamp(2rem, 4.5vw, 5rem) clamp(1rem, 4svh - 1.5rem, 2rem);
+    font-size: clamp(0.88rem, 0.3rem + 1.35svh, 1.1rem);
+    line-height: 1.6;
+  }
+
+  .about-title-row {
+    margin-bottom: clamp(0.75rem, 2svh, 1.25rem);
+  }
+
+  .about-text h2 {
+    font-size: clamp(1.6rem, 3.6svh, 2rem);
+  }
+
+  .about-text p,
+  .about-text .about-lineup {
+    margin-bottom: clamp(0.6rem, 1.8svh, 1.25rem);
+  }
+
+  .about-text .subheading {
+    margin: clamp(1rem, 3.5svh - 0.5rem, 2.5rem) 0 clamp(0.4rem, 1svh, 0.75rem);
+  }
+
+  .about-videos {
+    max-width: calc(clamp(14svh, 30svh - 7rem, 19svh) * 32 / 9 + 1.25rem);
+  }
+
+  .about-lineup {
+    line-height: 1.45;
   }
 }
 
