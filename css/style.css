@@ -1459,6 +1459,7 @@ button:focus-visible .button-media {
 }
 
 #name,
+#not-found,
 #press-kit,
 #shows,
 #press {
@@ -1478,6 +1479,7 @@ button:focus-visible .button-media {
 }
 
 #name h1,
+#not-found h1,
 #press-kit h1,
 #shows h2,
 #press h2 {
@@ -1500,6 +1502,45 @@ button:focus-visible .button-media {
 .name-text p {
   margin: 0 0 1.25rem;
   opacity: 0.85;
+}
+
+body:has(#not-found) {
+  min-height: 100svh;
+}
+
+body:has(#not-found) .section-gap-footer {
+  height: calc(var(--gap-room) / 2 + var(--about-fade) * 0.85 - (0.625rem * 2 + 45px));
+}
+
+#not-found {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: calc(1rem + 21px);
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.not-found-text p {
+  margin: 0 0 1.25rem;
+  opacity: 0.85;
+}
+
+.not-found-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+}
+
+.not-found-text .not-found-links {
+  opacity: 1;
+}
+
+.not-found-links .about-link {
+  margin: 0;
 }
 
 .name-text .name-intro {

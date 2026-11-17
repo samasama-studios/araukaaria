@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="home-page nav-scrolled">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <base href="/">
+  <title>Page not found | Araukaaria</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="preload" href="assets/fonts/MidnightMotion-Medium.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/MidnightMotion-Light.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/Jura-Regular-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="home">
+  <header id="navbar">
+    <a class="navbar-wordmark" href="./" aria-label="araukaaria, home page">
+      <img src="assets/icons/araukaaria.svg" alt="">
+    </a>
+    <ul class="navbar-social" data-links="navbar">
+      <template><li><a><img alt=""></a></li></template>
+    </ul>
+    <button class="corner-button" id="menu-toggle" popovertarget="menu" aria-label="Menu">
+      <img class="button-media" src="assets/icons/menu.svg" alt="">
+    </button>
+  </header>
+  <nav id="menu" popover aria-label="Menu">
+    <div class="menu-item">
+      <div class="menu-sub" id="music-links" data-links="music" hidden>
+        <template>
+          <a class="menu-icon">
+            <img class="button-media" alt="">
+            <span class="visually-hidden" data-name></span>
+            <span class="menu-sub-label" aria-hidden="true" data-name></span>
+          </a>
+        </template>
+      </div>
+      <button class="menu-icon" aria-expanded="false" aria-controls="music-links">
+        <span class="menu-label" aria-hidden="true">Music</span>
+        <img class="button-media" src="assets/icons/music.svg" alt="">
+        <span class="visually-hidden">Music</span>
+      </button>
+    </div>
+    <a class="menu-icon" href="./#about">
+      <span class="menu-label" aria-hidden="true">About</span>
+      <img class="button-media" src="assets/icons/about.svg" alt="">
+      <span class="visually-hidden">About</span>
+    </a>
+    <a class="menu-icon" href="./#shows">
+      <span class="menu-label" aria-hidden="true">Shows</span>
+      <img class="button-media" src="assets/icons/shows.svg" alt="">
+      <span class="visually-hidden">Shows</span>
+    </a>
+    <a class="menu-icon" href="./#press">
+      <span class="menu-label" aria-hidden="true">Press</span>
+      <img class="button-media" src="assets/icons/press.svg" alt="">
+      <span class="visually-hidden">Press</span>
+    </a>
+    <a class="menu-icon" href="./#footer">
+      <span class="menu-label" aria-hidden="true">Contact</span>
+      <img class="button-media" src="assets/icons/mail.svg" alt="">
+      <span class="visually-hidden">Contact</span>
+    </a>
+  </nav>
+  <div class="section-gap section-gap-page-top" aria-hidden="true"></div>
+  <section id="not-found" aria-labelledby="not-found-heading">
+    <h1 id="not-found-heading">Page not found</h1>
+    <div class="not-found-text">
+      <p>This page doesn’t exist, or it has moved.</p>
+      <p class="not-found-links"><a class="about-link" href="./">Home →</a> <a class="about-link" href="press-kit.html">Press kit →</a></p>
+    </div>
+  </section>
+  <div class="section-gap section-gap-footer" aria-hidden="true"></div>
+  <footer id="footer">
+    <ul class="footer-links" data-links="music social">
+      <template><li><a><img alt=""></a></li></template>
+    </ul>
+    <p class="footer-contact">
+      <span class="footer-label">Booking &amp; press</span>
+      <a data-link="email" data-link-text></a>
+    </p>
+    <p class="footer-press"><a class="about-link" href="press-kit.html">Press kit →</a></p>
+    <p class="footer-meta">
+      <span>© 2026 <a href="https://samasama.studio">samasama.studio</a></span>
+    </p>
+  </footer>
+  <script src="js/glitch.js"></script>
+  <script src="js/links.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+
+</html>
