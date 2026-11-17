@@ -12,6 +12,11 @@
   }, { threshold: 1 });
 
   buttons.forEach(button => {
+    const layer = document.createElement('span');
+    layer.className = 'kit-shine-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    layer.innerHTML = button.innerHTML;
+    button.append(layer);
     button.addEventListener('animationend', () => button.classList.remove('is-shining'));
     observer.observe(button);
   });
