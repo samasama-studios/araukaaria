@@ -2,21 +2,21 @@
   font-family: "Midnight Motion";
   src: url("../assets/fonts/MidnightMotion-Medium.ttf") format("truetype");
   font-weight: 500;
-  font-display: swap;
+  font-display: fallback;
 }
 
 @font-face {
   font-family: "Midnight Motion";
   src: url("../assets/fonts/MidnightMotion-Light.ttf") format("truetype");
   font-weight: 300;
-  font-display: swap;
+  font-display: fallback;
 }
 
 @font-face {
   font-family: "Jura";
   src: url("../assets/fonts/Jura-Regular-latin.woff2") format("woff2");
   font-weight: 400;
-  font-display: swap;
+  font-display: fallback;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -24,7 +24,7 @@
   font-family: "Jura";
   src: url("../assets/fonts/Jura-Regular-latin-ext.woff2") format("woff2");
   font-weight: 400;
-  font-display: swap;
+  font-display: fallback;
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -1430,8 +1430,11 @@ button:focus-visible .button-media {
   background: none;
 }
 
-.section-gap {
+:root {
   --gap-room: calc(2rem * 2 + 44px + 1rem);
+}
+
+.section-gap {
   height: calc(var(--gap-room) + var(--about-fade));
 }
 
@@ -1441,12 +1444,12 @@ button:focus-visible .button-media {
 }
 
 .section-gap-page-top {
-  height: calc(var(--gap-room) + var(--about-fade));
+  height: calc(var(--gap-room) / 2 + var(--about-fade) * 0.85);
   background: linear-gradient(to bottom, var(--fade-stops)) bottom / 100% var(--about-fade) no-repeat;
 }
 
 @media (max-width: 900px) {
-  .section-gap {
+  :root {
     --gap-room: calc(1.25rem * 2 + 44px + 1rem);
   }
 }
@@ -1471,7 +1474,7 @@ button:focus-visible .button-media {
 
 #shows,
 #press {
-  scroll-margin-top: calc(0.625rem * 2 + 44px + 1px + var(--about-fade) / 2);
+  scroll-margin-top: calc(var(--gap-room) / 2 + var(--about-fade) * 0.85);
 }
 
 #name h1,
