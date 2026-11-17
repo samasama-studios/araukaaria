@@ -5,7 +5,7 @@
   "url": "https://araukaaria.ee/",
   "logo": "https://araukaaria.ee/assets/press/logo/araukaaria-stacked-dark.png",
   "image": "https://araukaaria.ee/assets/share-live.jpg",
-  "description": "Psychedelic art rock with Argentine roots from Viljandi, Estonia, sung in Spanish and English.",
+  "description": "Psychedelic art rock with Argentine roots from Viljandi, Estonia.",
   "genre": ["Psychedelic rock", "Art rock", "Alternative rock"],
   "foundingLocation": {
     "@type": "Place",
