@@ -6,11 +6,11 @@
     {"title": "Sound engineer", "items": ["We prefer to bring our own sound engineer. If that is not possible, we will need the venue’s front-of-house engineer. Happy to discuss."]}
   ],
   "equipment": [
-    {"title": "Instruments", "items": ["1 × Drum kit: bass drum 18–20\", snare 14\", 1 × rack tom, 1 × floor tom, hi-hat stand, snare stand, 3 × cymbal stands, kick pedal, drum stool and drum rug. Cymbals are brought by the drummer."]},
-    {"title": "Amplifiers / Monitors", "items": ["6 × Floor monitors (separate mixes)"]},
+    {"title": "Instruments", "items": ["1 × Drum kit: 18–20\" bass drum, 14\" snare, rack tom, floor tom", "1 × Hi-hat stand", "1 × Snare stand", "3 × Cymbal stands", "1 × Kick pedal", "1 × Drum stool", "1 × Drum rug", "Cymbals are brought by the drummer"]},
+    {"title": "Monitors", "items": ["6 × Floor monitors (separate mixes)"]},
     {"title": "Microphones", "items": ["3 × Vocal microphones (1 × for sax)", "1 × Guitar amplifier microphone (dynamic)", "5 × Dynamic for drums (kick, snare top/bottom, rack tom, floor tom)", "2 × Condenser for drums (overheads)"]},
     {"title": "Stands", "items": ["5 × Long boom microphone stands (2 × vocals, 2 × OH, 1 × sax)", "2 × Short boom microphone stands (1 × guitar amplifier, 1 × kick)", "4 × Clamps for snare & toms", "1 × Keyboard stand (X shape)", "3 × Guitar stands", "1 × Bass stand"]},
-    {"title": "Other", "items": ["1 × Stereo DI box (electric guitar)", "1 × Stereo DI box (keys)", "1 × Mono DI box (acoustic guitar)", "1 × Mono DI box (bass)", "Extension cords with multiple outlets on the stage, plus extra extension cords", "Extra XLR and 6.5 mm instrument cables"]}
+    {"title": "Other", "items": ["1 × Stereo DI box (electric guitar)", "1 × Stereo DI box (keys)", "1 × Mono DI box (acoustic guitar)", "1 × Mono DI box (bass)", "Extension cords with multiple outlets on stage, plus spares", "Extra XLR and 6.5 mm instrument cables"]}
   ],
   "comments": [
     "We will bring our personal instruments, including cymbals.",
@@ -37,5 +37,58 @@
     {"ch": 15, "instrument": "Vocal 1 (Pepi)", "source": "Dynamic", "stand": "L/B", "effects": "Reverb, delay", "plot": "VOX1"},
     {"ch": 16, "instrument": "Vocal 2 (Lisanna)", "source": "Dynamic", "stand": "L/B", "effects": "Reverb, delay", "plot": "VOX2"},
     {"ch": 17, "instrument": "Saxophone", "source": "Dynamic", "stand": "L/B", "effects": "Reverb", "plot": "SAX"}
-  ]
+  ],
+  "stagePlot": {
+    "width": 1798,
+    "height": 1107,
+    "labels": [
+      {"type": "zone", "text": "Upstage right", "x": 30, "y": 35, "align": "start"},
+      {"type": "zone", "text": "Upstage center", "x": 899, "y": 35},
+      {"type": "zone", "text": "Upstage left", "x": 1768, "y": 35, "align": "end"},
+      {"type": "zone", "text": "Audience ↓", "x": 899, "y": 1053},
+      {"type": "person", "text": "Rauno Vaher", "x": 885, "y": 127},
+      {"type": "person", "text": "Artur Leppik", "x": 1333, "y": 218},
+      {"type": "person", "text": "Fedor Bezrukov", "x": 425, "y": 445},
+      {"type": "person", "text": "Norbert de Varenne", "x": 522, "y": 712},
+      {"type": "person", "text": "Pepi", "x": 893, "y": 680},
+      {"type": "person", "text": "Lisanna Kuningas", "x": 1347, "y": 634},
+      {"type": "item", "text": "Bass amp", "x": 430, "y": 312},
+      {"type": "item", "text": "Bass stand", "x": 342, "y": 391},
+      {"type": "item", "text": "Bass", "x": 584, "y": 457},
+      {"type": "item", "text": "Floor monitor", "x": 1112, "y": 290},
+      {"type": "item", "text": "Drum kit", "x": 891, "y": 454},
+      {"type": "item", "text": "Sax stand", "x": 1243, "y": 426},
+      {"type": "item", "text": "Saxophone", "x": 1374, "y": 452},
+      {"type": "item", "text": "Floor monitor", "x": 1468, "y": 478},
+      {"type": "item", "text": "Mono DI", "x": 333, "y": 548},
+      {"type": "item", "text": "Pedal board", "x": 450, "y": 548},
+      {"type": "item", "text": "Floor monitor", "x": 549, "y": 582},
+      {"type": "item", "text": "Electric guitar", "x": 655, "y": 621},
+      {"type": "item", "text": "Guitar amp", "x": 935, "y": 540},
+      {"type": "item", "text": "Acoustic guitar", "x": 1109, "y": 582},
+      {"type": "item", "text": "Guitar stand", "x": 744, "y": 788},
+      {"type": "item", "text": "Mono DI", "x": 1028, "y": 802},
+      {"type": "item", "text": "Guitar stand", "x": 1132, "y": 802},
+      {"type": "item", "text": "Pedal board", "x": 790, "y": 892},
+      {"type": "item", "text": "Floor monitor", "x": 1006, "y": 915},
+      {"type": "item", "text": "Guitar stand", "x": 240, "y": 826},
+      {"type": "item", "text": "Electric guitar", "x": 352, "y": 852},
+      {"type": "item", "text": "Stereo DI", "x": 330, "y": 944},
+      {"type": "item", "text": "Pedal board", "x": 452, "y": 944},
+      {"type": "item", "text": "Floor monitor", "x": 569, "y": 912},
+      {"type": "item", "text": "Keyboard", "x": 1372, "y": 860},
+      {"type": "item", "text": "Keys stand", "x": 1422, "y": 895},
+      {"type": "item", "text": "Floor monitor", "x": 1518, "y": 882},
+      {"type": "item", "text": "Stereo DI", "x": 1214, "y": 888},
+      {"type": "input", "text": "DRUMS", "x": 893, "y": 490},
+      {"type": "input", "text": "SAX", "x": 1308, "y": 521},
+      {"type": "input", "text": "BASS", "x": 388, "y": 575},
+      {"type": "input", "text": "GTR1", "x": 812, "y": 700},
+      {"type": "input", "text": "GTR3", "x": 1037, "y": 735},
+      {"type": "input", "text": "GTR2", "x": 392, "y": 973},
+      {"type": "input", "text": "VOX1", "x": 918, "y": 970},
+      {"type": "input", "text": "KEY1", "x": 1213, "y": 924},
+      {"type": "input", "text": "VOX2", "x": 1330, "y": 931}
+    ]
+  }
 }

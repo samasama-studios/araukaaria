@@ -74,12 +74,15 @@
   </nav>
   <div class="section-gap section-gap-page-top" aria-hidden="true"></div>
   <section id="press-kit" aria-labelledby="kit-heading">
-    <h1 id="kit-heading">Press kit</h1>
-    <p class="kit-intro">For bookers, promoters and press: bios, facts, quotes, photos, logos and the technical rider. Anything else, write to <a data-link="email" data-link-text></a>.</p>
-    <p class="kit-print-row"><button class="about-link kit-print" type="button" data-print="all" hidden>Save press kit as PDF ↓</button></p>
+    <div class="print-only kit-print-cover"><img src="assets/press/logo/araukaaria-stacked-light.svg" alt="Araukaaria"><p><a data-link="email" data-link-text>contact@araukaaria.com</a> · <a data-link="website" data-link-text>araukaaria.ee</a></p></div>
+    <div class="kit-title-row">
+      <h1 id="kit-heading">Press kit</h1>
+      <p class="kit-print-row"><button class="kit-toggle kit-print-theme" type="button" role="switch" aria-checked="false" aria-label="Light PDF" hidden><span class="kit-toggle-off">Dark</span> <span class="kit-switch" aria-hidden="true"></span> <span class="kit-toggle-on">Light</span></button><button class="about-link kit-print" type="button" data-print="all" hidden>Save press kit as PDF ↓</button></p>
+    </div>
+    <p class="kit-intro">For bookers, promoters and press: bios, info, quotes, photos, logos and the technical rider.<br>Anything else, write to <a data-link="email" data-link-text></a>.</p>
     <nav class="kit-contents" aria-label="On this page">
       <a href="#kit-bio">Bio</a>
-      <a href="#kit-facts">Facts</a>
+      <a href="#kit-info">Info</a>
       <a href="#kit-press">Press</a>
       <a href="#kit-photos">Photos</a>
       <a href="#kit-logo">Logo</a>
@@ -100,9 +103,9 @@
       <p>The self-titled debut album, <cite>Araukaaria</cite>, arrives on 2 April 2027, with a release show in Viljandi.</p>
     </div>
 
-    <h2 class="kit-heading" id="kit-facts">Facts</h2>
+    <h2 class="kit-heading" id="kit-info">Info</h2>
     <dl class="kit-facts">
-      <div><dt>Genre</dt><dd>Psychedelic art rock</dd></div>
+      <div><dt>Genre</dt><dd>Psychedelic art rock, alternative</dd></div>
       <div><dt>From</dt><dd>Viljandi, Estonia</dd></div>
       <div><dt>Sung in</dt><dd>Spanish and English</dd></div>
       <div><dt>Debut album</dt><dd><cite>Araukaaria</cite>, 2 April 2027</dd></div>
@@ -121,10 +124,11 @@
       </div>
       <div><dt>Listen</dt><dd data-links="listen" data-separator=" · "><template><a data-name></a></template></dd></div>
       <div><dt>Contact</dt><dd><a data-link="email" data-link-text></a></dd></div>
+      <div><dt>Website</dt><dd><a data-link="website" data-link-text></a></dd></div>
     </dl>
 
     <h2 class="kit-heading" id="kit-press">Press</h2>
-    <ol class="press-list" id="press-list"></ol>
+    <ol class="press-list" id="press-list" data-since="2025"></ol>
     <template id="press-row">
       <li class="press-item">
         <time class="press-date"></time>
@@ -142,32 +146,35 @@
       </li>
     </template>
 
-    <h2 class="kit-heading" id="kit-photos">Photos</h2>
+    <div class="kit-heading-row">
+      <h2 class="kit-heading" id="kit-photos">Photos</h2>
+      <button class="about-link kit-download" type="button" data-zip="araukaaria-photos" data-zip-from=".kit-photos" hidden>Download all ↓</button>
+    </div>
     <p class="kit-note">Free to use for press and promotion of Araukaaria. Please credit the photographer.</p>
     <ul class="kit-photos">
       <li>
-        <a href="assets/press/photos/araukaaria-band.jpg" download>
+        <a href="assets/press/photos/araukaaria-band.jpg" download data-zoom="assets/photos/web/band-1330.jpg">
           <img src="assets/photos/web/band-800.jpg" width="800" height="1199" loading="lazy" decoding="async"
             alt="The six members of Araukaaria posing together in front of a wooden house, seen from below.">
         </a>
         <p class="kit-photo-meta">Photo: Kerttu Kruusla · 1330 × 1994 · <a href="assets/press/photos/araukaaria-band.jpg" download>Download</a></p>
       </li>
       <li>
-        <a href="assets/press/photos/araukaaria-from-above.jpg" download>
+        <a href="assets/press/photos/araukaaria-from-above.jpg" download data-zoom="assets/photos/web/above-1600.jpg">
           <img src="assets/photos/web/above-800.jpg" width="800" height="800" loading="lazy" decoding="async"
             alt="The band seen from above, standing together on the grass, in a black-and-white double exposure.">
         </a>
         <p class="kit-photo-meta">Photo: Kerttu Kruusla · 3000 × 3000 · <a href="assets/press/photos/araukaaria-from-above.jpg" download>Download</a></p>
       </li>
       <li>
-        <a href="assets/press/photos/araukaaria-live-barn.jpg" download>
+        <a href="assets/press/photos/araukaaria-live-barn.jpg" download data-zoom="assets/photos/web/landscape-1920.jpg">
           <img src="assets/photos/web/landscape-960.jpg" width="960" height="640" loading="lazy" decoding="async"
             alt="Araukaaria live on stage: Pepi singing with an acoustic guitar, a saxophonist beside him, under a wooden barn roof.">
         </a>
         <p class="kit-photo-meta">Photo: Kerttu Kruusla · 3000 × 2000 · <a href="assets/press/photos/araukaaria-live-barn.jpg" download>Download</a></p>
       </li>
       <li>
-        <a href="assets/press/photos/araukaaria-live-konservatoorium.jpg" download>
+        <a href="assets/press/photos/araukaaria-live-konservatoorium.jpg" download data-zoom="assets/photos/web/konservatoorium-1920.jpg">
           <img src="assets/photos/web/konservatoorium-960.jpg" width="960" height="640" loading="lazy" decoding="async"
             alt="Araukaaria live at Konservatoorium in Viljandi under neon lights, in a colour double exposure: Pepi on guitar, Lisanna at the keys and a saxophonist.">
         </a>
@@ -175,21 +182,38 @@
       </li>
     </ul>
 
-    <h2 class="kit-heading" id="kit-logo">Logo</h2>
+    <div class="kit-heading-row">
+      <h2 class="kit-heading" id="kit-logo">Logo</h2>
+      <div class="kit-heading-actions">
+        <button class="kit-toggle kit-logo-toggle" type="button" role="switch" aria-checked="false" hidden>Light background <span class="kit-switch" aria-hidden="true"></span></button>
+        <button class="about-link kit-download" type="button" data-zip="araukaaria-logos" data-zip-from=".kit-logos" hidden>Download all ↓</button>
+      </div>
+    </div>
+    <p class="kit-photo-meta kit-colors">Colors · <span class="kit-swatch kit-swatch-light"></span>#E2FDE1 · <span class="kit-swatch kit-swatch-dark"></span>#2D2828</p>
     <ul class="kit-logos">
-      <li class="kit-logo-on-dark">
+      <li>
         <div class="kit-logo-preview">
-          <img src="assets/press/logo/araukaaria-logo-light.svg" alt="The Araukaaria logo in pale green.">
-          <img src="assets/press/logo/araukaaria-wordmark-light.svg" alt="The Araukaaria wordmark in pale green.">
+          <img src="assets/press/logo/araukaaria-stacked-light.svg" alt="The Araukaaria logo with the wordmark below.">
         </div>
-        <p class="kit-photo-meta">For dark backgrounds · Logo <a href="assets/press/logo/araukaaria-logo-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-logo-light.png" download>PNG</a> · Wordmark <a href="assets/press/logo/araukaaria-wordmark-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-wordmark-light.png" download>PNG</a></p>
+        <p class="kit-photo-meta">Stacked · <a href="assets/press/logo/araukaaria-stacked-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-stacked-light.png" download>PNG</a></p>
       </li>
-      <li class="kit-logo-on-light">
+      <li>
         <div class="kit-logo-preview">
-          <img src="assets/press/logo/araukaaria-logo-dark.svg" alt="The Araukaaria logo in dark brown.">
-          <img src="assets/press/logo/araukaaria-wordmark-dark.svg" alt="The Araukaaria wordmark in dark brown.">
+          <img class="kit-logo-wide" src="assets/press/logo/araukaaria-horizontal-light.svg" alt="The Araukaaria logo with the wordmark beside it.">
         </div>
-        <p class="kit-photo-meta">For light backgrounds · Logo <a href="assets/press/logo/araukaaria-logo-dark.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-logo-dark.png" download>PNG</a> · Wordmark <a href="assets/press/logo/araukaaria-wordmark-dark.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-wordmark-dark.png" download>PNG</a></p>
+        <p class="kit-photo-meta">Horizontal · <a href="assets/press/logo/araukaaria-horizontal-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-horizontal-light.png" download>PNG</a></p>
+      </li>
+      <li>
+        <div class="kit-logo-preview">
+          <img src="assets/press/logo/araukaaria-logo-light.svg" alt="The Araukaaria logo.">
+        </div>
+        <p class="kit-photo-meta">Logo · <a href="assets/press/logo/araukaaria-logo-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-logo-light.png" download>PNG</a></p>
+      </li>
+      <li>
+        <div class="kit-logo-preview">
+          <img class="kit-logo-wide" src="assets/press/logo/araukaaria-wordmark-light.svg" alt="The Araukaaria wordmark.">
+        </div>
+        <p class="kit-photo-meta">Wordmark · <a href="assets/press/logo/araukaaria-wordmark-light.svg" download>SVG</a> <a href="assets/press/logo/araukaaria-wordmark-light.png" download>PNG</a></p>
       </li>
     </ul>
 
@@ -210,7 +234,7 @@
             <path d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
           </svg>
         </a>
-        <figcaption><span class="video-title">El Don del Águila</span> <span class="video-place">Konservatoorium, Viljandi</span></figcaption>
+        <figcaption class="video-caption-row"><span class="video-caption"><span class="video-title">El Don del Águila</span> <span class="video-place">Konservatoorium, Viljandi</span></span> <button class="video-copy" type="button" hidden><svg class="video-copy-link" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></svg><svg class="video-copy-done" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></svg><span class="video-copy-text">Link</span></button></figcaption>
       </figure>
       <figure class="about-video">
         <a class="video-cover video-cover-soft" href="https://www.youtube.com/watch?v=HKWwaiz4lvg" data-video="HKWwaiz4lvg"
@@ -227,37 +251,57 @@
             <path d="M23 18V39L40 28.5L23 18Z" stroke="currentColor" stroke-width="1.54054" stroke-linejoin="round" />
           </svg>
         </a>
-        <figcaption><span class="video-title">Los Fuegos No Descansan</span> <span class="video-place">Säsin Stuudio, Tartu</span></figcaption>
+        <figcaption class="video-caption-row"><span class="video-caption"><span class="video-title">Los Fuegos No Descansan</span> <span class="video-place">Säsin Stuudio, Tartu</span></span> <button class="video-copy" type="button" hidden><svg class="video-copy-link" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></svg><svg class="video-copy-done" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" /></svg><span class="video-copy-text">Link</span></button></figcaption>
       </figure>
     </div>
 
     <div class="kit-part" id="rider-part">
-    <p class="print-only rider-print-header"><img src="assets/press/logo/araukaaria-wordmark-dark.svg" alt="Araukaaria"> <span>contact@araukaaria.com · araukaaria.ee</span></p>
+    <p class="print-only kit-print-header rider-print-header"><img src="assets/press/logo/araukaaria-horizontal-light.svg" alt="Araukaaria"> <span><a data-link="email" data-link-text>contact@araukaaria.com</a> · <a data-link="website" data-link-text>araukaaria.ee</a></span></p>
     <h2 class="kit-heading" id="rider">Technical rider</h2>
-    <p class="kit-note kit-print-row"><a class="about-link" href="assets/press/araukaaria-rider.pdf" download>Download rider (PDF) →</a> <button class="about-link kit-print" type="button" data-print="rider" hidden>Save rider as PDF ↓</button></p>
-    <h3 class="subheading">Show info</h3>
-    <div class="rider-groups" id="rider-show"></div>
-    <h3 class="subheading">Equipment needed</h3>
-    <div class="rider-groups" id="rider-equipment"></div>
-    <h3 class="subheading">Comments</h3>
-    <div id="rider-comments"></div>
-    <h3 class="subheading rider-plot-heading">Stage plot</h3>
-    <a class="rider-plot" href="assets/press/araukaaria-stage-plot.png">
-      <img src="assets/press/araukaaria-stage-plot.png" width="1920" height="1357" loading="lazy" decoding="async"
-        alt="Stage plot: drums upstage centre; bass and Norbert's electric guitar stage right; Pepi centre with his electric guitar, amp and the shared acoustic; saxophone upstage left and Lisanna's keys stage left; a floor monitor for each of the six musicians.">
-    </a>
-    <h3 class="subheading">Input list</h3>
-    <div class="rider-table-wrap">
-      <table class="rider-inputs">
-        <thead>
-          <tr><th scope="col">Ch.</th><th scope="col">Instrument</th><th scope="col">Mic / DI</th><th scope="col">Stand</th><th scope="col">Effects</th><th scope="col">Plot</th></tr>
-        </thead>
-        <tbody id="rider-inputs"></tbody>
-      </table>
+    <p class="kit-note kit-print-row"><button class="about-link kit-print" type="button" data-print="rider" hidden>Save rider as PDF ↓</button><button class="kit-toggle kit-print-theme" type="button" role="switch" aria-checked="false" aria-label="Light PDF" hidden><span class="kit-toggle-off">Dark</span> <span class="kit-switch" aria-hidden="true"></span> <span class="kit-toggle-on">Light</span></button></p>
+    <div class="rider-block rider-block-show">
+      <h3 class="subheading">Show info</h3>
+      <div class="rider-groups" id="rider-show"></div>
+    </div>
+    <div class="rider-block rider-block-equipment">
+      <h3 class="subheading">Equipment needed</h3>
+      <div class="rider-groups" id="rider-equipment"></div>
+    </div>
+    <div class="rider-block rider-block-comments">
+      <h3 class="subheading">Comments</h3>
+      <div id="rider-comments"></div>
+    </div>
+    <div class="rider-block rider-block-plot">
+      <h3 class="subheading rider-plot-heading">Stage plot</h3>
+      <div class="rider-plot-wrap">
+        <div class="rider-plot" id="rider-plot">
+          <img src="assets/press/araukaaria-stage-plot-light.svg" width="1798" height="1107" loading="lazy" decoding="async"
+            alt="Stage plot: drums upstage centre; bass and Norbert's electric guitar stage right; Pepi centre with his electric guitar, amp and the shared acoustic; saxophone upstage left and Lisanna's keys stage left; a floor monitor for each of the six musicians.">
+          <div class="rider-plot-labels" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+    <div class="rider-block rider-block-inputs">
+      <h3 class="subheading">Input list</h3>
+      <div class="rider-table-wrap">
+        <table class="rider-inputs">
+          <thead>
+            <tr><th scope="col">Ch.</th><th scope="col">Instrument</th><th scope="col">Mic / DI</th><th scope="col">Stand</th><th scope="col">Effects</th><th scope="col">Plot</th></tr>
+          </thead>
+          <tbody id="rider-inputs"></tbody>
+        </table>
+      </div>
     </div>
     </div>
   </section>
   <div class="section-gap section-gap-footer" aria-hidden="true"></div>
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged view">
+    <div class="lightbox-bar">
+      <div class="lightbox-actions"></div>
+      <button class="lightbox-close" type="button" aria-label="Close"><img src="assets/icons/close.svg" alt=""></button>
+    </div>
+    <div class="lightbox-body" tabindex="-1" autofocus></div>
+  </dialog>
   <footer id="footer">
     <ul class="footer-links" data-links="music social">
       <template><li><a><img alt=""></a></li></template>
@@ -278,6 +322,10 @@
   <script src="js/press.js"></script>
   <script src="js/rider.js"></script>
   <script src="js/print.js"></script>
+  <script src="js/logo-toggle.js"></script>
+  <script src="js/download-all.js"></script>
+  <script src="js/copy-link.js"></script>
+  <script src="js/lightbox.js"></script>
 </body>
 
 </html>

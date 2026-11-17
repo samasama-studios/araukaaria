@@ -7,8 +7,27 @@
     div.className = 'rider-group';
     const heading = document.createElement('h4');
     heading.textContent = title;
-    div.append(heading, list(items));
+    div.append(heading, groupItems(items));
     return div;
+  }
+
+  function groupItems(items) {
+    const ul = document.createElement('ul');
+    ul.className = 'rider-items';
+    const counted = items.some(text => /^\d+ × /.test(text));
+    items.forEach(text => {
+      const li = document.createElement('li');
+      const [, count, rest] = text.match(/^(?:(\d+) × )?(.*)$/);
+      if (counted) {
+        const qty = document.createElement('span');
+        qty.className = 'rider-qty';
+        qty.textContent = count ? `${count}×` : '';
+        li.append(qty);
+      }
+      li.append(rest);
+      ul.append(li);
+    });
+    return ul;
   }
 
   function list(items) {
@@ -33,6 +52,20 @@
     return tr;
   }
 
+  function plotLabels({ width, height, labels }) {
+    const layer = document.querySelector('#rider-plot .rider-plot-labels');
+    if (!layer) return;
+    layer.append(...labels.map(({ type, text, x, y, align }) => {
+      const span = document.createElement('span');
+      span.className = `rider-plot-label rider-plot-${type}`;
+      if (align) span.classList.add(`rider-plot-${align}`);
+      span.textContent = text;
+      span.style.left = `${(x / width) * 100}%`;
+      span.style.top = `${(y / height) * 100}%`;
+      return span;
+    }));
+  }
+
   fetch('data/rider.json')
     .then(response => {
       if (!response.ok) throw new Error(`rider.json: ${response.status}`);
@@ -43,6 +76,7 @@
       document.getElementById('rider-equipment').append(...rider.equipment.map(group));
       document.getElementById('rider-comments').append(list(rider.comments));
       document.getElementById('rider-inputs').append(...rider.inputs.map(inputRow));
+      if (rider.stagePlot) plotLabels(rider.stagePlot);
       section.classList.add('is-filled');
     })
     .catch(error => console.error(error));

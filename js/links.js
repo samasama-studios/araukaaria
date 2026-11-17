@@ -42,7 +42,7 @@
         const link = data.links[a.dataset.link];
         if (!link?.url) return;
         a.href = link.url;
-        if (a.hasAttribute('data-link-text')) a.textContent = link.url.replace(/^mailto:/, '');
+        if (a.hasAttribute('data-link-text')) a.textContent = link.url.replace(/^(mailto:|https?:\/\/)/, '').replace(/\/$/, '');
       });
     })
     .catch(error => console.error(error));

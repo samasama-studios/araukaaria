@@ -54,6 +54,7 @@
     })
     .then(items => {
       items.sort((a, b) => b.date.localeCompare(a.date));
+      if (list.dataset.since) items = items.filter(item => item.date >= list.dataset.since);
       const rows = items.map(row);
       list.append(...rows);
       addLoadMore(list, rows, STEP);

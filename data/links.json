@@ -8,10 +8,11 @@
     "instagram": { "name": "Instagram", "url": "https://www.instagram.com/araukaaria/" },
     "facebook": { "name": "Facebook", "url": "" },
     "linktree": { "name": "Linktree", "url": "https://linktr.ee/araukaaria" },
-    "email": { "name": "Email", "url": "mailto:contact@araukaaria.com", "icon": "mail" }
+    "email": { "name": "Email", "url": "mailto:contact@araukaaria.com", "icon": "mail" },
+    "website": { "name": "Website", "url": "https://araukaaria.ee/" }
   },
   "music": ["spotify", "youtube", "bandcamp", "tidal", "soundcloud"],
   "social": ["instagram", "facebook", "linktree", "email"],
   "navbar": ["linktree", "youtube", "spotify", "instagram"],
-  "listen": ["spotify", "bandcamp", "youtube"]
+  "listen": ["spotify", "youtube", "soundcloud", "bandcamp", "tidal"]
 }
