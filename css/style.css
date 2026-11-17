@@ -1041,7 +1041,7 @@ button:focus-visible .button-media {
   opacity: 0.85;
 }
 
-.about-title-row {
+.title-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -1050,9 +1050,13 @@ button:focus-visible .button-media {
   margin-bottom: 1.25rem;
 }
 
-.about-text .about-title-row h2,
-.about-title-row .about-link {
+:is(#about, #press) .title-row h2,
+.title-row .about-link {
   margin: 0;
+}
+
+#press .title-row {
+  margin-bottom: 2rem;
 }
 
 .about-text cite {
@@ -1378,7 +1382,7 @@ button:focus-visible .button-media {
     line-height: 1.6;
   }
 
-  .about-title-row {
+  .about-text .title-row {
     margin-bottom: clamp(0.75rem, 2svh, 1.25rem);
   }
 
@@ -2799,8 +2803,13 @@ body:has(#spotify-bar.open) #footer {
   transition: filter 0.2s, transform 0.2s;
 }
 
-#footer .footer-contact a {
+#footer .footer-contact a,
+#footer .footer-press a {
   color: #E2FDE1;
+}
+
+#footer .footer-press .about-link {
+  margin: 0;
 }
 
 #footer a:focus-visible {
