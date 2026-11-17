@@ -1,0 +1,22 @@
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Araukaaria",
+  "url": "https://araukaaria.ee/",
+  "logo": "https://araukaaria.ee/assets/press/logo/araukaaria-stacked-dark.png",
+  "image": "https://araukaaria.ee/assets/share-live.jpg",
+  "description": "Psychedelic art rock with Argentine roots from Viljandi, Estonia, sung in Spanish and English.",
+  "genre": ["Psychedelic rock", "Art rock", "Alternative rock"],
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Viljandi, Estonia"
+  },
+  "email": "contact@araukaaria.com",
+  "member": [
+    {"@type": "Person", "name": "José “Pepi” Prieto"},
+    {"@type": "Person", "name": "Lisanna Kuningas"},
+    {"@type": "Person", "name": "Norbert de Varenne"},
+    {"@type": "Person", "name": "Fedor Bezrukov"},
+    {"@type": "Person", "name": "Rauno Vaher"}
+  ]
+}
