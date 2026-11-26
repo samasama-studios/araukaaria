@@ -1,6 +1,6 @@
 (() => {
   const toggle = document.querySelector('.kit-lang');
-  const kit = document.getElementById('press-kit');
+  const kit = toggle?.closest('[data-lang-scope]');
   if (!toggle || !kit) return;
   const images = [...kit.querySelectorAll('img[data-alt-en]')];
   images.forEach(img => { img.dataset.altEt = img.alt; });
