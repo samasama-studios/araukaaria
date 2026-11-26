@@ -1806,6 +1806,87 @@ body:has(#not-found) .section-gap-footer {
   margin-top: 0;
 }
 
+.kit-subheading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.kit-heading + .kit-subheading-row {
+  margin-top: 0;
+}
+
+.kit-subheading-row .subheading {
+  margin: 0;
+}
+
+.kit-copy {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: "Midnight Motion", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.kit-copy[hidden] {
+  display: none;
+}
+
+.kit-copy svg {
+  display: block;
+  position: relative;
+  top: calc(1cap * 0.3);
+  width: calc(1cap * 1.6);
+  height: calc(1cap * 1.6);
+}
+
+.kit-copy .kit-copy-done,
+.kit-copy .kit-copy-done-label,
+.kit-copy.copied .kit-copy-icon,
+.kit-copy.copied .kit-copy-label {
+  display: none;
+}
+
+.kit-copy.copied .kit-copy-done {
+  display: block;
+}
+
+.kit-copy.copied .kit-copy-done-label {
+  display: inline;
+}
+
+.kit-copy:focus-visible {
+  outline: none;
+  opacity: 1;
+  filter:
+    drop-shadow(-1px 0 0 #2f6bff)
+    drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+}
+
+@media (hover: hover) {
+  .kit-copy:hover {
+    opacity: 1;
+    filter:
+      drop-shadow(-1px 0 0 #2f6bff)
+      drop-shadow(1.5px -1px 0 rgba(255, 0, 0, 0.6));
+  }
+}
+
 .kit-note {
   margin: -0.5rem 0 1.5rem;
   font-size: 0.95rem;
